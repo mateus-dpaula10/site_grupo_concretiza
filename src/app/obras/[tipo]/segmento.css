@@ -24,9 +24,9 @@
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
-.seg nav {position: sticky !important; top: 0; 
+.seg nav {position: sticky !important;
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: var(--altura-cabecalho); left: 0; right: 0;
   z-index: 200;
   height: 64px;
   display: flex;
@@ -579,3 +579,6 @@
 @media (max-width: 960px) { .seg .hero { min-height: 100svh; } }
 .seg a { color: inherit; }
 .seg .btn-primary, .seg .btn-ghost, .seg .nav-pill, .seg .nav-cta-btn, .seg .nav-logo { text-decoration: none; }
+
+/* Âncoras das obras: cabeçalho fixo + menu interno (64px). */
+html:has(.seg) { scroll-padding-top: calc(var(--altura-cabecalho) + 64px); }

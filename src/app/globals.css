@@ -22,8 +22,18 @@
   --breakpoint-desk: 1001px;
 }
 
+/* Altura do cabeçalho fixo (mesma conta de Cabecalho.tsx): usada pelo menu interno das obras
+   e para as âncoras não ficarem escondidas atrás do menu. */
+:root {
+  --altura-cabecalho: 71px;
+  @media (width >= 1001px) {
+    --altura-cabecalho: clamp(91px, calc(91px + 20 * ((100vw - 1100px) / 340)), 111px);
+  }
+}
+
 @layer base {
   html {
+    scroll-padding-top: var(--altura-cabecalho);
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }

@@ -12,7 +12,7 @@ const fluido = (a: number, b: number) => `clamp(${a}px, calc(${a}px + ${b - a} *
 export function Cabecalho() {
   const s = MENU.servicos;
   return (
-    <header className="relative z-40 bg-fundo text-white">
+    <header className="sticky top-0 z-[300] bg-fundo text-white">
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:text-fundo"
