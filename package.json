@@ -5,8 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "npx serve@14 out -l 3000",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "imagens": "node scripts/otimizar-imagens.mjs",
+    "icones": "node scripts/gerar-icones.mjs",
+    "redirects": "node scripts/gerar-nginx-redirects.mjs",
+    "start:servidor": "next start",
+    "postbuild": "node scripts/pos-build.mjs"
   },
   "dependencies": {
     "next": "16.4.5",
@@ -20,6 +26,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

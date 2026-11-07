@@ -1,0 +1,242 @@
+{
+  "academia": {
+    "w": 927,
+    "h": 617
+  },
+  "casa-oliveira-fachada": {
+    "w": 1350,
+    "h": 1500
+  },
+  "casa-oliveira-sala": {
+    "w": 720,
+    "h": 1080
+  },
+  "edificio-portico-madeira": {
+    "w": 1536,
+    "h": 1024
+  },
+  "emporio-francesca": {
+    "w": 1080,
+    "h": 1060
+  },
+  "equipe-em-obra": {
+    "w": 1920,
+    "h": 1080
+  },
+  "espelho-dagua": {
+    "w": 923,
+    "h": 695
+  },
+  "fachada-drugovich": {
+    "w": 2400,
+    "h": 1350
+  },
+  "farmacia-interior": {
+    "w": 1600,
+    "h": 1200
+  },
+  "farmacia-sao-joao": {
+    "w": 1024,
+    "h": 682
+  },
+  "fashion-hall": {
+    "w": 1536,
+    "h": 768
+  },
+  "galpao-em-obra": {
+    "w": 1350,
+    "h": 780
+  },
+  "hotel-palmeiras": {
+    "w": 1123,
+    "h": 756
+  },
+  "hotel-prime-executive": {
+    "w": 1000,
+    "h": 440
+  },
+  "institucional-capa": {
+    "w": 1920,
+    "h": 1080
+  },
+  "interior-alto-padrao": {
+    "w": 1200,
+    "h": 1200
+  },
+  "loja-cechia": {
+    "w": 862,
+    "h": 888
+  },
+  "loja-desnude": {
+    "w": 740,
+    "h": 1020
+  },
+  "loja-eva-bella-vitrine": {
+    "w": 670,
+    "h": 447
+  },
+  "loja-eva-bella": {
+    "w": 1280,
+    "h": 960
+  },
+  "loja-luiza-fazzolli": {
+    "w": 480,
+    "h": 330
+  },
+  "loja-madri-belle": {
+    "w": 818,
+    "h": 929
+  },
+  "majestic-hall-aereo": {
+    "w": 1448,
+    "h": 1086
+  },
+  "majestic-hall": {
+    "w": 1350,
+    "h": 1500
+  },
+  "mapa-brasil": {
+    "w": 1920,
+    "h": 1080
+  },
+  "nobile-suites": {
+    "w": 640,
+    "h": 581
+  },
+  "obra-guindaste": {
+    "w": 2400,
+    "h": 1600
+  },
+  "predio-comercial": {
+    "w": 1080,
+    "h": 945
+  },
+  "residencia-piscina": {
+    "w": 980,
+    "h": 551
+  },
+  "sala-reunioes": {
+    "w": 1920,
+    "h": 1080
+  },
+  "vista-cidade": {
+    "w": 1178,
+    "h": 900
+  },
+  "cliente-alem-do-olhar": {
+    "w": 713,
+    "h": 203
+  },
+  "cliente-avenida-fashion": {
+    "w": 176,
+    "h": 52
+  },
+  "cliente-bom-samaritano": {
+    "w": 754,
+    "h": 419
+  },
+  "cliente-bradesco": {
+    "w": 1114,
+    "h": 249
+  },
+  "cliente-cacau-show": {
+    "w": 1200,
+    "h": 412
+  },
+  "cliente-caixa": {
+    "w": 1200,
+    "h": 272
+  },
+  "cliente-camargo-correa": {
+    "w": 1200,
+    "h": 466
+  },
+  "cliente-celesc": {
+    "w": 241,
+    "h": 248
+  },
+  "cliente-coocam": {
+    "w": 208,
+    "h": 49
+  },
+  "cliente-copercampos": {
+    "w": 1200,
+    "h": 311
+  },
+  "cliente-drugovich": {
+    "w": 200,
+    "h": 170
+  },
+  "cliente-emporio-francesca": {
+    "w": 676,
+    "h": 600
+  },
+  "cliente-enercan": {
+    "w": 1200,
+    "h": 389
+  },
+  "cliente-farmacias-sao-joao": {
+    "w": 553,
+    "h": 151
+  },
+  "cliente-fiat": {
+    "w": 859,
+    "h": 600
+  },
+  "cliente-ipiranga": {
+    "w": 1200,
+    "h": 334
+  },
+  "cliente-jeep": {
+    "w": 700,
+    "h": 281
+  },
+  "cliente-magalu": {
+    "w": 1200,
+    "h": 258
+  },
+  "cliente-mcdonalds": {
+    "w": 891,
+    "h": 600
+  },
+  "cliente-nobile-suites": {
+    "w": 167,
+    "h": 73
+  },
+  "cliente-parana-moda-park": {
+    "w": 229,
+    "h": 109
+  },
+  "cliente-perdigao": {
+    "w": 548,
+    "h": 600
+  },
+  "cliente-samae": {
+    "w": 500,
+    "h": 285
+  },
+  "cliente-senac": {
+    "w": 1023,
+    "h": 600
+  },
+  "cliente-senai": {
+    "w": 1200,
+    "h": 307
+  },
+  "cliente-vestsul": {
+    "w": 1200,
+    "h": 365
+  },
+  "logo-concretiza-branco": {
+    "w": 1200,
+    "h": 268
+  },
+  "logo-concretiza-energia-branco": {
+    "w": 1200,
+    "h": 245
+  },
+  "simbolo-concretiza": {
+    "w": 577,
+    "h": 565
+  }
+}

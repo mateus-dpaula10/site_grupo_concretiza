@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tokens da marca. Verdes tirados do logo e do rodapé do site atual; o fundo claro
+   é cinza-concreto frio (não creme) para conversar com canteiro e estrutura. */
+@theme {
+  --color-concreto: #eceeec;
+  --color-concreto-escuro: #dfe2df;
+  --color-floresta: #0c2b25;
+  --color-floresta-2: #123a32;
+  --color-marca: #23705f;
+  --color-menta: #7fd3c0;
+  --color-tinta: #13201d;
+  --color-grafite: #47524f;
+  --color-linha: #c9cecb;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-xs: 26rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+  body {
+    background: var(--color-concreto);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    font-stretch: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-marca);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .sobre-escuro :focus-visible,
+  .sobre-escuro:focus-visible {
+    outline-color: var(--color-menta);
+  }
+  ::selection {
+    background: var(--color-menta);
+    color: var(--color-floresta);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Títulos usam o eixo de largura do Archivo: expandido e pesado, como
+   letreiro de obra. O corpo fica na largura normal. */
+@utility titulo {
+  font-stretch: 118%;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+@utility titulo-condensado {
+  font-stretch: 80%;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+@utility container-site {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+@utility texto-corrido {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  max-width: 68ch;
+}
+
+/* Cota: a linha de dimensão dos desenhos técnicos (traço com batentes nas pontas).
+   É o único ornamento do site, usado só nos números da empresa. */
+@utility cota {
+  position: relative;
+  height: 11px;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 5px 0 auto 0;
+    border-top: 1px solid currentColor;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-inline: 1px solid currentColor;
+  }
+}
+
+/* Dropdown de serviços no desktop: abre no hover e no foco do teclado, sem JS. */
+.menu-grupo:hover > .menu-sub,
+.menu-grupo:focus-within > .menu-sub {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
 }

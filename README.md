@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Grupo Concretiza — site
 
-## Getting Started
+Reescrita em Next.js do site grupoconcretiza.com.br (antes no Wix).
+Next 16 (App Router) + TypeScript + Tailwind 4, gerado como **site estático** (`out/`).
 
-First, run the development server:
+## Rodar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # gera out/ (e roda scripts/pos-build.mjs)
+npm run start      # serve out/ em http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Onde mexer
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Textos, contatos, menu, obras, clientes: `src/lib/site.ts`
+- Posts do blog: `src/lib/posts.ts`
+- Redirects das URLs antigas do Wix: `src/lib/redirects.mjs` (depois rode `npm run redirects`)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Imagens e vídeos
 
-## Learn More
+- Originais do cliente ficam em `images/` (fora do git e do build).
+- Fotos/logos usados no site ficam em `assets/fotos` e `assets/logos` (masters até 2400 px).
+  Depois de trocar ou incluir uma imagem: `npm run imagens` (gera os WebP em `public/img`
+  em 8 larguras e o mapa de dimensões `src/lib/imagens.gerado.json`).
+- Favicon, ícones do manifest e imagem de compartilhamento: `npm run icones`.
+- Vídeos comprimidos em `public/video` (gerados com ffmpeg a partir de `images/`):
+  `hero-obras.mp4/.webm` (corte de 6,8 s de concretiza.mp4, 720x900, sem áudio) e
+  `institucional-1080p.mp4` (Video Institucional REV01, 1080p).
 
-To learn more about Next.js, take a look at the following resources:
+## Publicar (aaPanel, nginx)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O site é estático: basta servir a pasta `out/`. No vhost:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```nginx
+root /www/wwwroot/grupoconcretiza.com.br/out;
+include /www/wwwroot/grupoconcretiza.com.br/deploy/nginx-redirects.conf;
+location / { try_files $uri $uri.html $uri/ =404; }
+error_page 404 /404.html;
+gzip on; gzip_types text/plain text/css application/javascript application/json image/svg+xml application/manifest+json;
+location ~* ^/(_next/static|img|video)/ { expires 1y; add_header Cache-Control "public, immutable"; }
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Para rodar com servidor Node (PM2) em vez de estático: `NEXT_MODO=servidor npm run build`
+e `npm run start:servidor`; nesse modo os redirects 301 saem do próprio Next.
