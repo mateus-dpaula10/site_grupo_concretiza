@@ -3,16 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
-import { IconeFechar, IconeMenu } from "@/components/Icones";
-import type { ItemMenu } from "@/lib/site";
+import { IconeFechar, IconeMenu, IconeSeletor } from "@/components/Icones";
+import { LinkMenu } from "@/components/LinkMenu";
+import { MENU } from "@/lib/site";
 
-// Único pedaço interativo do cabeçalho: o menu do celular.
-export function MenuMobile({ itens }: { itens: ItemMenu[] }) {
+// Menu do celular igual ao do Wix: painel verde-oliva vindo da direita, caixa do menu
+// verde translúcida, Serviços expansível (Construtora > obras, Energia).
+export function MenuMobile() {
   const [aberto, setAberto] = useState(false);
+  const [servicos, setServicos] = useState(false);
   const pathname = usePathname();
   const id = useId();
 
-  // Fecha ao navegar para outra página.
   const [ultimaRota, setUltimaRota] = useState(pathname);
   if (ultimaRota !== pathname) {
     setUltimaRota(pathname);
@@ -30,45 +32,68 @@ export function MenuMobile({ itens }: { itens: ItemMenu[] }) {
     };
   }, [aberto]);
 
+  const fechar = () => setAberto(false);
+  const s = MENU.servicos;
+
   return (
-    <div className="lg:hidden">
-      <button
-        type="button"
-        aria-expanded={aberto}
-        aria-controls={id}
-        onClick={() => setAberto((v) => !v)}
-        className="grid size-11 place-items-center rounded-full border border-white/25 hover:border-menta"
-      >
-        {aberto ? <IconeFechar className="size-6" /> : <IconeMenu className="size-6" />}
-        <span className="sr-only">{aberto ? "Fechar menu" : "Abrir menu"}</span>
+    <>
+      <button type="button" aria-expanded={aberto} aria-controls={id} onClick={() => setAberto(true)} className="grid size-[40px] place-items-center">
+        <IconeMenu className="w-[26px]" />
+        <span className="sr-only">Abrir menu</span>
       </button>
-      <nav
-        id={id}
-        aria-label="Principal"
-        hidden={!aberto}
-        className="fixed inset-x-0 bottom-0 top-16 overflow-y-auto bg-floresta px-4 pb-10 pt-4"
-      >
-        <ul className="text-lg">
-          {itens.map((item) => (
-            <li key={item.href} className="border-b border-white/10">
-              <Link href={item.href} onClick={() => setAberto(false)} className="block py-3.5 font-semibold">
-                {item.rotulo}
-              </Link>
-              {item.filhos && (
-                <ul className="-mt-1 mb-3 grid gap-0.5 border-l border-menta/50 pl-4 text-base text-white/85">
-                  {item.filhos.map((f) => (
-                    <li key={f.href}>
-                      <Link href={f.href} onClick={() => setAberto(false)} className="block py-2">
-                        {f.rotulo}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+      <div id={id} hidden={!aberto} className="fixed inset-0 z-50">
+        <div className="absolute inset-0 bg-black/50" onClick={fechar} aria-hidden />
+        <nav aria-label="Principal" className="absolute bottom-0 right-0 top-0 w-[90%] overflow-y-auto bg-oliva pt-[89px]">
+          <button type="button" onClick={fechar} className="absolute right-[12px] top-[20px] grid size-[40px] place-items-center">
+            <IconeFechar className="w-[22px]" />
+            <span className="sr-only">Fechar menu</span>
+          </button>
+          <ul className="ml-[20px] w-[264px] rounded-[8px] bg-menta/40 p-[14px] text-[18px] leading-[1.6]">
+            {MENU.itens.map((item) => (
+              <li key={item.href} className="py-[5px]">
+                <LinkMenu href={item.href} onClick={fechar} className="inline-block px-[14px] py-[1px]">
+                  {item.rotulo}
+                </LinkMenu>
+              </li>
+            ))}
+            <li className="py-[5px]">
+              <button
+                type="button"
+                aria-expanded={servicos}
+                onClick={() => setServicos((v) => !v)}
+                className={`inline-flex items-center gap-[8px] rounded-full px-[14px] py-[1px] ${servicos ? "bg-menta/40" : ""}`}
+              >
+                {s.rotulo}
+                <IconeSeletor className={`w-[10px] transition-transform ${servicos ? "rotate-180" : ""}`} />
+              </button>
+              {servicos && (
+                <div className="pb-[10px] pl-[36px] pt-[12px]">
+                  <p className="text-[15px] text-[#263017]/70">{s.grupo}</p>
+                  <ul className="mt-[6px] text-[14px] leading-[24px] text-fundo">
+                    {s.obras.map((o) => (
+                      <li key={o.href}>
+                        <Link href={o.href} onClick={fechar} className="-ml-[4px] block">
+                          {o.rotulo}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={s.energia.href} onClick={fechar} className="mt-[16px] block text-[15px] text-[#263017]/70">
+                    {s.energia.rotulo}
+                  </Link>
+                </div>
               )}
             </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+            {MENU.finais.map((item) => (
+              <li key={item.href} className="py-[5px]">
+                <LinkMenu href={item.href} onClick={fechar} className="inline-block px-[14px] py-[1px]">
+                  {item.rotulo}
+                </LinkMenu>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </>
   );
 }

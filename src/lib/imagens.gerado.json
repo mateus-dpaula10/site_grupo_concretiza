@@ -3,6 +3,30 @@
     "w": 927,
     "h": 617
   },
+  "avatar-1": {
+    "w": 160,
+    "h": 160
+  },
+  "avatar-2": {
+    "w": 160,
+    "h": 160
+  },
+  "avatar-3": {
+    "w": 160,
+    "h": 160
+  },
+  "avatar-4": {
+    "w": 160,
+    "h": 160
+  },
+  "avatar-erico": {
+    "w": 96,
+    "h": 96
+  },
+  "capa-energia": {
+    "w": 1245,
+    "h": 933
+  },
   "casa-oliveira-fachada": {
     "w": 1350,
     "h": 1500
@@ -47,6 +71,10 @@
     "w": 1350,
     "h": 780
   },
+  "hero-capa": {
+    "w": 1920,
+    "h": 1080
+  },
   "hotel-palmeiras": {
     "w": 1123,
     "h": 756
@@ -54,6 +82,54 @@
   "hotel-prime-executive": {
     "w": 1000,
     "h": 440
+  },
+  "insta-01": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-02": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-03": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-04": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-05": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-06": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-07": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-08": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-09": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-10": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-11": {
+    "w": 640,
+    "h": 640
+  },
+  "insta-12": {
+    "w": 640,
+    "h": 640
   },
   "institucional-capa": {
     "w": 1920,
@@ -95,9 +171,9 @@
     "w": 1350,
     "h": 1500
   },
-  "mapa-brasil": {
-    "w": 1920,
-    "h": 1080
+  "mapa-recorte": {
+    "w": 940,
+    "h": 1078
   },
   "nobile-suites": {
     "w": 640,
@@ -111,6 +187,14 @@
     "w": 1080,
     "h": 945
   },
+  "render-edificio-curvo": {
+    "w": 604,
+    "h": 312
+  },
+  "residencia-branca": {
+    "w": 348,
+    "h": 222
+  },
   "residencia-piscina": {
     "w": 980,
     "h": 551
@@ -118,6 +202,250 @@
   "sala-reunioes": {
     "w": 1920,
     "h": 1080
+  },
+  "seg-comerciais-01": {
+    "w": 900,
+    "h": 599
+  },
+  "seg-comerciais-02": {
+    "w": 670,
+    "h": 447
+  },
+  "seg-comerciais-03": {
+    "w": 900,
+    "h": 675
+  },
+  "seg-comerciais-04": {
+    "w": 792,
+    "h": 900
+  },
+  "seg-comerciais-05": {
+    "w": 862,
+    "h": 888
+  },
+  "seg-comerciais-06": {
+    "w": 480,
+    "h": 330
+  },
+  "seg-comerciais-07": {
+    "w": 653,
+    "h": 900
+  },
+  "seg-comerciais-08": {
+    "w": 900,
+    "h": 506
+  },
+  "seg-comerciais-09": {
+    "w": 1000,
+    "h": 667
+  },
+  "seg-comerciais-10": {
+    "w": 1000,
+    "h": 625
+  },
+  "seg-comerciais-11": {
+    "w": 900,
+    "h": 599
+  },
+  "seg-comerciais-12": {
+    "w": 670,
+    "h": 447
+  },
+  "seg-comerciais-13": {
+    "w": 900,
+    "h": 675
+  },
+  "seg-comerciais-14": {
+    "w": 792,
+    "h": 900
+  },
+  "seg-comerciais-15": {
+    "w": 862,
+    "h": 888
+  },
+  "seg-comerciais-16": {
+    "w": 480,
+    "h": 330
+  },
+  "seg-comerciais-17": {
+    "w": 653,
+    "h": 900
+  },
+  "seg-comerciais-18": {
+    "w": 900,
+    "h": 506
+  },
+  "seg-comerciais-19": {
+    "w": 1000,
+    "h": 667
+  },
+  "seg-corporativas-01": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-02": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-03": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-04": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-05": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-06": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-07": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-08": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-09": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-10": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-11": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-corporativas-12": {
+    "w": 820,
+    "h": 547
+  },
+  "seg-industriais-01": {
+    "w": 780,
+    "h": 521
+  },
+  "seg-industriais-02": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-03": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-04": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-05": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-06": {
+    "w": 780,
+    "h": 472
+  },
+  "seg-industriais-07": {
+    "w": 780,
+    "h": 472
+  },
+  "seg-industriais-08": {
+    "w": 780,
+    "h": 521
+  },
+  "seg-industriais-09": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-10": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-11": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-12": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-13": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-14": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-industriais-15": {
+    "w": 780,
+    "h": 520
+  },
+  "seg-residenciais-01": {
+    "w": 760,
+    "h": 507
+  },
+  "seg-residenciais-02": {
+    "w": 760,
+    "h": 428
+  },
+  "seg-residenciais-03": {
+    "w": 560,
+    "h": 560
+  },
+  "seg-residenciais-04": {
+    "w": 760,
+    "h": 507
+  },
+  "seg-residenciais-05": {
+    "w": 760,
+    "h": 507
+  },
+  "seg-residenciais-06": {
+    "w": 760,
+    "h": 428
+  },
+  "seg-residenciais-07": {
+    "w": 560,
+    "h": 560
+  },
+  "seg-residenciais-08": {
+    "w": 760,
+    "h": 428
+  },
+  "seg-residenciais-09": {
+    "w": 760,
+    "h": 507
+  },
+  "seg-residenciais-10": {
+    "w": 760,
+    "h": 507
+  },
+  "seg-residenciais-11": {
+    "w": 760,
+    "h": 507
+  },
+  "seg-residenciais-12": {
+    "w": 420,
+    "h": 560
+  },
+  "seg-residenciais-13": {
+    "w": 420,
+    "h": 560
+  },
+  "seg-residenciais-14": {
+    "w": 420,
+    "h": 560
+  },
+  "seg-residenciais-15": {
+    "w": 420,
+    "h": 560
   },
   "vista-cidade": {
     "w": 1178,
@@ -238,5 +566,9 @@
   "simbolo-concretiza": {
     "w": 577,
     "h": 565
+  },
+  "whatsapp-horizontal": {
+    "w": 600,
+    "h": 178
   }
 }

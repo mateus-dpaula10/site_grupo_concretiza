@@ -1,20 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
+import { Wix_Madefor_Display, Wix_Madefor_Text } from "next/font/google";
 import { Cabecalho } from "@/components/Cabecalho";
 import { JsonLd, dadosOrganizacao } from "@/components/JsonLd";
 import { Rodape } from "@/components/Rodape";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-// Uma família só (Archivo), variável em peso e largura: títulos expandidos, corpo normal.
-// Arquivo local reduzido por scripts/subset-fonte.mjs (60 KB em vez de 88 KB).
-const archivo = localFont({
-  src: "../fonts/archivo-variavel.woff2",
-  weight: "400 800",
-  style: "normal",
+// As mesmas famílias do site original (Wix Madefor), publicadas no Google Fonts.
+const madeforDisplay = Wix_Madefor_Display({
+  subsets: ["latin"],
   display: "swap",
-  variable: "--font-archivo",
-  declarations: [{ prop: "font-stretch", value: "80% 125%" }],
+  variable: "--font-madefor-display",
+});
+const madeforText = Wix_Madefor_Text({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-madefor-text",
 });
 
 export const metadata: Metadata = {
@@ -37,13 +38,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0c2b25",
-  colorScheme: "light",
+  themeColor: "#0f1309",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={archivo.variable}>
+    <html lang="pt-BR" className={`${madeforDisplay.variable} ${madeforText.variable}`}>
       <body className="flex min-h-dvh flex-col antialiased">
         <JsonLd dados={dadosOrganizacao()} />
         <Cabecalho />

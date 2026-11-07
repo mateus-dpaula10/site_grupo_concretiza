@@ -1,0 +1,23 @@
+{
+ "accent": "#1A8C7A",
+ "accentDim": "#116659",
+ "accentRgb": "26,140,122",
+ "formId": "res-form",
+ "imagens": [
+  "residenciais-01.jpg",
+  "residenciais-02.jpg",
+  "residenciais-03.jpg",
+  "residenciais-04.jpg",
+  "residenciais-05.jpg",
+  "residenciais-06.jpg",
+  "residenciais-07.jpg",
+  "residenciais-08.jpg",
+  "residenciais-09.jpg",
+  "residenciais-10.jpg",
+  "residenciais-11.jpg",
+  "residenciais-12.jpg",
+  "residenciais-13.jpg",
+  "residenciais-14.jpg",
+  "residenciais-15.jpg"
+ ]
+}

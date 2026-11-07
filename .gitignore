@@ -42,3 +42,4 @@ next-env.d.ts
 
 # originais do cliente (fonte das imagens/vídeos; não vão para o build)
 /images/
+/comparacao/

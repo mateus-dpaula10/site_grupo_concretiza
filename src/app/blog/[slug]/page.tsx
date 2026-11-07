@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CartoesPosts } from "@/components/CartoesPosts";
-import { ChamadaOrcamento } from "@/components/ChamadaOrcamento";
-import { IconeSeta } from "@/components/Icones";
+import { Foto } from "@/components/Foto";
 import { JsonLd, ORGANIZACAO_ID, dadosBreadcrumb } from "@/components/JsonLd";
-import { POSTS, formatarData, type Bloco } from "@/lib/posts";
+import { POSTS, dataCurta, type Bloco } from "@/lib/posts";
 import { metadados } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
+import { v } from "@/lib/medidas";
+
+// Réplica da página de post do Wix: "All Posts", autor, título grande, texto em coluna de
+// 740px, foto, e "Posts recentes". No original os subtítulos saem na cor do fundo
+// (invisíveis); aqui ficam brancos. Contadores de visualização, curtidas e comentários
+// do Wix não foram replicados.
 
 export const dynamicParams = false;
 
@@ -18,46 +22,32 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">) {
   const { slug } = await params;
   const p = POSTS.find((x) => x.slug === slug);
   if (!p) return {};
-  return metadados({
-    titulo: p.titulo,
-    descricao: p.resumo,
-    caminho: `/blog/${p.slug}`,
-    tipo: "article",
-    publicado: p.publicado,
-    atualizado: p.atualizado,
-  });
+  return metadados({ titulo: p.titulo, descricao: p.resumo, caminho: `/blog/${p.slug}`, tipo: "article", publicado: p.publicado, atualizado: p.atualizado });
 }
 
 function Corpo({ blocos }: { blocos: Bloco[] }) {
   return blocos.map((b, i) => {
-    switch (b.tipo) {
-      case "h2":
-        return (
-          <h2 key={i} className="mt-12 text-3xl font-bold leading-tight [font-stretch:112%]">
-            {b.texto}
-          </h2>
-        );
-      case "h3":
-        return (
-          <h3 key={i} className="mt-8 text-xl font-bold [font-stretch:108%]">
-            {b.texto}
-          </h3>
-        );
-      case "lista":
-        return (
-          <ul key={i} className="mt-4 grid list-disc gap-2 pl-6 marker:text-marca">
-            {b.itens.map((it) => (
-              <li key={it}>{it}</li>
-            ))}
-          </ul>
-        );
-      default:
-        return (
-          <p key={i} className="mt-4">
-            {b.texto}
-          </p>
-        );
-    }
+    if (b.tipo === "h2")
+      return (
+        <h2 key={i} className={`font-display text-[22px] font-semibold leading-[1.4] text-white tab:text-[28px] ${i === 0 ? "" : "mt-[6px]"}`}>
+          {b.texto}
+        </h2>
+      );
+    if (b.tipo === "h3")
+      return (
+        <h3 key={i} className="mt-[6px] font-display text-[18px] font-semibold text-white tab:text-[20px]">
+          {b.texto}
+        </h3>
+      );
+    if (b.tipo === "lista")
+      return (
+        <ul key={i} className="list-disc pl-[36px]">
+          {b.itens.map((it) => (
+            <li key={it}>{it}</li>
+          ))}
+        </ul>
+      );
+    return <p key={i}>{b.texto}</p>;
   });
 }
 
@@ -66,10 +56,9 @@ export default async function Artigo({ params }: PageProps<"/blog/[slug]">) {
   const p = POSTS.find((x) => x.slug === slug);
   if (!p) notFound();
   const outros = POSTS.filter((x) => x.slug !== p.slug);
-  const url = `${SITE_URL}/blog/${p.slug}`;
 
   return (
-    <>
+    <article className="degrade-base pb-[60px] pt-[40px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]" style={{ "--pt": v(117), "--pb": v(100), "--inicio": "70%", "--fim": "#1e2612" } as React.CSSProperties}>
       <JsonLd
         dados={{
           "@context": "https://schema.org",
@@ -80,75 +69,65 @@ export default async function Artigo({ params }: PageProps<"/blog/[slug]">) {
           dateModified: p.atualizado ?? p.publicado,
           author: { "@type": "Person", name: p.autor },
           publisher: { "@id": ORGANIZACAO_ID },
-          mainEntityOfPage: url,
+          mainEntityOfPage: `${SITE_URL}/blog/${p.slug}`,
           image: `${SITE_URL}/opengraph-image.jpg`,
           inLanguage: "pt-BR",
         }}
       />
-      <JsonLd
-        dados={dadosBreadcrumb([
-          { nome: "Blog", href: "/blog" },
-          { nome: p.titulo, href: `/blog/${p.slug}` },
-        ])}
-      />
-      <article>
-        <header className="sobre-escuro bg-floresta text-white">
-          <div className="container-site pb-14 pt-8">
-            <nav aria-label="Trilha de navegação">
-              <ol className="flex flex-wrap items-center gap-x-2 text-sm text-white/75">
-                <li>
-                  <Link href="/" className="hover:text-menta">
-                    Home
-                  </Link>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span aria-hidden>/</span>
-                  <Link href="/blog" className="hover:text-menta">
-                    Blog
-                  </Link>
-                </li>
-              </ol>
-            </nav>
-            <p className="titulo-condensado mt-10 text-2xl text-menta">{p.tema}</p>
-            <h1 className="titulo mt-3 max-w-4xl text-[2.1rem] sm:text-5xl lg:text-6xl">{p.titulo}</h1>
-            <p className="mt-6 text-white/80">
-              Por {p.autor}. Publicado em <time dateTime={p.publicado}>{formatarData(p.publicado)}</time>
-              {p.atualizado && (
-                <>
-                  , atualizado em <time dateTime={p.atualizado}>{formatarData(p.atualizado)}</time>
-                </>
-              )}
-              .
-            </p>
+      <JsonLd dados={dadosBreadcrumb([{ nome: "Blog", href: "/blog" }, { nome: p.titulo, href: `/blog/${p.slug}` }])} />
+      <div className="caixa">
+        <Link href="/blog" className="text-[14px] text-lima hover:underline tab:ml-[var(--ml)]" style={{ "--ml": v(20) } as React.CSSProperties}>
+          Todos os posts
+        </Link>
+        <div className="mx-auto mt-[24px] max-w-[740px] tab:mt-[var(--m)] tab:w-[var(--w)] tab:max-w-none" style={{ "--m": v(117), "--w": v(740) } as React.CSSProperties}>
+          <div className="flex items-center gap-[12px] text-[14px] text-cinza">
+            {p.avatar ? (
+              <Foto nome={p.avatar} alt="" largura={32} className="size-[32px] rounded-full object-cover" />
+            ) : (
+              <span aria-hidden className="grid size-[32px] place-items-center rounded-full bg-teal text-[13px] font-semibold text-white">
+                {p.autor[0]}
+              </span>
+            )}
+            <span>{p.autor}</span>
+            <span aria-hidden>·</span>
+            <time dateTime={p.publicado}>{dataCurta(p.publicado)}</time>
+            <span aria-hidden>·</span>
+            <span>1 min de leitura</span>
           </div>
-        </header>
-        <div className="container-site py-14 lg:py-20">
-          <div className="mx-auto max-w-[68ch] text-[1.125rem] leading-[1.75] text-tinta">
-            <p className="text-xl leading-relaxed text-grafite">{p.resumo}</p>
+          <h1 className="mt-[22px] font-display text-[32px] font-semibold leading-[1.2] tab:text-[59px]">{p.titulo}</h1>
+          <div className="mt-[28px] grid gap-[6px] text-[16px] leading-[1.6] text-cinza tab:text-[18px]">
             <Corpo blocos={p.corpo} />
-            <Link
-              href={p.servicoRelacionado.href}
-              className="mt-12 inline-flex items-center gap-2 rounded-full bg-floresta px-6 py-3.5 font-semibold text-white hover:bg-marca"
-            >
-              {p.servicoRelacionado.rotulo}
-              <IconeSeta className="size-5" />
+          </div>
+          <div className="relative mt-[40px] aspect-[740/493] overflow-hidden">
+            <Foto nome={p.capa.nome} alt={p.capa.alt} fill sizes="(min-width: 751px) 52vw, 351px" className="object-cover" />
+          </div>
+        </div>
+
+        <section aria-labelledby="recentes" className="mx-auto mt-[60px] max-w-[940px] border-t border-white/10 pt-[24px] tab:w-[var(--w2)] tab:max-w-none" style={{ "--w2": v(940) } as React.CSSProperties}>
+          <div className="flex items-baseline justify-between">
+            <h2 id="recentes" className="text-[18px] text-cinza">
+              Posts recentes
+            </h2>
+            <Link href="/blog" className="text-[14px] text-cinza hover:text-white">
+              Ver tudo
             </Link>
           </div>
-        </div>
-      </article>
-
-      <section aria-labelledby="recentes-titulo" className="border-t border-linha py-16">
-        <div className="container-site">
-          <h2 id="recentes-titulo" className="titulo text-3xl sm:text-4xl">
-            Posts recentes
-          </h2>
-          <div className="mt-8">
-            <CartoesPosts posts={outros} />
-          </div>
-        </div>
-      </section>
-
-      <ChamadaOrcamento />
-    </>
+          <ul className="mt-[20px] grid gap-[24px] tab:grid-cols-3">
+            {outros.map((o) => (
+              <li key={o.slug} className="group relative border border-white/10">
+                <div className="relative aspect-[289/162] overflow-hidden">
+                  <Foto nome={o.capa.nome} alt={o.capa.alt} fill sizes="(min-width: 751px) 20vw, 351px" className="object-cover" />
+                </div>
+                <h3 className="p-[24px] font-display text-[18px] font-semibold leading-[1.3]">
+                  <Link href={`/blog/${o.slug}`} className="after:absolute after:inset-0 group-hover:text-menta">
+                    {o.tituloOriginal}
+                  </Link>
+                </h3>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </article>
   );
 }

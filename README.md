@@ -26,8 +26,10 @@ npm run start      # serve out/ em http://localhost:3000
   em 8 larguras e o mapa de dimensões `src/lib/imagens.gerado.json`).
 - Favicon, ícones do manifest e imagem de compartilhamento: `npm run icones`.
 - Vídeos comprimidos em `public/video` (gerados com ffmpeg a partir de `images/`):
-  `hero-obras.mp4/.webm` (corte de 6,8 s de concretiza.mp4, 720x900, sem áudio) e
-  `institucional-1080p.mp4` (Video Institucional REV01, 1080p).
+  `hero.mp4/.webm` (6 s de concretiza.mp4, 1280x720, sem áudio, carregado após o load só no desktop) e
+  `institucional-loop.mp4/.webm` (12 s do vídeo institucional, sem áudio, carregado quando aparece na tela).
+- Páginas de obras: no Wix eram HTMLs próprios dentro de iframes. O conteúdo importado está em
+  `src/app/obras/[tipo]/conteudo/*.html` (texto e estrutura) e `segmento.css` (estilo com escopo `.seg`).
 
 ## Publicar (aaPanel, nginx)
 

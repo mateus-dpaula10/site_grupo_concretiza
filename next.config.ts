@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       }
     : { output: "export" as const }),
   poweredByHeader: false,
+  devIndicators: false,
   images: {
     // As variantes WebP são geradas por scripts/otimizar-imagens.mjs (sem otimizador em runtime).
     loader: "custom",

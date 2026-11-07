@@ -1,28 +1,31 @@
 @import "tailwindcss";
 
-/* Tokens da marca. Verdes tirados do logo e do rodapé do site atual; o fundo claro
-   é cinza-concreto frio (não creme) para conversar com canteiro e estrutura. */
+/* Réplica visual do site Wix (Wix Studio). Cores e medidas extraídas do site original
+   em 1440px e 390px. Breakpoints do Wix: mobile < 751px, tablet 751–1000, desktop >= 1001. */
 @theme {
-  --color-concreto: #eceeec;
-  --color-concreto-escuro: #dfe2df;
-  --color-floresta: #0c2b25;
-  --color-floresta-2: #123a32;
-  --color-marca: #23705f;
-  --color-menta: #7fd3c0;
-  --color-tinta: #13201d;
-  --color-grafite: #47524f;
-  --color-linha: #c9cecb;
+  --color-fundo: #0f1309;
+  --color-cinza: #cfd0ce;
+  --color-menta: #74cebc;
+  --color-menta-escuro: #4ca392;
+  --color-teal: #25695b;
+  --color-teal-fim: #377a6d;
+  --color-floresta: #0b2f28;
+  --color-oliva: #263017;
+  --color-lima: #dbff98;
+  --color-tinta: #0b2f28;
 
-  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-madefor-display), "Helvetica Neue", Arial, sans-serif;
+  --font-texto: var(--font-madefor-text), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-texto);
 
-  --breakpoint-xs: 26rem;
+  --breakpoint-tab: 751px;
+  --breakpoint-desk: 1001px;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    scroll-padding-top: 5.5rem;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -31,87 +34,128 @@
     *,
     *::before,
     *::after {
-      transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
   }
   body {
-    background: var(--color-concreto);
-    color: var(--color-tinta);
-    font-family: var(--font-sans);
-    font-stretch: 100%;
-    text-rendering: optimizeLegibility;
+    background: var(--color-fundo);
+    color: #fff;
+    font-family: var(--font-texto);
   }
   :focus-visible {
-    outline: 3px solid var(--color-marca);
+    outline: 2px solid var(--color-lima);
     outline-offset: 3px;
-    border-radius: 2px;
-  }
-  .sobre-escuro :focus-visible,
-  .sobre-escuro:focus-visible {
-    outline-color: var(--color-menta);
-  }
-  ::selection {
-    background: var(--color-menta);
-    color: var(--color-floresta);
   }
 }
 
-/* Títulos usam o eixo de largura do Archivo: expandido e pesado, como
-   letreiro de obra. O corpo fica na largura normal. */
-@utility titulo {
-  font-stretch: 118%;
-  font-weight: 750;
-  letter-spacing: -0.02em;
-  line-height: 1.02;
-  text-wrap: balance;
-}
-@utility titulo-condensado {
-  font-stretch: 80%;
-  font-weight: 650;
-  letter-spacing: 0;
-}
-@utility container-site {
-  width: 100%;
-  max-width: 78rem;
-  margin-inline: auto;
-  padding-inline: 1rem;
-  @media (width >= 40rem) {
-    padding-inline: 1.5rem;
-  }
-  @media (width >= 64rem) {
-    padding-inline: 2rem;
-  }
-}
-@utility texto-corrido {
-  font-size: 1.0625rem;
-  line-height: 1.7;
-  max-width: 68ch;
-}
-
-/* Cota: a linha de dimensão dos desenhos técnicos (traço com batentes nas pontas).
-   É o único ornamento do site, usado só nos números da empresa. */
-@utility cota {
-  position: relative;
-  height: 11px;
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 5px 0 auto 0;
-    border-top: 1px solid currentColor;
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-inline: 1px solid currentColor;
+/* Margem lateral do Wix: 20px no celular, 5% da largura a partir do tablet. */
+@utility caixa {
+  padding-inline: 20px;
+  @media (width >= 751px) {
+    padding-inline: 5%;
   }
 }
 
-/* Dropdown de serviços no desktop: abre no hover e no foco do teclado, sem JS. */
+/* Tipografia fluida: valor fixo no celular; no desktop interpola entre o tamanho
+   medido em 1100px e em 1440px (o Wix Studio escala o texto com a largura). */
+@utility t-h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.2;
+  @media (width >= 751px) {
+    font-size: clamp(55px, calc(55px + 13.4 * ((100vw - 1100px) / 340)), 68.4px);
+  }
+}
+@utility t-h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.3;
+  @media (width >= 751px) {
+    font-size: clamp(40px, calc(40px + 11.3 * ((100vw - 1100px) / 340)), 51.3px);
+  }
+}
+@utility t-h2-menor {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.3;
+  @media (width >= 751px) {
+    font-size: clamp(40px, calc(40px + 5 * ((100vw - 1100px) / 340)), 45px);
+  }
+}
+@utility t-lead {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-cinza);
+  @media (width >= 751px) {
+    font-size: clamp(16px, calc(16px + 4.25 * ((100vw - 1100px) / 340)), 20.25px);
+  }
+}
+@utility t-h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.3;
+  @media (width >= 751px) {
+    font-size: clamp(20px, calc(20px + 2.5 * ((100vw - 1100px) / 340)), 22.5px);
+  }
+}
+@utility t-servico {
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--color-cinza);
+  @media (width >= 751px) {
+    font-size: clamp(14px, calc(14px + 4 * ((100vw - 1100px) / 340)), 18px);
+  }
+}
+@utility t-card-titulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.4;
+  @media (width >= 751px) {
+    font-size: 22px;
+    line-height: 1.33;
+  }
+}
+@utility t-card-texto {
+  font-size: 14px;
+  line-height: 1.42;
+  color: var(--color-cinza);
+  @media (width >= 751px) {
+    font-size: clamp(14px, calc(14px + 2 * ((100vw - 1100px) / 340)), 16px);
+    line-height: 1.5;
+  }
+}
+
+/* Faixa em degradê que fecha várias seções do original (escuro → verde-água). */
+@utility degrade-base {
+  background-image: linear-gradient(to bottom, var(--color-fundo) 0%, var(--color-fundo) var(--inicio, 55%), var(--fim, #377a6d) 100%);
+}
+
+/* Galeria que rola sozinha (como a do Wix); para com prefers-reduced-motion. */
+@keyframes rolar {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@utility rolagem-continua {
+  animation: rolar var(--duracao, 60s) linear infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Dropdown de Serviços no desktop: abre no hover e no foco do teclado, sem JS. */
 .menu-grupo:hover > .menu-sub,
 .menu-grupo:focus-within > .menu-sub {
   visibility: visible;
   opacity: 1;
-  transform: translateY(0);
 }

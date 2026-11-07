@@ -1,328 +1,328 @@
 import Link from "next/link";
-import { BlocoContato } from "@/components/BlocoContato";
-import { CartoesPosts } from "@/components/CartoesPosts";
-import { Clientes } from "@/components/Clientes";
-import { Depoimentos, Estrelas } from "@/components/Depoimentos";
+import { CarrosselInstagram } from "@/components/CarrosselInstagram";
+import { FormContato } from "@/components/FormContato";
 import { Foto } from "@/components/Foto";
-import { IconeInstagram, IconeSeta, IconeWhatsapp } from "@/components/Icones";
-import { Numeros } from "@/components/Numeros";
+import { BotaoSeta } from "@/components/BotaoSeta";
+import { IconeEstrelas, IconeServico } from "@/components/Icones";
+import { CartoesBlog } from "@/components/CartoesBlog";
+import { VideoAoVer } from "@/components/VideoAoVer";
 import { VideoHero } from "@/components/VideoHero";
 import { metadados } from "@/lib/seo";
-import { EMPRESA, ESPECIALIDADES, TIPOS_OBRA, WHATSAPP_ORCAMENTO, whatsappUrl } from "@/lib/site";
+import { CLIENTES, ESPECIALIDADES, GALERIA_HOME, SERVICOS_HOME, WHATSAPP_ORCAMENTO, whatsappUrl } from "@/lib/site";
+import { v } from "@/lib/medidas";
 
 export const metadata = metadados({
-  titulo: "Grupo Concretiza | Engenharia e execução de obras",
+  titulo: "Home | Grupo Concretiza",
   tituloAbsoluto: true,
   descricao:
     "Soluções completas em engenharia e execução de obras corporativas, comerciais, industriais e residenciais de alto padrão. Mais de 747 projetos e 20 anos de experiência.",
   caminho: "/",
 });
 
-const DESTAQUES = [
-  {
-    titulo: "Casa Oliveira",
-    tipo: "Residencial alto padrão",
-    foto: { nome: "casa-oliveira-fachada", alt: "Casa Oliveira: esquina envidraçada com oliveira no jardim" },
-    href: "/obras/residenciais",
-  },
-  {
-    titulo: "Majestic Hall",
-    tipo: "Centro de eventos",
-    foto: { nome: "majestic-hall", alt: "Fachada curva em vermelho do Majestic Hall refletida no espelho d'água" },
-    href: "/obras/corporativas",
-  },
-  {
-    titulo: "Empório Francesca",
-    tipo: "Comercial, Maringá (PR)",
-    foto: { nome: "emporio-francesca", alt: "Fachada do Empório Francesca com tijolos aparentes e toldo preto" },
-    href: "/obras/comerciais",
-  },
-  {
-    titulo: "Hotel Prime Executive",
-    tipo: "Hotelaria, Campos Novos (SC)",
-    foto: { nome: "hotel-prime-executive", alt: "Fachada do Hotel Prime Executive com varandas de vidro" },
-    href: "/obras/corporativas",
-  },
-];
-
+// Réplica da home do site Wix. Medidas desktop medidas em 1440px e convertidas em vw
+// (o Wix Studio escala o layout com a largura); medidas do celular medidas em 390px.
 export default function Home() {
   return (
     <>
-      {/* Abertura */}
-      <section className="sobre-escuro relative overflow-hidden bg-floresta text-white">
-        <div className="container-site grid gap-10 pb-12 pt-10 lg:min-h-[min(46rem,calc(100dvh-4.5rem))] lg:grid-cols-[1.15fr_1fr] lg:items-center lg:pb-16 lg:pt-12">
-          <div className="relative z-10">
-            <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/85">
-              <span className="flex items-center gap-2">
-                <Estrelas className="text-menta" />
-                Nota 5,0 no Google
-              </span>
-              <span>500+ clientes</span>
-            </p>
-            <h1 className="titulo mt-6 text-[2.5rem] xs:text-[2.9rem] sm:text-6xl xl:text-[4.6rem]">
-              Soluções completas em engenharia e execução de obras.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl">
-              Planejamento, agilidade e compromisso para entregar obras com precisão e alto padrão.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <a
-                href={WHATSAPP_ORCAMENTO}
-                target="_blank"
-                rel="noopener"
-                className="inline-flex items-center gap-2 rounded-full bg-menta px-7 py-4 font-semibold text-floresta hover:bg-white"
-              >
-                <IconeWhatsapp className="size-5" />
-                Orçamento de projetos
-              </a>
-              <Link
-                href="/contato"
-                className="inline-flex items-center rounded-full border border-white/60 px-7 py-4 font-semibold hover:border-white hover:bg-white/10"
-              >
-                Contato
-              </Link>
+      {/* 1. Abertura com vídeo (o Wix usava vídeo do banco do Wix; aqui é vídeo do cliente) */}
+      <section
+        className="relative overflow-hidden tab:h-[var(--h)]"
+        style={{ "--h": v(666) } as React.CSSProperties}
+      >
+        <div className="absolute inset-0">
+          <Foto nome="hero-capa" alt="" fill prioridade="lcp" sizes="100vw" className="object-cover" />
+          <VideoHero />
+          <div aria-hidden className="absolute inset-0 bg-fundo/75" />
+        </div>
+        <div className="caixa relative pb-[39px] pt-[10px] tab:pb-0 tab:pt-[var(--pt)]" style={{ "--pt": v(105) } as React.CSSProperties}>
+          <div
+            className="flex h-[66px] w-[323px] items-center gap-[10px] rounded-full border border-white/15 bg-white/10 pl-[11px] backdrop-blur-sm tab:h-[var(--bh)] tab:w-[var(--bw)] tab:gap-[var(--bg)] tab:pl-[var(--bp)]"
+            style={{ "--bh": v(79), "--bw": v(352), "--bg": v(14), "--bp": v(11), "--st": v(84) } as React.CSSProperties}
+          >
+            <div className="flex">
+              {[1, 2, 3, 4].map((n) => (
+                <div
+                  key={n}
+                  className="-ml-[21px] size-[45px] overflow-hidden rounded-full border-2 border-white/70 first:ml-0 tab:-ml-[var(--ov)] tab:size-[var(--av)]"
+                  style={{ "--av": v(43), "--ov": v(15) } as React.CSSProperties}
+                >
+                  <Foto nome={`avatar-${n}`} alt="" largura={45} className="size-full object-cover" />
+                </div>
+              ))}
+            </div>
+            <div>
+              <p className="flex items-center gap-[10px] whitespace-nowrap text-[12px] text-cinza tab:text-[length:var(--t1)]" style={{ "--t1": v(14) } as React.CSSProperties}>
+                <IconeEstrelas className="w-[70px] text-menta tab:w-[var(--st)]" />
+                <span>5.0 Nota</span>
+              </p>
+              <p className="mt-[4px] text-[13px] tab:text-[length:var(--t2)]" style={{ "--t2": v(16) } as React.CSSProperties}>
+                500+ Clientes
+              </p>
             </div>
           </div>
-          <div className="relative -mx-4 aspect-[4/3] sm:mx-0 lg:aspect-auto lg:h-full lg:min-h-[34rem]">
-            <Foto
-              nome="obra-guindaste"
-              alt="Edifício em construção com guindaste, fôrmas e andaimes sob céu azul"
-              fill
-              prioridade="lcp"
-              sizes="(min-width: 1248px) 540px, (min-width: 1024px) 44vw, 100vw"
-              className="object-cover lg:rounded-sm"
-            />
-            <VideoHero />
+
+          <h1 className="t-h1 mt-[17px] max-w-[355px] tab:mt-[var(--g1)] tab:max-w-[var(--w)]" style={{ "--g1": v(23), "--w": v(1110) } as React.CSSProperties}>
+            Soluções completas em engenharia e execução de obras.
+          </h1>
+          <p className="t-lead mt-[6px] max-w-[355px] tab:mt-[var(--g2)] tab:max-w-none" style={{ "--g2": v(12) } as React.CSSProperties}>
+            Planejamento, agilidade e compromisso para entregar obras com precisão e alto padrão.
+          </p>
+          <div className="mt-[42px] flex flex-col items-start gap-[16px] tab:mt-[var(--g3)] tab:flex-row tab:gap-[var(--g4)]" style={{ "--g3": v(57), "--g4": v(28) } as React.CSSProperties}>
+            <BotaoSeta href={WHATSAPP_ORCAMENTO} externo variante="cheio" largura={[185, 210]}>
+              Orçamento de projetos
+            </BotaoSeta>
+            <BotaoSeta href="/#contato" variante="contorno" largura={[155, 157]}>
+              Contato
+            </BotaoSeta>
           </div>
         </div>
       </section>
 
-      {/* Resultados */}
-      <section aria-labelledby="resultados-titulo" className="py-16 lg:py-24">
-        <div className="container-site">
-          <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-            <h2 id="resultados-titulo" className="titulo text-4xl sm:text-5xl">
+      {/* 2. Resultados que constroem confiança + galeria rolando */}
+      <section
+        className="degrade-base pb-[30px] pt-[31px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
+        style={{ "--pt": v(87), "--pb": v(85), "--inicio": "59%", "--fim": "#377a6d" } as React.CSSProperties}
+      >
+        <div className="caixa">
+          <div className="tab:grid tab:grid-cols-[42.75%_1fr]">
+            <h2 className="t-h2-menor max-w-[351px] tab:max-w-[var(--w)]" style={{ "--w": v(497) } as React.CSSProperties}>
               Resultados que constroem confiança
             </h2>
-            <p className="texto-corrido text-grafite lg:pt-2">
-              Em mais de duas décadas de atuação, a Concretiza construiu uma trajetória sólida de Campos Novos ao
-              Paraná, de residências a grandes complexos comerciais. Cada obra entregue carrega o compromisso de quem
-              projeta com técnica, executa com rigor e entrega com orgulho.
-            </p>
-          </div>
-          <div className="mt-14 lg:mt-20">
-            <Numeros />
+            <div>
+              <p className="t-lead mt-[5px] tab:mt-0">
+                Em mais de duas décadas de atuação, a Concretiza construiu uma trajetória sólida de Campos Novos ao Paraná, de
+                residências a grandes complexos comerciais. Cada obra entregue carrega o compromisso de quem projeta com técnica,
+                executa com rigor e entrega com orgulho.
+              </p>
+              <ul
+                className="mt-[47px] grid grid-cols-2 gap-[21px] tab:ml-[var(--ml)] tab:mt-[var(--mt)] tab:flex tab:gap-[var(--gap)]"
+                style={{ "--ml": v(194), "--mt": v(34), "--gap": v(34) } as React.CSSProperties}
+              >
+                {[
+                  ["+747 projetos", "Residências, edifícios e grandes complexos entregues."],
+                  ["20 anos", "De experiência, inovação e compromisso com a excelência."],
+                ].map(([t, d]) => (
+                  <li key={t} className="tab:w-[var(--sw)]" style={{ "--sw": v(159) } as React.CSSProperties}>
+                    <h3 className="t-h3 border-b border-white pb-[4px]">{t}</h3>
+                    <p className="mt-[8px] text-[14px] leading-[1.1] text-cinza tab:mt-[var(--m)] tab:text-[length:var(--f)]" style={{ "--m": v(20), "--f": v(13.5) } as React.CSSProperties}>
+                      {d}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* Serviços */}
-      <section aria-labelledby="servicos-titulo" className="bg-white py-16 lg:py-24">
-        <div className="container-site">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 id="servicos-titulo" className="titulo text-4xl sm:text-5xl">
-              Nossos serviços
-            </h2>
-            <Link href="/servicos" className="inline-flex items-center gap-2 py-2 font-semibold text-marca hover:text-floresta">
-              Todos os serviços
-              <IconeSeta className="size-5" />
-            </Link>
-          </div>
-          <ul className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-            {TIPOS_OBRA.map((t) => (
-              <li key={t.slug} className="group relative">
-                <div className="relative aspect-[4/5] overflow-hidden bg-concreto">
-                  <Foto
-                    nome={t.foto.nome}
-                    alt={t.foto.alt}
-                    fill
-                    sizes="(min-width: 1248px) 290px, (min-width: 1024px) 23vw, (min-width: 640px) 46vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
-                <h3 className="mt-5 text-2xl font-bold [font-stretch:112%]">
-                  <Link href={`/obras/${t.slug}`} className="after:absolute after:inset-0 group-hover:text-marca">
-                    {t.tituloCurto}
-                  </Link>
-                </h3>
-                <p className="mt-2 text-grafite">{t.resumo}</p>
+        <div className="mt-[46px] overflow-hidden tab:mx-[5%] tab:mt-[var(--mt)]" style={{ "--mt": v(57) } as React.CSSProperties} aria-label="Fotos de obras">
+          <ul className="rolagem-continua flex w-max gap-[20px] pl-[20px] tab:gap-[var(--gap)] tab:pl-0" style={{ "--gap": v(25), "--duracao": "70s" } as React.CSSProperties}>
+            {[...GALERIA_HOME, ...GALERIA_HOME].map((f, i) => (
+              <li
+                key={`${f.nome}-${i}`}
+                aria-hidden={i >= GALERIA_HOME.length}
+                className="relative h-[288px] w-[166px] shrink-0 overflow-hidden rounded-[12px] tab:h-[var(--gh)] tab:w-[var(--gw)] tab:rounded-[var(--r)]"
+                style={{ "--gw": v(305), "--gh": v(342), "--r": v(20) } as React.CSSProperties}
+              >
+                <Foto nome={f.nome} alt={i >= GALERIA_HOME.length ? "" : f.alt} fill sizes="(min-width: 751px) 22vw, 166px" className="object-cover" />
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* Especialidades */}
-      <section aria-labelledby="especialidades-titulo" className="py-16 lg:py-24">
-        <div className="container-site">
-          <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-            <h2 id="especialidades-titulo" className="titulo text-4xl sm:text-5xl">
-              Nossas especialidades
-            </h2>
-            <div className="lg:pt-2">
-              <p className="texto-corrido text-grafite">
-                Do projeto à entrega, cada obra carrega a nossa assinatura: a precisão de quem projeta com cuidado,
-                constrói com técnica e entrega com orgulho.
+      {/* 3. Nossos Serviços */}
+      <section
+        className="degrade-base pb-[44px] pt-[32px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
+        style={{ "--pt": v(86), "--pb": v(92), "--inicio": "70%", "--fim": "#285d52" } as React.CSSProperties}
+      >
+        <div className="caixa">
+          <h2 className="t-h2 text-center">Nossos Serviços</h2>
+          <ul className="mt-[55px] grid gap-[48px] px-[16px] tab:mt-[var(--mt)] tab:grid-cols-4 tab:gap-[var(--gap)] tab:px-[var(--px)] tab:text-center" style={{ "--mt": v(70), "--gap": v(45), "--px": v(12) } as React.CSSProperties}>
+            {SERVICOS_HOME.map((s) => (
+              <li key={s.titulo} className="group">
+                <div
+                  className="grid size-[52px] place-items-center rounded-[8px] border-[4px] border-[#2d6c5e] bg-menta-escuro tab:mx-auto tab:size-[var(--b)] tab:rounded-[var(--r)] tab:border-[length:var(--bd)]"
+                  style={{ "--b": v(69), "--r": v(10), "--bd": v(5), "--i": v(40) } as React.CSSProperties}
+                >
+                  <IconeServico tipo={s.icone} className="w-[31px] text-teal tab:w-[var(--i)]" />
+                </div>
+                <h3 className="t-h3 mt-[30px] tab:mt-[var(--m)]" style={{ "--m": v(40) } as React.CSSProperties}>
+                  <Link href={s.href} className="hover:text-menta">
+                    {s.titulo}
+                  </Link>
+                </h3>
+                <p className="t-servico mt-[5px] tab:mt-[var(--m2)]" style={{ "--m2": v(9) } as React.CSSProperties}>
+                  {s.texto}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 4. Nossas Especialidades */}
+      <section
+        className="degrade-base pb-[51px] pt-[31px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
+        style={{ "--pt": v(86), "--pb": v(106), "--inicio": "74%", "--fim": "#245f53" } as React.CSSProperties}
+      >
+        <div className="caixa">
+          <div className="tab:flex tab:items-end tab:justify-between">
+            <div>
+              <h2 className="t-h2">Nossas Especialidades</h2>
+              <p className="t-lead mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(17), "--w": v(714) } as React.CSSProperties}>
+                Do projeto à entrega, cada obra carrega a nossa assinatura a precisão de quem projeta com cuidado, constrói com técnica e
+                entrega com orgulho.
               </p>
-              <a
-                href={whatsappUrl("Olá! Gostaria de falar com um especialista da Concretiza.")}
-                target="_blank"
-                rel="noopener"
-                className="mt-5 inline-flex items-center gap-2 py-2 font-semibold text-marca hover:text-floresta"
-              >
-                Fale com um de nossos especialistas
-                <IconeSeta className="size-5" />
-              </a>
+            </div>
+            <div className="mt-[37px] flex justify-end tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(0) } as React.CSSProperties}>
+              <BotaoSeta href={whatsappUrl("Olá! Gostaria de falar com um especialista da Concretiza.")} externo variante="cheio" largura={[175, 191]} escuro>
+                Especialistas
+              </BotaoSeta>
             </div>
           </div>
-          <ul className="mt-12 border-t border-linha">
+          <ul className="mt-[45px] grid gap-[25px] tab:-mx-[var(--mx)] tab:mt-[var(--mt)] tab:grid-cols-3 tab:gap-[var(--gap)]" style={{ "--mt": v(66), "--gap": v(25), "--mx": v(4) } as React.CSSProperties}>
             {ESPECIALIDADES.map((e) => (
-              <li key={e.titulo} className="group relative grid gap-5 border-b border-linha py-8 sm:grid-cols-[1fr_12rem] sm:items-center lg:grid-cols-[1.1fr_1.3fr_14rem] lg:gap-10">
-                <h3 className="text-3xl font-bold leading-tight [font-stretch:115%] sm:text-[2.1rem]">
-                  <Link href={e.href} className="after:absolute after:inset-0 group-hover:text-marca">
+              <li
+                key={e.titulo}
+                className="group relative overflow-hidden rounded-[20px] border border-white/0 bg-teal pb-[30px] tab:pb-[var(--pb)]"
+                style={{ "--pb": v(56) } as React.CSSProperties}
+              >
+                <div className="relative aspect-[351/232] overflow-hidden rounded-t-[20px] tab:aspect-square">
+                  <Foto nome={e.foto.nome} alt={e.foto.alt} fill sizes="(min-width: 751px) 29vw, 351px" className="object-cover" />
+                </div>
+                <h3 className="t-card-titulo mt-[21px] px-[20px] tab:mt-[var(--m)]" style={{ "--m": v(19) } as React.CSSProperties}>
+                  <Link href={e.href} className="after:absolute after:inset-0 hover:text-lima">
                     {e.titulo}
                   </Link>
                 </h3>
-                <p className="text-lg text-grafite sm:col-start-1 lg:col-start-2 lg:row-start-1">{e.texto}</p>
-                <div className="relative aspect-[3/2] overflow-hidden sm:col-start-2 sm:row-span-2 sm:row-start-1 lg:col-start-3 lg:row-span-1">
-                  <Foto nome={e.foto.nome} alt={e.foto.alt} fill sizes="(min-width: 640px) 224px, 100vw" className="object-cover" />
-                </div>
+                <p className="t-card-texto mt-[12px] px-[20px] tab:mt-[var(--m2)]" style={{ "--m2": v(12) } as React.CSSProperties}>
+                  {e.texto}
+                </p>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* Obras em destaque */}
-      <section aria-labelledby="obras-titulo" className="sobre-escuro bg-floresta py-16 text-white lg:py-24">
-        <div className="container-site">
-          <h2 id="obras-titulo" className="titulo max-w-3xl text-4xl sm:text-5xl">
-            Obras que levam a nossa assinatura
-          </h2>
-          <ul className="-mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 lg:grid-cols-4">
-            {DESTAQUES.map((d) => (
-              <li key={d.titulo} className="group relative w-[78%] shrink-0 snap-start sm:w-auto">
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <Foto
-                    nome={d.foto.nome}
-                    alt={d.foto.alt}
-                    fill
-                    sizes="(min-width: 1248px) 290px, (min-width: 1024px) 23vw, (min-width: 640px) 46vw, 78vw"
-                    className="object-cover"
-                  />
-                </div>
-                <h3 className="mt-4 text-xl font-bold [font-stretch:110%]">
-                  <Link href={d.href} className="after:absolute after:inset-0 group-hover:text-menta">
-                    {d.titulo}
-                  </Link>
-                </h3>
-                <p className="text-white/75">{d.tipo}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Clientes */}
-      <section id="clientes" aria-labelledby="clientes-titulo" className="py-16 lg:py-24">
-        <div className="container-site">
-          <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-            <h2 id="clientes-titulo" className="titulo text-4xl sm:text-5xl">
-              Nossos clientes
-            </h2>
-            <p className="texto-corrido text-grafite lg:pt-2">
-              Grandes marcas e histórias reais que confiam na Concretiza para construir o que importa.
-            </p>
-          </div>
-          <div className="mt-12">
-            <Clientes />
+      {/* 5. Vídeo institucional (trecho em loop, sem áudio, carregado só quando aparece na tela) */}
+      <section
+        className="degrade-base pb-[39px] pt-[39px] tab:pb-[var(--p)] tab:pt-[var(--p)]"
+        style={{ "--p": v(101), "--inicio": "88%", "--fim": "#153b33" } as React.CSSProperties}
+      >
+        <div className="caixa">
+          <div className="relative aspect-[351/288] overflow-hidden rounded-[12px] bg-black tab:aspect-[1296/540]">
+            <VideoAoVer
+              poster="equipe-em-obra"
+              webm="/video/institucional-loop.webm"
+              mp4="/video/institucional-loop.mp4"
+              titulo="Trecho do vídeo institucional do Grupo Concretiza"
+            />
           </div>
         </div>
       </section>
 
-      {/* Depoimentos */}
-      <section aria-labelledby="depoimentos-titulo" className="bg-concreto-escuro py-16 lg:py-24">
-        <div className="container-site">
-          <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-            <h2 id="depoimentos-titulo" className="titulo text-4xl sm:text-5xl">
-              A confiança de quem já construiu com a Concretiza
-            </h2>
-            <p className="texto-corrido flex flex-wrap items-center gap-3 text-grafite lg:pt-2">
-              <Estrelas className="text-[#8a5a12]" />
-              {EMPRESA.avaliacaoGoogle.nota} estrelas no Google e mais de {EMPRESA.avaliacaoGoogle.total} avaliações.
-            </p>
-          </div>
-          <div className="mt-12">
-            <Depoimentos />
-          </div>
+      {/* 6. Nossos Clientes */}
+      <section id="clientes" className="scroll-mt-[20px] bg-black pb-[60px] pt-[17px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]" style={{ "--pt": v(64), "--pb": v(40) } as React.CSSProperties}>
+        <div className="px-[25px] tab:px-[var(--px)]" style={{ "--px": v(92) } as React.CSSProperties}>
+          <h2 className="t-h2">Nossos Clientes</h2>
+          <p className="t-lead mt-[9px] tab:mt-[var(--m)]" style={{ "--m": v(17) } as React.CSSProperties}>
+            Grandes marcas e histórias reais que confiam na Concretiza para construir o que importa.
+          </p>
         </div>
+        <ul className="mt-[24px] grid grid-cols-5 items-center gap-y-[14px] px-[16px] tab:mt-[var(--mt)] tab:gap-y-0 tab:px-[var(--px)]" style={{ "--mt": v(31), "--px": v(76) } as React.CSSProperties}>
+          {CLIENTES.map((c) => (
+            <li key={c.nome} className="flex h-[44px] items-center justify-center tab:h-[var(--lh)]" style={{ "--lh": v(130) } as React.CSSProperties}>
+              <div className="w-[var(--wm)] tab:w-[var(--wd)]" style={{ "--wm": `${Math.round(c.w * 0.3)}px`, "--wd": v(c.w) } as React.CSSProperties}>
+                <Foto nome={c.logo} alt={c.nome} sizes={`(min-width: 751px) ${Math.round(c.w / 14.4)}vw, ${Math.round(c.w * 0.3)}px`} className="h-auto w-full object-contain" />
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      {/* Presença */}
-      <section aria-labelledby="presenca-titulo" className="sobre-escuro bg-floresta-2 text-white">
-        <div className="container-site grid items-center gap-8 py-16 lg:grid-cols-2 lg:py-20">
-          <div>
-            <h2 id="presenca-titulo" className="titulo text-4xl sm:text-5xl">
-              Presença que constrói confiança em todo o Brasil
-            </h2>
-            <p className="texto-corrido mt-5 text-white/85">
+      {/* 7. Presença em todo o Brasil */}
+      <section
+        className="relative overflow-hidden bg-[linear-gradient(to_bottom,#0b2e27,#0f1208)] pb-[52px] pt-[28px] tab:pb-0 tab:pt-[var(--pt)]"
+        style={{ "--pt": v(76) } as React.CSSProperties}
+      >
+        <div className="caixa relative tab:flex tab:h-[var(--h)] tab:justify-between" style={{ "--h": v(485) } as React.CSSProperties}>
+          <div className="tab:mt-[var(--mt)] tab:max-w-[var(--w)] tab:pl-[var(--pl)] tab:pr-0" style={{ "--mt": v(96), "--w": v(770), "--pl": v(7) } as React.CSSProperties}>
+            <h2 className="t-h2">Presença que constrói confiança em todo o Brasil</h2>
+            <p className="t-lead mt-[9px] tab:mt-[var(--m)]" style={{ "--m": v(18) } as React.CSSProperties}>
               Obras realizadas em diversas cidades comprovam a solidez e a credibilidade da Concretiza.
             </p>
           </div>
-          <Foto
-            nome="mapa-brasil"
-            alt="Mapa do Brasil com marcações nas cidades onde a Concretiza realizou obras, concentradas no Sul e no Sudeste"
-            sizes="(min-width: 1024px) 600px, 100vw"
-            className="h-auto w-full"
-          />
+          <div className="absolute right-[19px] top-[-26px] w-[115px] tab:static tab:mr-[var(--mr)] tab:w-[var(--w2)]" style={{ "--w2": v(423), "--mr": v(-2) } as React.CSSProperties}>
+            <Foto nome="mapa-recorte" alt="Mapa do Brasil com marcações das cidades onde a Concretiza realizou obras" sizes="(min-width: 751px) 30vw, 115px" className="h-auto w-full" />
+          </div>
         </div>
       </section>
 
-      {/* Blog */}
-      <section aria-labelledby="blog-titulo" className="py-16 lg:py-24">
-        <div className="container-site">
-          <div className="flex flex-wrap items-end justify-between gap-4">
+      {/* 8. Instagram */}
+      <section
+        className="degrade-base pb-[40px] pt-[39px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
+        style={{ "--pt": v(101), "--pb": v(60), "--inicio": "80%", "--fim": "#143931" } as React.CSSProperties}
+      >
+        <div className="caixa">
+          <h2 className="t-h2">Conecte-se com a Concretiza</h2>
+          <p className="t-lead mt-[9px] tab:mt-[var(--m)]" style={{ "--m": v(17) } as React.CSSProperties}>
+            Siga nosso Instagram e acompanhe de perto cada etapa das nossas obras.
+          </p>
+          <div className="mt-[30px] tab:mt-[var(--mt)]" style={{ "--mt": v(40) } as React.CSSProperties}>
+            <CarrosselInstagram />
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Vamos Construir Juntos? (formulário) */}
+      <section
+        id="contato"
+        className="scroll-mt-[20px] bg-[linear-gradient(to_bottom,#0b2e27_0%,#0c231a_37%,#0f1309_100%)] pb-[32px] pt-[31px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
+        style={{ "--pt": v(87), "--pb": v(107) } as React.CSSProperties}
+      >
+        <div className="caixa">
+          <div className="tab:flex tab:items-end tab:justify-between">
             <div>
-              <h2 id="blog-titulo" className="titulo text-4xl sm:text-5xl">
-                Construindo com conhecimento
-              </h2>
-              <p className="texto-corrido mt-4 text-grafite">
+              <h2 className="t-h2">Vamos Construir Juntos?</h2>
+              <p className="t-lead mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(16), "--w": v(675) } as React.CSSProperties}>
+                Conte-nos sobre o seu projeto e entraremos em contato para transformar a sua ideia em realidade.
+              </p>
+            </div>
+            <div className="mt-[36px] tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(8) } as React.CSSProperties}>
+              <BotaoSeta href={WHATSAPP_ORCAMENTO} externo variante="cheio" largura={[175, 191]} escuro>
+                WhatsApp
+              </BotaoSeta>
+            </div>
+          </div>
+          <div className="mt-[46px] tab:mt-[var(--mt)]" style={{ "--mt": v(48) } as React.CSSProperties}>
+            <FormContato />
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Construindo com Conhecimento (blog) */}
+      <section
+        className="bg-[linear-gradient(to_bottom,#0f1309_0%,#0f1309_35%,#0b2e27_100%)] pb-[42px] pt-[32px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
+        style={{ "--pt": v(86), "--pb": v(90) } as React.CSSProperties}
+      >
+        <div className="caixa">
+          <div className="tab:flex tab:items-end tab:justify-between">
+            <div>
+              <h2 className="t-h2">Construindo com Conhecimento</h2>
+              <p className="t-lead mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(16), "--w": v(719) } as React.CSSProperties}>
                 Conteúdo sobre arquitetura, engenharia e construção civil para quem quer se inspirar e se informar.
               </p>
             </div>
-            <Link href="/blog" className="inline-flex items-center gap-2 py-2 font-semibold text-marca hover:text-floresta">
-              Ver todos os artigos
-              <IconeSeta className="size-5" />
-            </Link>
+            <div className="mt-[37px] tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(0) } as React.CSSProperties}>
+              <BotaoSeta href="/#contato" variante="cheio" largura={[175, 191]} escuro>
+                Orçamentos
+              </BotaoSeta>
+            </div>
           </div>
-          <div className="mt-10">
-            <CartoesPosts />
+          <div className="mt-[47px] tab:mt-[var(--mt)]" style={{ "--mt": v(57) } as React.CSSProperties}>
+            <CartoesBlog />
           </div>
         </div>
       </section>
-
-      {/* Instagram */}
-      <section aria-labelledby="instagram-titulo" className="border-t border-linha">
-        <div className="container-site flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 id="instagram-titulo" className="text-3xl font-bold [font-stretch:115%]">
-              Conecte-se com a Concretiza
-            </h2>
-            <p className="mt-2 text-grafite">Siga nosso Instagram e acompanhe de perto cada etapa das nossas obras.</p>
-          </div>
-          <a
-            href={EMPRESA.instagram}
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center gap-2 self-start rounded-full border border-tinta px-6 py-3.5 font-semibold hover:bg-tinta hover:text-white md:self-auto"
-          >
-            <IconeInstagram className="size-5" />
-            @grupoconcretiza
-          </a>
-        </div>
-      </section>
-
-      <BlocoContato />
     </>
   );
 }

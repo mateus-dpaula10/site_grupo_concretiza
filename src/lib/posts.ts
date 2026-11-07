@@ -10,6 +10,12 @@ export type Bloco =
 export type Post = {
   slug: string;
   titulo: string;
+  /** Título como aparece no Wix (iniciais maiúsculas). */
+  tituloOriginal: string;
+  /** Trecho que o widget de blog do Wix mostra no cartão. */
+  resumoOriginal: string;
+  capa: { nome: string; alt: string };
+  avatar?: string;
   resumo: string;
   autor: string;
   publicado: string;
@@ -22,7 +28,11 @@ export type Post = {
 export const POSTS: Post[] = [
   {
     slug: "carregamento-de-carros-eletricos",
-    titulo: "Carregamento de carros elétricos: o que sua empresa precisa saber",
+    titulo: "Carregamento de Carros Elétricos: O Que Sua Empresa Precisa Saber",
+    tituloOriginal: "Carregamento de Carros Elétricos: O Que Sua Empresa Precisa Saber",
+    resumoOriginal: "A mobilidade elétrica já é uma realidade O crescimento dos veículos elétricos no Brasil tem impulsionado uma nova demanda no mercado da construção civil.",
+    // Exceção: a capa original era do banco do Wix (11062b); aqui vai o logo da Concretiza Energia.
+    capa: { nome: "capa-energia", alt: "Logotipo Concretiza Energia" },
     resumo:
       "O crescimento dos veículos elétricos no Brasil criou uma nova demanda: infraestrutura adequada para carregamento em empresas, condomínios e centros comerciais.",
     autor: "Bernardo Cassel",
@@ -79,7 +89,12 @@ export const POSTS: Post[] = [
   },
   {
     slug: "gestao-de-obras-reduzir-desperdicios",
-    titulo: "Gestão de obras: como reduzir desperdícios, economizar recursos e ganhar tempo",
+    titulo: "Gestão de Obras: Como Reduzir Desperdícios, Economizar Recursos e Ganhar Tempo",
+    tituloOriginal: "Gestão de Obras: Como Reduzir Desperdícios, Economizar Recursos e Ganhar Tempo",
+    resumoOriginal: "Como Reduzir Desperdícios, Economizar Recursos e Ganhar Tempo",
+    // Exceção: a capa original era do banco do Wix (11062b); aqui vai foto de obra do cliente.
+    capa: { nome: "galpao-em-obra", alt: "Galpão em construção com estrutura de concreto" },
+    avatar: "avatar-erico",
     resumo:
       "Atrasos, retrabalho e desperdício pesam no custo de qualquer obra. Veja como uma gestão especializada mantém prazo, qualidade e orçamento em equilíbrio.",
     autor: "Érico Vicentin",
@@ -136,7 +151,11 @@ export const POSTS: Post[] = [
   },
   {
     slug: "obras-rapidas-para-lojas",
-    titulo: "Obras rápidas para lojas: como reduzir o tempo de implantação do seu negócio",
+    titulo: "Obras Rápidas para Lojas: Como Reduzir o Tempo de Implantação do Seu Negócio",
+    tituloOriginal: "Obras Rápidas para Lojas: Como Reduzir o Tempo de Implantação do Seu Negócio",
+    resumoOriginal: "Como Reduzir o Tempo de Implantação do Seu Negócio",
+    capa: { nome: "loja-luiza-fazzolli", alt: "Loja Luiza Fazzolli com fachada em mármore e letreiro dourado" },
+    avatar: "avatar-erico",
     resumo:
       "Loja em obra ainda não está vendendo. Planejamento antecipado, compatibilização de projetos e coordenação integrada encurtam o prazo sem pressa e sem retrabalho.",
     autor: "Érico Vicentin",
@@ -196,4 +215,11 @@ export const POSTS: Post[] = [
 
 export function formatarData(iso: string) {
   return new Date(`${iso}T12:00:00Z`).toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+}
+
+// Data no formato do Wix ("8 de jun.").
+export function dataCurta(iso: string) {
+  const meses = ["jan.", "fev.", "mar.", "abr.", "mai.", "jun.", "jul.", "ago.", "set.", "out.", "nov.", "dez."];
+  const [, m, d] = iso.split("-").map(Number);
+  return `${d} de ${meses[m - 1]}`;
 }
