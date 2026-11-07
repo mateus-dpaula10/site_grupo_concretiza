@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { IconeEmail, IconeInstagram, IconeLinkedin, IconeLocal, IconeTelefone, IconeWhatsapp } from "@/components/Icones";
-import { EMPRESA, MAPS_EMBED, whatsappUrl } from "@/lib/site";
+import { EMAILS_SETOR, EMPRESA, FORMULARIO_FORNECEDOR, LINK_FORNECEDOR, MAPS_EMBED, MAPS_URL, whatsappUrl } from "@/lib/site";
 
 const fluido = (a: number, b: number) => `clamp(${a}px, calc(${a}px + ${b - a} * ((100vw - 1100px) / 340)), ${b}px)`;
 
@@ -10,31 +10,38 @@ const REDES = [
   { href: EMPRESA.linkedin, rotulo: "LinkedIn", Icone: IconeLinkedin },
 ];
 
-// Mesmos links do rodapé do original. "Orçamento" e "Contato" levam ao formulário da home;
-// "Política de privacidade" e "LGPD" agora têm página (no Wix não levavam a lugar nenhum).
-const MENU_RODAPE = [
+// Links do rodapé revistos com o cliente (07/11/2026): "Serviços" leva à seção da home (a página
+// do template tinha preços e serviços que o grupo não pratica), o blog saiu, "Política de privacidade"
+// e "LGPD" viraram um link só (a página cobre os dois) e entrou "Seja nosso fornecedor".
+type LinkRodape = { href: string; rotulo: string; externo?: boolean };
+const MENU_RODAPE: LinkRodape[] = [
   { href: "/", rotulo: "Home" },
-  { href: "/servicos", rotulo: "Serviços" },
+  { href: "/#servicos", rotulo: "Serviços" },
   { href: "/sobre", rotulo: "Sobre" },
   { href: "/#contato", rotulo: "Orçamento" },
 ];
-const RECURSOS = [
-  { href: "/blog", rotulo: "Blog" },
+const RECURSOS: LinkRodape[] = [
   { href: "/contato", rotulo: "Contato" },
-  { href: "/politica-de-privacidade", rotulo: "Política de privacidade" },
-  { href: "/politica-de-privacidade#lgpd", rotulo: "LGPD" },
+  { href: LINK_FORNECEDOR, rotulo: "Seja nosso fornecedor", externo: Boolean(FORMULARIO_FORNECEDOR) },
+  { href: "/politica-de-privacidade", rotulo: "Privacidade e LGPD" },
 ];
 
-function Coluna({ titulo, links }: { titulo: string; links: { href: string; rotulo: string }[] }) {
+function Coluna({ titulo, links }: { titulo: string; links: LinkRodape[] }) {
   return (
     <nav aria-label={titulo}>
       <h3 className="font-display text-[20px] font-semibold leading-[1.3] tab:text-[length:var(--h3)]">{titulo}</h3>
       <ul className="mt-[18px] grid gap-[12px] text-[14px] leading-[1.2] text-cinza tab:mt-[22px] tab:text-[length:var(--link)]" style={{ rowGap: "var(--passo)" }}>
         {links.map((l) => (
           <li key={l.rotulo}>
-            <Link href={l.href} className="hover:text-white">
-              {l.rotulo}
-            </Link>
+            {l.externo || l.href.startsWith("mailto:") ? (
+              <a href={l.href} target={l.externo ? "_blank" : undefined} rel={l.externo ? "noopener" : undefined} className="hover:text-white">
+                {l.rotulo}
+              </a>
+            ) : (
+              <Link href={l.href} className="hover:text-white">
+                {l.rotulo}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
@@ -50,7 +57,7 @@ export function Rodape() {
   } as React.CSSProperties;
   return (
     <footer className="caixa bg-floresta pb-[20px] pt-[31px] tab:pb-[30px] tab:pt-[87px]" style={vars}>
-      <div className="grid gap-y-[32px] tab:grid-cols-[39.9%_17.4%_19.4%_1fr]">
+      <div className="grid gap-y-[32px] tab:grid-cols-2 tab:gap-x-[40px] desk:grid-cols-[39.9%_17.4%_19.4%_1fr] desk:gap-x-0">
         <div>
           <p className="font-display text-[18px] font-medium leading-[1.6] tab:text-[length:var(--tagline)]" style={{ "--tagline": fluido(18, 22.5) } as React.CSSProperties}>
             <strong className="font-bold">Grupo Concretiza:</strong> Projetando ideias,
@@ -80,14 +87,22 @@ export function Rodape() {
               <IconeEmail className="size-[20px] shrink-0 text-menta-escuro tab:size-[26px]" />
               <span className="tab:text-[0.875em]">{EMPRESA.email}</span>
             </a>
+            {EMAILS_SETOR.map((s) => (
+              <a key={s.setor} href={`mailto:${s.email}`} className="flex items-center gap-[11px] hover:text-white tab:gap-[18px]">
+                <IconeEmail className="size-[20px] shrink-0 text-menta-escuro tab:size-[26px]" />
+                <span className="min-w-0 break-words tab:text-[0.875em]">
+                  {s.setor}: {s.email}
+                </span>
+              </a>
+            ))}
             <a href={`tel:${EMPRESA.telefoneE164}`} className="flex items-center gap-[11px] hover:text-white tab:gap-[18px]">
               <IconeTelefone className="size-[20px] shrink-0 text-menta-escuro tab:size-[26px]" />
               {EMPRESA.telefone}
             </a>
-            <p className="flex items-center gap-[11px] tab:gap-[18px]">
+            <a href={MAPS_URL} target="_blank" rel="noopener" className="flex items-center gap-[11px] hover:text-white tab:gap-[18px]">
               <IconeLocal className="size-[20px] shrink-0 text-menta-escuro tab:size-[26px]" />
               <span className="max-w-[16em]">{EMPRESA.endereco.rodape}</span>
-            </p>
+            </a>
           </address>
           <div className="mt-[40px] aspect-[351/190] w-full overflow-hidden bg-[#3a3a3a] tab:mt-[48px] tab:aspect-[304/193] tab:max-w-[304px]">
             <iframe

@@ -20,7 +20,7 @@ export default function Energia() {
       foto={{ nome: "fachada-drugovich", alt: "Fachada da concessionária Drugovich" }}
       logo={{ nome: "logo-concretiza-energia-branco", alt: "Concretiza Energia" }}
       trilha={[
-        { nome: "Serviços", href: "/servicos" },
+        { nome: "Serviços", href: "/#servicos" },
         { nome: "Energia", href: "/energia" },
       ]}
     />

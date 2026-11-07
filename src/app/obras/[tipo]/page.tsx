@@ -56,7 +56,7 @@ export default async function PaginaObras({ params }: PageProps<"/obras/[tipo]">
     <>
       <JsonLd
         dados={dadosBreadcrumb([
-          { nome: "Serviços", href: "/servicos" },
+          { nome: "Serviços", href: "/#servicos" },
           { nome: t.titulo, href: `/obras/${t.slug}` },
         ])}
       />

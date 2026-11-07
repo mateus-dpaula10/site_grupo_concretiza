@@ -4,7 +4,6 @@ import { FormContato } from "@/components/FormContato";
 import { Foto } from "@/components/Foto";
 import { BotaoSeta } from "@/components/BotaoSeta";
 import { IconeEstrelas, IconeServico } from "@/components/Icones";
-import { CartoesBlog } from "@/components/CartoesBlog";
 import { Rolagem } from "@/components/Rolagem";
 import { VideoAoVer } from "@/components/VideoAoVer";
 import { VideoHero } from "@/components/VideoHero";
@@ -36,21 +35,11 @@ export default function Home() {
           <div aria-hidden className="absolute inset-0 bg-fundo/75" />
         </div>
         <div className="caixa relative pb-[39px] pt-[10px] tab:pb-0 tab:pt-[var(--pt)]" style={{ "--pt": v(105) } as React.CSSProperties}>
+          {/* Selo sem as fotos de pessoas (eram do Unsplash e o cliente via como "logos embaralhados"). */}
           <div
-            className="flex h-[66px] w-[323px] items-center gap-[10px] rounded-full border border-white/15 bg-white/10 pl-[11px] backdrop-blur-sm tab:h-[var(--bh)] tab:w-[var(--bw)] tab:gap-[var(--bg)] tab:pl-[var(--bp)]"
-            style={{ "--bh": v(79), "--bw": v(352), "--bg": v(14), "--bp": v(11), "--st": v(84) } as React.CSSProperties}
+            className="inline-flex h-[66px] items-center rounded-full border border-white/15 bg-white/10 px-[24px] backdrop-blur-sm tab:h-[var(--bh)] tab:px-[var(--bp)]"
+            style={{ "--bh": v(79), "--bp": v(28), "--st": v(84) } as React.CSSProperties}
           >
-            <div className="flex">
-              {[1, 2, 3, 4].map((n) => (
-                <div
-                  key={n}
-                  className="-ml-[21px] size-[45px] overflow-hidden rounded-full border-2 border-white/70 first:ml-0 tab:-ml-[var(--ov)] tab:size-[var(--av)]"
-                  style={{ "--av": v(43), "--ov": v(15) } as React.CSSProperties}
-                >
-                  <Foto nome={`avatar-${n}`} alt="" largura={45} className="size-full object-cover" />
-                </div>
-              ))}
-            </div>
             <div>
               <p className="flex items-center gap-[10px] whitespace-nowrap text-[12px] text-cinza tab:text-[length:var(--t1)]" style={{ "--t1": v(14) } as React.CSSProperties}>
                 <IconeEstrelas className="w-[70px] text-menta tab:w-[var(--st)]" />
@@ -69,10 +58,12 @@ export default function Home() {
             Planejamento, agilidade e compromisso para entregar obras com precisão e alto padrão.
           </p>
           <div className="mt-[42px] flex flex-col items-start gap-[16px] tab:mt-[var(--g3)] tab:flex-row tab:gap-[var(--g4)]" style={{ "--g3": v(57), "--g4": v(28) } as React.CSSProperties}>
-            <BotaoSeta href={WHATSAPP_ORCAMENTO} externo variante="cheio" largura={[185, 210]}>
+            {/* Cada botão leva a um lugar: Orçamento → formulário; Contato → página com todos os canais.
+                O WhatsApp fica só no cabeçalho. */}
+            <BotaoSeta href="/#contato" variante="cheio" largura={[185, 210]}>
               Orçamento de projetos
             </BotaoSeta>
-            <BotaoSeta href="/#contato" variante="contorno" largura={[155, 157]}>
+            <BotaoSeta href="/contato" variante="contorno" largura={[155, 157]}>
               Contato
             </BotaoSeta>
           </div>
@@ -131,6 +122,7 @@ export default function Home() {
 
       {/* 3. Nossos Serviços */}
       <section
+        id="servicos"
         className="degrade-base pb-[44px] pt-[32px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
         style={{ "--pt": v(86), "--pb": v(92), "--inicio": "70%", "--fim": "#285d52" } as React.CSSProperties}
       >
@@ -295,31 +287,6 @@ export default function Home() {
           </div>
           <div className="mt-[46px] tab:mt-[var(--mt)]" style={{ "--mt": v(48) } as React.CSSProperties}>
             <FormContato />
-          </div>
-        </div>
-      </section>
-
-      {/* 10. Construindo com Conhecimento (blog) */}
-      <section
-        className="bg-[linear-gradient(to_bottom,#0f1309_0%,#0f1309_35%,#0b2e27_100%)] pb-[42px] pt-[32px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
-        style={{ "--pt": v(86), "--pb": v(90) } as React.CSSProperties}
-      >
-        <div className="caixa">
-          <div className="tab:flex tab:items-end tab:justify-between">
-            <div>
-              <h2 className="t-h2">Construindo com Conhecimento</h2>
-              <p className="t-lead mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(16), "--w": v(719) } as React.CSSProperties}>
-                Conteúdo sobre arquitetura, engenharia e construção civil para quem quer se inspirar e se informar.
-              </p>
-            </div>
-            <div className="mt-[37px] tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(0) } as React.CSSProperties}>
-              <BotaoSeta href="/#contato" variante="cheio" largura={[175, 191]} escuro>
-                Orçamentos
-              </BotaoSeta>
-            </div>
-          </div>
-          <div className="mt-[47px] tab:mt-[var(--mt)]" style={{ "--mt": v(57) } as React.CSSProperties}>
-            <CartoesBlog />
           </div>
         </div>
       </section>

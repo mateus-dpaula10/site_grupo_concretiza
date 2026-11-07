@@ -12,9 +12,16 @@ export const REDIRECTS = [
   { de: "/about-us-1-1-1-1", para: "/obras/residenciais" },
   { de: "/about-us-1-1-1-1-1", para: "/energia" },
   { de: "/about-us-1-2", para: "/administracao-de-obras" },
-  { de: "/properties-1", para: "/servicos" },
-  { de: "/post/____g", para: "/blog/carregamento-de-carros-eletricos" },
-  { de: "/post/c%C3%B3pia-de-qual-%C3%A9-o-tema-do-seu-blog", para: "/blog/gestao-de-obras-reduzir-desperdicios" },
-  { de: "/post/seu-t%C3%ADtulo-qual-%C3%A9-o-tema-do-seu-blog", para: "/blog/obras-rapidas-para-lojas" },
-  { de: "/blog-feed.xml", para: "/blog" },
+  { de: "/properties-1", para: "/#servicos" },
+  // Página /servicos e blog retirados a pedido do cliente (07/11/2026): o template tinha preços e
+  // serviços que o grupo não pratica, e o blog não tinha conteúdo próprio.
+  { de: "/servicos", para: "/#servicos" },
+  { de: "/blog", para: "/" },
+  { de: "/blog/carregamento-de-carros-eletricos", para: "/energia" },
+  { de: "/blog/gestao-de-obras-reduzir-desperdicios", para: "/administracao-de-obras" },
+  { de: "/blog/obras-rapidas-para-lojas", para: "/obras/comerciais" },
+  { de: "/post/____g", para: "/energia" },
+  { de: "/post/c%C3%B3pia-de-qual-%C3%A9-o-tema-do-seu-blog", para: "/administracao-de-obras" },
+  { de: "/post/seu-t%C3%ADtulo-qual-%C3%A9-o-tema-do-seu-blog", para: "/obras/comerciais" },
+  { de: "/blog-feed.xml", para: "/" },
 ];

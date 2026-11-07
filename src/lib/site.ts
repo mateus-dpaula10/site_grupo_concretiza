@@ -46,8 +46,22 @@ export function whatsappUrl(texto?: string) {
 
 export const WHATSAPP_ORCAMENTO = whatsappUrl("Olá! Vim pelo site e gostaria de pedir um orçamento.");
 
+// "Seja nosso fornecedor" (pedido do cliente em 07/11/2026). TODO: link do Google Forms do cliente.
+// Enquanto estiver vazio, o botão abre um e-mail para o contato geral com o assunto pronto.
+export const FORMULARIO_FORNECEDOR = "";
+export const LINK_FORNECEDOR =
+  FORMULARIO_FORNECEDOR || `mailto:${EMPRESA.email}?subject=${encodeURIComponent("Quero ser fornecedor do Grupo Concretiza")}`;
+
+// E-mails por setor (pedido do cliente em 07/11/2026). TODO: preencher com os endereços reais.
+// Setor com e-mail vazio não aparece no site, para não publicar endereço errado.
+export const EMAILS_SETOR: { setor: string; email: string }[] = [
+  { setor: "Suprimentos", email: "" },
+  { setor: "Financeiro", email: "" },
+  { setor: "Engenharia", email: "" },
+].filter((s) => s.email);
+
 // Menu idêntico ao do site original: Serviços abre "Construtora" (4 tipos de obra) e "Energia".
-// "Clientes" e "Contato" levam às seções da home, como no Wix.
+// "Clientes" leva à seção da home, como no Wix; "Contato" leva à página /contato (todos os canais).
 export const MENU = {
   itens: [
     { href: "/", rotulo: "Home" },
@@ -66,7 +80,7 @@ export const MENU = {
   },
   finais: [
     { href: "/#clientes", rotulo: "Clientes" },
-    { href: "/#contato", rotulo: "Contato" },
+    { href: "/contato", rotulo: "Contato" },
   ],
 };
 

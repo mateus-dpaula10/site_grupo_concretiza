@@ -12,22 +12,31 @@ export const metadata = metadados({
   caminho: "/sobre",
 });
 
+// Revisado a pedido do cliente (07/11/2026): o título dizia "Missão, Visão e Valores", mas os quadros
+// eram Compromisso, Visão, Inovação e Confiança. Agora são os três, na ordem do título.
+// TODO (cliente): aprovar o texto da Visão, que não existia no site antigo.
 const VALORES = [
-  { icone: "compromisso", titulo: "Compromisso", texto: "Cada obra é conduzida com rigor técnico, atenção aos detalhes e alto padrão de execução." },
+  {
+    icone: "compromisso",
+    titulo: "Missão",
+    texto:
+      "Trabalhar com responsabilidade, inovação e excelência para desenvolver projetos que geram valor, constroem confiança e deixam resultados duradouros.",
+  },
   {
     icone: "visao",
     titulo: "Visão",
-    texto: "Projetamos e construímos pensando na durabilidade, na valorização e no impacto positivo de cada empreendimento.",
-  },
-  {
-    icone: "inovacao",
-    titulo: "Inovação e Tecnologia",
-    texto: "Utilizamos processos modernos de gestão e projeto para garantir mais precisão, eficiência e segurança em todas as etapas.",
+    texto:
+      "Ser referência em engenharia e execução de obras, reconhecida pela qualidade técnica, pelo cumprimento de prazos e pela confiança de clientes, parceiros e investidores.",
   },
   {
     icone: "confianca",
-    titulo: "Confiança e Transparência",
-    texto: "Mantemos relações baseadas em seriedade, clareza e responsabilidade com clientes, parceiros e investidores.",
+    titulo: "Valores",
+    itens: [
+      ["Compromisso", "rigor técnico, atenção aos detalhes e alto padrão de execução em cada obra."],
+      ["Visão de longo prazo", "construir pensando na durabilidade, na valorização e no impacto positivo de cada empreendimento."],
+      ["Inovação e tecnologia", "processos modernos de gestão e projeto para mais precisão, eficiência e segurança."],
+      ["Confiança e transparência", "relações baseadas em seriedade, clareza e responsabilidade."],
+    ],
   },
 ] as const;
 
@@ -97,12 +106,11 @@ export default function Sobre() {
           <div className="text-center">
             <h2 className="t-h2">Missão, Visão e Valores</h2>
             <p className="t-lead mx-auto mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(17), "--w": v(789) } as React.CSSProperties}>
-              Trabalhar com responsabilidade, inovação e excelência para desenvolver projetos que geram valor, constroem confiança e
-              deixam resultados duradouros.
+              O que nos move, onde queremos chegar e os princípios que seguimos em cada obra.
             </p>
           </div>
           <div className="mt-[21px] tab:mt-[var(--m)] tab:grid tab:grid-cols-[var(--c1)_1fr] tab:gap-x-[var(--g)]" style={{ "--m": v(57), "--c1": v(496), "--g": v(58) } as React.CSSProperties}>
-            <div className="relative h-[314px] overflow-hidden rounded-[16px] tab:h-[var(--h)]" style={{ "--h": v(693) } as React.CSSProperties}>
+            <div className="relative h-[314px] overflow-hidden rounded-[16px] tab:h-auto tab:min-h-[var(--h)]" style={{ "--h": v(693) } as React.CSSProperties}>
               {/* Exceção: no original a foto é do banco do Wix (guindaste); aqui vai foto de obra do cliente. */}
               <Foto nome="majestic-hall" alt="Majestic Hall, centro de eventos construído pela Concretiza" fill sizes="(min-width: 751px) 35vw, 351px" className="object-cover" />
             </div>
@@ -110,7 +118,7 @@ export default function Sobre() {
               {VALORES.map((val) => (
                 <li
                   key={val.titulo}
-                  className="rounded-[20px] bg-[#16423a] px-[16px] pb-[30px] pt-[18px] tab:px-[var(--px)] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
+                  className={`rounded-[20px] bg-[#16423a] px-[16px] pb-[30px] pt-[18px] tab:px-[var(--px)] tab:pb-[var(--pb)] tab:pt-[var(--pt)] ${"itens" in val ? "tab:col-span-2" : ""}`}
                   style={{ "--px": v(24), "--pt": v(28), "--pb": v(36) } as React.CSSProperties}
                 >
                   <div
@@ -122,9 +130,19 @@ export default function Sobre() {
                   <h3 className="mt-[30px] font-display text-[20px] font-semibold leading-[1.3] tab:mt-[var(--m)] tab:text-[length:var(--f)]" style={{ "--m": v(39), "--f": v(24.75) } as React.CSSProperties}>
                     {val.titulo}
                   </h3>
-                  <p className="mt-[4px] text-[14px] leading-[1.6] text-cinza tab:mt-[var(--m2)] tab:text-[length:var(--f2)]" style={{ "--m2": v(9), "--f2": v(18) } as React.CSSProperties}>
-                    {val.texto}
-                  </p>
+                  {"itens" in val ? (
+                    <ul className="mt-[8px] grid gap-[8px] text-[14px] leading-[1.6] text-cinza tab:mt-[var(--m2)] tab:grid-cols-2 tab:gap-x-[var(--gx)] tab:text-[length:var(--f2)]" style={{ "--m2": v(9), "--f2": v(18), "--gx": v(28) } as React.CSSProperties}>
+                      {val.itens.map(([nome, desc]) => (
+                        <li key={nome}>
+                          <strong className="font-semibold text-white">{nome}:</strong> {desc}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-[4px] text-[14px] leading-[1.6] text-cinza tab:mt-[var(--m2)] tab:text-[length:var(--f2)]" style={{ "--m2": v(9), "--f2": v(18) } as React.CSSProperties}>
+                      {val.texto}
+                    </p>
+                  )}
                 </li>
               ))}
             </ul>
