@@ -23,7 +23,7 @@ export function Cabecalho() {
       {/* Desktop (>= 1001px) */}
       <div className="relative hidden desk:block" style={{ height: fluido(91, 111) }}>
         <Link href="/" aria-label="Grupo Concretiza, página inicial" className="absolute left-[5%] top-1/2 -translate-y-1/2" style={{ width: fluido(183, 240) }}>
-          <Foto nome="logo-concretiza-branco" alt="" largura={240} prioridade="cedo" className="h-auto w-full" />
+          <Foto nome="logo-concretiza-branco" alt="" largura={240} className="h-auto w-full" />
         </Link>
 
         <nav
@@ -78,14 +78,14 @@ export function Cabecalho() {
           className="absolute left-[82.08%] top-1/2 -translate-y-1/2"
           style={{ width: fluido(98, 128) }}
         >
-          <Foto nome="whatsapp-horizontal" alt="" largura={128} prioridade="cedo" className="h-auto w-full" />
+          <Foto nome="whatsapp-horizontal" alt="" largura={128} className="h-auto w-full" />
         </a>
       </div>
 
       {/* Celular e tablet (< 1001px) */}
       <div className="flex h-[71px] items-center justify-between px-[20px] desk:hidden">
         <Link href="/" aria-label="Grupo Concretiza, página inicial" className="block w-[66px]">
-          <Foto nome="logo-concretiza-branco" alt="" largura={66} prioridade="cedo" className="h-auto w-full" />
+          <Foto nome="logo-concretiza-branco" alt="" largura={66} className="h-auto w-full" />
         </Link>
         <div className="flex items-center gap-[6px]">
           <a href={whatsappUrl()} target="_blank" rel="noopener" aria-label="WhatsApp" className="block w-[40px]">

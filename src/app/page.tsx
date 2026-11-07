@@ -5,6 +5,7 @@ import { Foto } from "@/components/Foto";
 import { BotaoSeta } from "@/components/BotaoSeta";
 import { IconeEstrelas, IconeServico } from "@/components/Icones";
 import { CartoesBlog } from "@/components/CartoesBlog";
+import { Rolagem } from "@/components/Rolagem";
 import { VideoAoVer } from "@/components/VideoAoVer";
 import { VideoHero } from "@/components/VideoHero";
 import { metadados } from "@/lib/seo";
@@ -114,18 +115,17 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-[46px] overflow-hidden tab:mx-[5%] tab:mt-[var(--mt)]" style={{ "--mt": v(57) } as React.CSSProperties} aria-label="Fotos de obras">
-          <ul className="rolagem-continua flex w-max gap-[20px] pl-[20px] tab:gap-[var(--gap)] tab:pl-0" style={{ "--gap": v(25), "--duracao": "70s" } as React.CSSProperties}>
-            {[...GALERIA_HOME, ...GALERIA_HOME].map((f, i) => (
+          <Rolagem className="flex w-max gap-[20px] pl-[20px] tab:gap-[var(--gap)] tab:pl-0" style={{ "--gap": v(25), "--duracao": "70s" } as React.CSSProperties}>
+            {GALERIA_HOME.map((f) => (
               <li
-                key={`${f.nome}-${i}`}
-                aria-hidden={i >= GALERIA_HOME.length}
+                key={f.nome}
                 className="relative h-[288px] w-[166px] shrink-0 overflow-hidden rounded-[12px] tab:h-[var(--gh)] tab:w-[var(--gw)] tab:rounded-[var(--r)]"
                 style={{ "--gw": v(305), "--gh": v(342), "--r": v(20) } as React.CSSProperties}
               >
-                <Foto nome={f.nome} alt={i >= GALERIA_HOME.length ? "" : f.alt} fill sizes="(min-width: 751px) 22vw, 166px" className="object-cover" />
+                <Foto nome={f.nome} alt={f.alt} fill sizes="(min-width: 751px) 22vw, 166px" className="object-cover" />
               </li>
             ))}
-          </ul>
+          </Rolagem>
         </div>
       </section>
 
@@ -232,7 +232,7 @@ export default function Home() {
           {CLIENTES.map((c) => (
             <li key={c.nome} className="flex h-[44px] items-center justify-center tab:h-[var(--lh)]" style={{ "--lh": v(130) } as React.CSSProperties}>
               <div className="w-[var(--wm)] tab:w-[var(--wd)]" style={{ "--wm": `${Math.round(c.w * 0.3)}px`, "--wd": v(c.w) } as React.CSSProperties}>
-                <Foto nome={c.logo} alt={c.nome} sizes={`(min-width: 751px) ${Math.round(c.w / 14.4)}vw, ${Math.round(c.w * 0.3)}px`} className="h-auto w-full object-contain" />
+                <Foto nome={c.logo} alt={c.nome} largura={c.w} className="h-auto w-full object-contain" />
               </div>
             </li>
           ))}
