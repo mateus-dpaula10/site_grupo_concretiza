@@ -19,6 +19,8 @@ export function dadosOrganizacao() {
     "@id": ORGANIZACAO_ID,
     name: EMPRESA.nome,
     alternateName: EMPRESA.nomeCurto,
+    legalName: EMPRESA.razaoSocial,
+    taxID: EMPRESA.cnpj,
     slogan: EMPRESA.slogan,
     url: SITE_URL,
     logo: `${SITE_URL}/icon.png`,

@@ -8,6 +8,9 @@ export const SITE_URL = "https://www.grupoconcretiza.com.br";
 export const EMPRESA = {
   nome: "Grupo Concretiza",
   nomeCurto: "Concretiza",
+  // Conforme o cadastro do domínio no Registro.br.
+  razaoSocial: "Concretiza Projetos e Construções Ltda",
+  cnpj: "07.932.250/0001-09",
   slogan: "Projetando ideias, concretizando sonhos.",
   desde: 2006,
   email: "contato@grupoconcretiza.com.br",
@@ -21,10 +24,10 @@ export const EMPRESA = {
     rodape: "Av Getúlio Vargas, 72 - Sobreloja 02 - Zona 01",
     bairro: "Zona 01",
     // Cidade confirmada pelo mapa do rodapé do site original (Maringá).
-    // TODO: informar o CEP.
     cidade: "Maringá",
     uf: "PR",
-    cep: "",
+    // CEP dos Correios para o nº 72. O do Registro.br (87065-005) é de outro endereço, a Rodovia PR-317.
+    cep: "87013-920",
   },
   instagram: "https://www.instagram.com/grupoconcretiza/",
   // O site antigo apontava para /admin/dashboard/ (painel interno); aqui vai a página pública.

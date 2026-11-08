@@ -5,7 +5,7 @@ import { v } from "@/lib/medidas";
 
 // TODO (jurídico do cliente): o site antigo tinha os links "Política de privacidade" e "LGPD"
 // no rodapé, mas sem página. Este texto descreve só o que ESTE site faz com dados.
-// Precisa de revisão e da razão social/CNPJ. Fica fora do menu, acessível pelo rodapé.
+// Precisa de revisão. Fica fora do menu, acessível pelo rodapé.
 
 export const metadata = metadados({
   titulo: "Política de privacidade",
@@ -21,6 +21,9 @@ export default function Privacidade() {
       <JsonLd dados={dadosBreadcrumb([{ nome: "Política de privacidade", href: "/politica-de-privacidade" }])} />
       <div className="caixa max-w-[900px] text-[16px] leading-[1.7] text-cinza">
         <h1 className="t-h2 text-white">Política de privacidade</h1>
+        <p className="mt-[16px]">
+          Este site é mantido por {EMPRESA.razaoSocial}, CNPJ {EMPRESA.cnpj}.
+        </p>
         <h2 className={`${h2} text-white`}>Quais dados recebemos</h2>
         <p className="mt-[8px]">
           Os formulários do site pedem nome, e-mail, telefone e uma mensagem. O site não grava essas informações: ao enviar, elas
