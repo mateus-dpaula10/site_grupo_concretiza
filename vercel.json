@@ -56,53 +56,33 @@
       "permanent": true
     },
     {
-      "source": "/blog",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/carregamento-de-carros-eletricos",
-      "destination": "/energia",
-      "permanent": true
-    },
-    {
-      "source": "/blog/gestao-de-obras-reduzir-desperdicios",
-      "destination": "/administracao-de-obras",
-      "permanent": true
-    },
-    {
-      "source": "/blog/obras-rapidas-para-lojas",
-      "destination": "/obras/comerciais",
-      "permanent": true
-    },
-    {
       "source": "/post/____g",
-      "destination": "/energia",
+      "destination": "/blog/carregamento-de-carros-eletricos",
       "permanent": true
     },
     {
       "source": "/post/c%C3%B3pia-de-qual-%C3%A9-o-tema-do-seu-blog",
-      "destination": "/administracao-de-obras",
+      "destination": "/blog/gestao-de-obras-reduzir-desperdicios",
       "permanent": true
     },
     {
       "source": "/post/cópia-de-qual-é-o-tema-do-seu-blog",
-      "destination": "/administracao-de-obras",
+      "destination": "/blog/gestao-de-obras-reduzir-desperdicios",
       "permanent": true
     },
     {
       "source": "/post/seu-t%C3%ADtulo-qual-%C3%A9-o-tema-do-seu-blog",
-      "destination": "/obras/comerciais",
+      "destination": "/blog/obras-rapidas-para-lojas",
       "permanent": true
     },
     {
       "source": "/post/seu-título-qual-é-o-tema-do-seu-blog",
-      "destination": "/obras/comerciais",
+      "destination": "/blog/obras-rapidas-para-lojas",
       "permanent": true
     },
     {
       "source": "/blog-feed.xml",
-      "destination": "/",
+      "destination": "/blog",
       "permanent": true
     },
     {

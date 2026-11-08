@@ -59,12 +59,20 @@ export function FormContato() {
             Telefone
           </label>
           <div className="relative">
-            <svg aria-hidden viewBox="0 0 22 14" className="pointer-events-none absolute left-[12px] top-[21px] w-[22px] tab:top-[22px]">
-              <rect width="22" height="14" fill="#009c3b" />
-              <path d="M11 1.5 20.5 7 11 12.5 1.5 7z" fill="#ffdf00" />
-              <circle cx="11" cy="7" r="3.2" fill="#002776" />
-            </svg>
-            <input id="telefone" name="telefone" type="tel" placeholder="Telefone" autoComplete="tel" inputMode="tel" className={`${campo} pl-[50px]`} />
+            {/* Bandeira e seta nas medidas do Wix. Só visual: aqui não há seletor de país. */}
+            <span aria-hidden className="pointer-events-none absolute left-[13px] top-[12px] flex items-center">
+              <svg viewBox="0 0 224 139" className="h-[13.9px] w-[22.4px]">
+                <rect width="224" height="139" fill="#fff" />
+                <rect x="4" y="4" width="216" height="131" fill="#3f9c40" />
+                <path d="M40 69.5 112 17l72 52.5L112 122z" fill="#f5d327" />
+                <circle cx="112" cy="69.5" r="33" fill="#2b2f7e" />
+                <path d="M80 62q34-8 64 18" fill="none" stroke="#fff" strokeWidth="7" />
+              </svg>
+              <svg viewBox="0 0 20 20" className="size-[16px] text-white">
+                <path d="M4.7 7 10.35 12.65 16 7" fill="none" stroke="currentColor" />
+              </svg>
+            </span>
+            <input id="telefone" name="telefone" type="tel" placeholder="Telefone" autoComplete="tel" inputMode="tel" className={`${campo} pl-[54px]`} />
           </div>
         </div>
         <div className="tab:col-span-2">

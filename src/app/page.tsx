@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CartoesBlog } from "@/components/CartoesBlog";
 import { CarrosselInstagram } from "@/components/CarrosselInstagram";
 import { FormContato } from "@/components/FormContato";
 import { Foto } from "@/components/Foto";
@@ -287,6 +288,31 @@ export default function Home() {
           </div>
           <div className="mt-[46px] tab:mt-[var(--mt)]" style={{ "--mt": v(48) } as React.CSSProperties}>
             <FormContato />
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Construindo com Conhecimento (blog) */}
+      <section
+        className="bg-[linear-gradient(to_bottom,#0f1309_0%,#0f1309_35%,#0b2e27_100%)] pb-[42px] pt-[32px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]"
+        style={{ "--pt": v(86), "--pb": v(90) } as React.CSSProperties}
+      >
+        <div className="caixa">
+          <div className="tab:flex tab:items-end tab:justify-between">
+            <div>
+              <h2 className="t-h2">Construindo com Conhecimento</h2>
+              <p className="t-lead mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(16), "--w": v(719) } as React.CSSProperties}>
+                Conteúdo sobre arquitetura, engenharia e construção civil para quem quer se inspirar e se informar.
+              </p>
+            </div>
+            <div className="mt-[37px] tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(0) } as React.CSSProperties}>
+              <BotaoSeta href="/#contato" variante="cheio" largura={[175, 191]} escuro>
+                Orçamentos
+              </BotaoSeta>
+            </div>
+          </div>
+          <div className="mt-[47px] tab:mt-[var(--mt)]" style={{ "--mt": v(57) } as React.CSSProperties}>
+            <CartoesBlog />
           </div>
         </div>
       </section>
