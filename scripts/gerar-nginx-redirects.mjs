@@ -1,4 +1,4 @@
-// Gera deploy/nginx-redirects.conf a partir de src/lib/redirects.mjs.
+// Gera deploy/nginx-redirects.conf e vercel.json a partir de src/lib/redirects.mjs.
 // O nginx compara `location =` com a URI já decodificada, então o caminho vai em UTF-8.
 import fs from "node:fs";
 import path from "node:path";
@@ -17,3 +17,14 @@ const linhas = [
 fs.mkdirSync(path.join(raiz, "deploy"), { recursive: true });
 fs.writeFileSync(path.join(raiz, "deploy", "nginx-redirects.conf"), linhas.join("\n"));
 console.log(`deploy/nginx-redirects.conf: ${REDIRECTS.length + 1} regras`);
+
+// O caminho vai nas duas formas (percent-encoded e UTF-8) para casar com qualquer uma.
+const fontes = REDIRECTS.flatMap(({ de, para }) => [...new Set([de, decodeURI(de)])].map((source) => ({ source, para })));
+const vercel = {
+  redirects: [
+    ...fontes.map(({ source, para }) => ({ source, destination: para, permanent: true })),
+    { source: "/members-area/:caminho*", destination: "/", permanent: true },
+  ],
+};
+fs.writeFileSync(path.join(raiz, "vercel.json"), JSON.stringify(vercel, null, 2) + "\n");
+console.log(`vercel.json: ${vercel.redirects.length} regras`);

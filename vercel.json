@@ -1,0 +1,114 @@
+{
+  "redirects": [
+    {
+      "source": "/site",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/sobre",
+      "permanent": true
+    },
+    {
+      "source": "/about-us-1",
+      "destination": "/obras/corporativas",
+      "permanent": true
+    },
+    {
+      "source": "/about-us-1-1",
+      "destination": "/obras/comerciais",
+      "permanent": true
+    },
+    {
+      "source": "/about-us-1-1-1",
+      "destination": "/obras/industriais",
+      "permanent": true
+    },
+    {
+      "source": "/about-us-1-1-1-1",
+      "destination": "/obras/residenciais",
+      "permanent": true
+    },
+    {
+      "source": "/about-us-1-1-1-1-1",
+      "destination": "/energia",
+      "permanent": true
+    },
+    {
+      "source": "/about-us-1-2",
+      "destination": "/administracao-de-obras",
+      "permanent": true
+    },
+    {
+      "source": "/properties-1",
+      "destination": "/#servicos",
+      "permanent": true
+    },
+    {
+      "source": "/servicos",
+      "destination": "/#servicos",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/carregamento-de-carros-eletricos",
+      "destination": "/energia",
+      "permanent": true
+    },
+    {
+      "source": "/blog/gestao-de-obras-reduzir-desperdicios",
+      "destination": "/administracao-de-obras",
+      "permanent": true
+    },
+    {
+      "source": "/blog/obras-rapidas-para-lojas",
+      "destination": "/obras/comerciais",
+      "permanent": true
+    },
+    {
+      "source": "/post/____g",
+      "destination": "/energia",
+      "permanent": true
+    },
+    {
+      "source": "/post/c%C3%B3pia-de-qual-%C3%A9-o-tema-do-seu-blog",
+      "destination": "/administracao-de-obras",
+      "permanent": true
+    },
+    {
+      "source": "/post/cópia-de-qual-é-o-tema-do-seu-blog",
+      "destination": "/administracao-de-obras",
+      "permanent": true
+    },
+    {
+      "source": "/post/seu-t%C3%ADtulo-qual-%C3%A9-o-tema-do-seu-blog",
+      "destination": "/obras/comerciais",
+      "permanent": true
+    },
+    {
+      "source": "/post/seu-título-qual-é-o-tema-do-seu-blog",
+      "destination": "/obras/comerciais",
+      "permanent": true
+    },
+    {
+      "source": "/blog-feed.xml",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/members-area/:caminho*",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}

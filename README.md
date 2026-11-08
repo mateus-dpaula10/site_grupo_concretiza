@@ -31,6 +31,11 @@ npm run start      # serve out/ em http://localhost:3000
 - Páginas de obras: no Wix eram HTMLs próprios dentro de iframes. O conteúdo importado está em
   `src/app/obras/[tipo]/conteudo/*.html` (texto e estrutura) e `segmento.css` (estilo com escopo `.seg`).
 
+## Publicar (Vercel)
+
+Importar o repositório na Vercel, sem variáveis de ambiente. Os redirects 301 das URLs antigas ficam
+em `vercel.json`, gerado por `npm run redirects` a partir de `src/lib/redirects.mjs`.
+
 ## Publicar (aaPanel, nginx)
 
 O site é estático: basta servir a pasta `out/`. No vhost:
