@@ -67,7 +67,7 @@ export default function Sobre() {
               <Foto nome="vista-cidade" alt="Profissional da Concretiza observando a cidade" fill sizes="(min-width: 751px) 20vw, 156px" className="object-cover" />
             </div>
           </div>
-          <div className="mt-[22px] tab:mt-0">
+          <div data-anima="fade" className="mt-[22px] tab:mt-0">
             <h2 className="t-h2">Concretiza</h2>
             <p className="t-lead mt-[9px] tab:mt-[var(--m)]" style={{ "--m": v(17) } as React.CSSProperties}>
               Da concepção ao acabamento, desenvolvemos obras que unem técnica, inovação e solidez para quem constrói, investe e acredita
@@ -103,7 +103,7 @@ export default function Sobre() {
         style={{ "--pt": v(86), "--pb": v(88), "--inicio": "60%", "--fim": "#1c2411" } as React.CSSProperties}
       >
         <div className="caixa">
-          <div className="text-center">
+          <div data-anima="sobe" className="text-center">
             <h2 className="t-h2">Missão, Visão e Valores</h2>
             <p className="t-lead mx-auto mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(17), "--w": v(789) } as React.CSSProperties}>
               O que nos move, onde queremos chegar e os princípios que seguimos em cada obra.
@@ -114,7 +114,7 @@ export default function Sobre() {
               {/* Exceção: no original a foto é do banco do Wix (guindaste); aqui vai foto de obra do cliente. */}
               <Foto nome="majestic-hall" alt="Majestic Hall, centro de eventos construído pela Concretiza" fill sizes="(min-width: 751px) 35vw, 351px" className="object-cover" />
             </div>
-            <ul className="mt-[25px] grid gap-[25px] tab:mt-0 tab:grid-cols-2 tab:gap-x-[var(--gx)] tab:gap-y-[var(--gy)]" style={{ "--gx": v(25), "--gy": v(30) } as React.CSSProperties}>
+            <ul data-anima="fade" className="mt-[25px] grid gap-[25px] tab:mt-0 tab:grid-cols-2 tab:gap-x-[var(--gx)] tab:gap-y-[var(--gy)]" style={{ "--gx": v(25), "--gy": v(30) } as React.CSSProperties}>
               {VALORES.map((val) => (
                 <li
                   key={val.titulo}

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Wix_Madefor_Display, Wix_Madefor_Text } from "next/font/google";
+import { AnimacoesEntrada } from "@/components/AnimacoesEntrada";
 import { Cabecalho } from "@/components/Cabecalho";
 import { JsonLd, dadosOrganizacao } from "@/components/JsonLd";
 import { Rodape } from "@/components/Rodape";
@@ -44,8 +45,18 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${madeforDisplay.variable} ${madeforText.variable}`}>
+    // suppressHydrationWarning: o script abaixo põe a classe .anima no <html> antes do React.
+    <html lang="pt-BR" className={`${madeforDisplay.variable} ${madeforText.variable}`} suppressHydrationWarning>
       <body className="flex min-h-dvh flex-col antialiased">
+        {/* Liga as animações de entrada antes da primeira pintura (sem piscar). Se o JS do
+            site não subir em 4 s, desliga, para nada ficar escondido. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('anima');setTimeout(function(){if(!window.__anima)document.documentElement.classList.remove('anima')},4000)",
+          }}
+        />
+        <AnimacoesEntrada />
         <JsonLd dados={dadosOrganizacao()} />
         <Cabecalho />
         <main id="conteudo" className="flex-1">

@@ -35,7 +35,7 @@ export default function Home() {
           <VideoHero />
           <div aria-hidden className="absolute inset-0 bg-fundo/75" />
         </div>
-        <div className="caixa relative pb-[39px] pt-[10px] tab:pb-0 tab:pt-[var(--pt)]" style={{ "--pt": v(105) } as React.CSSProperties}>
+        <div data-anima="fade-lento" data-anima-agora className="caixa relative pb-[39px] pt-[10px] tab:pb-0 tab:pt-[var(--pt)]" style={{ "--pt": v(105) } as React.CSSProperties}>
           {/* Selo sem as fotos de pessoas (eram do Unsplash e o cliente via como "logos embaralhados"). */}
           <div
             className="inline-flex h-[66px] items-center rounded-full border border-white/15 bg-white/10 px-[24px] backdrop-blur-sm tab:h-[var(--bh)] tab:px-[var(--bp)]"
@@ -78,11 +78,11 @@ export default function Home() {
       >
         <div className="caixa">
           <div className="tab:grid tab:grid-cols-[42.75%_1fr]">
-            <h2 className="t-h2-menor max-w-[351px] tab:max-w-[var(--w)]" style={{ "--w": v(497) } as React.CSSProperties}>
+            <h2 data-anima="sobe" className="t-h2-menor max-w-[351px] tab:max-w-[var(--w)]" style={{ "--w": v(497) } as React.CSSProperties}>
               Resultados que constroem confiança
             </h2>
             <div>
-              <p className="t-lead mt-[5px] tab:mt-0">
+              <p data-anima="fade-lento" className="t-lead mt-[5px] tab:mt-0">
                 Em mais de duas décadas de atuação, a Concretiza construiu uma trajetória sólida de Campos Novos ao Paraná, de
                 residências a grandes complexos comerciais. Cada obra entregue carrega o compromisso de quem projeta com técnica,
                 executa com rigor e entrega com orgulho.
@@ -128,7 +128,7 @@ export default function Home() {
         style={{ "--pt": v(86), "--pb": v(92), "--inicio": "70%", "--fim": "#285d52" } as React.CSSProperties}
       >
         <div className="caixa">
-          <h2 className="t-h2 text-center">Nossos Serviços</h2>
+          <h2 data-anima="sobe" className="t-h2 text-center">Nossos Serviços</h2>
           <ul className="mt-[55px] grid gap-[48px] px-[16px] tab:mt-[var(--mt)] tab:grid-cols-4 tab:gap-[var(--gap)] tab:px-[var(--px)] tab:text-center" style={{ "--mt": v(70), "--gap": v(45), "--px": v(12) } as React.CSSProperties}>
             {SERVICOS_HOME.map((s) => (
               <li key={s.titulo} className="group">
@@ -159,20 +159,20 @@ export default function Home() {
       >
         <div className="caixa">
           <div className="tab:flex tab:items-end tab:justify-between">
-            <div>
+            <div data-anima="sobe">
               <h2 className="t-h2">Nossas Especialidades</h2>
               <p className="t-lead mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(17), "--w": v(714) } as React.CSSProperties}>
                 Do projeto à entrega, cada obra carrega a nossa assinatura a precisão de quem projeta com cuidado, constrói com técnica e
                 entrega com orgulho.
               </p>
             </div>
-            <div className="mt-[37px] flex justify-end tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(0) } as React.CSSProperties}>
+            <div data-anima="fade" className="mt-[37px] flex justify-end tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(0) } as React.CSSProperties}>
               <BotaoSeta href={whatsappUrl("Olá! Gostaria de falar com um especialista da Concretiza.")} externo variante="cheio" largura={[175, 191]} escuro>
                 Especialistas
               </BotaoSeta>
             </div>
           </div>
-          <ul className="mt-[45px] grid gap-[25px] tab:-mx-[var(--mx)] tab:mt-[var(--mt)] tab:grid-cols-3 tab:gap-[var(--gap)]" style={{ "--mt": v(66), "--gap": v(25), "--mx": v(4) } as React.CSSProperties}>
+          <ul data-anima="fade" className="mt-[45px] grid gap-[25px] tab:-mx-[var(--mx)] tab:mt-[var(--mt)] tab:grid-cols-3 tab:gap-[var(--gap)]" style={{ "--mt": v(66), "--gap": v(25), "--mx": v(4) } as React.CSSProperties}>
             {ESPECIALIDADES.map((e) => (
               <li
                 key={e.titulo}
@@ -221,7 +221,7 @@ export default function Home() {
             Grandes marcas e histórias reais que confiam na Concretiza para construir o que importa.
           </p>
         </div>
-        <ul className="mt-[24px] grid grid-cols-5 items-center gap-y-[14px] px-[16px] tab:mt-[var(--mt)] tab:gap-y-0 tab:px-[var(--px)]" style={{ "--mt": v(31), "--px": v(76) } as React.CSSProperties}>
+        <ul data-anima="cresce" className="mt-[24px] grid grid-cols-5 items-center gap-y-[14px] px-[16px] tab:mt-[var(--mt)] tab:gap-y-0 tab:px-[var(--px)]" style={{ "--mt": v(31), "--px": v(76) } as React.CSSProperties}>
           {CLIENTES.map((c) => (
             <li key={c.nome} className="flex h-[44px] items-center justify-center tab:h-[var(--lh)]" style={{ "--lh": v(130) } as React.CSSProperties}>
               <div className="w-[var(--wm)] tab:w-[var(--wd)]" style={{ "--wm": `${Math.round(c.w * 0.3)}px`, "--wd": v(c.w) } as React.CSSProperties}>
@@ -238,7 +238,7 @@ export default function Home() {
         style={{ "--pt": v(76) } as React.CSSProperties}
       >
         <div className="caixa relative tab:flex tab:h-[var(--h)] tab:justify-between" style={{ "--h": v(485) } as React.CSSProperties}>
-          <div className="tab:mt-[var(--mt)] tab:max-w-[var(--w)] tab:pl-[var(--pl)] tab:pr-0" style={{ "--mt": v(96), "--w": v(770), "--pl": v(7) } as React.CSSProperties}>
+          <div data-anima="sobe" className="tab:mt-[var(--mt)] tab:max-w-[var(--w)] tab:pl-[var(--pl)] tab:pr-0" style={{ "--mt": v(96), "--w": v(770), "--pl": v(7) } as React.CSSProperties}>
             <h2 className="t-h2">Presença que constrói confiança em todo o Brasil</h2>
             <p className="t-lead mt-[9px] tab:mt-[var(--m)]" style={{ "--m": v(18) } as React.CSSProperties}>
               Obras realizadas em diversas cidades comprovam a solidez e a credibilidade da Concretiza.
@@ -256,10 +256,12 @@ export default function Home() {
         style={{ "--pt": v(101), "--pb": v(60), "--inicio": "80%", "--fim": "#143931" } as React.CSSProperties}
       >
         <div className="caixa">
-          <h2 className="t-h2">Conecte-se com a Concretiza</h2>
-          <p className="t-lead mt-[9px] tab:mt-[var(--m)]" style={{ "--m": v(17) } as React.CSSProperties}>
-            Siga nosso Instagram e acompanhe de perto cada etapa das nossas obras.
-          </p>
+          <div data-anima="sobe">
+            <h2 className="t-h2">Conecte-se com a Concretiza</h2>
+            <p className="t-lead mt-[9px] tab:mt-[var(--m)]" style={{ "--m": v(17) } as React.CSSProperties}>
+              Siga nosso Instagram e acompanhe de perto cada etapa das nossas obras.
+            </p>
+          </div>
           <div className="mt-[30px] tab:mt-[var(--mt)]" style={{ "--mt": v(40) } as React.CSSProperties}>
             <CarrosselInstagram />
           </div>
@@ -274,13 +276,13 @@ export default function Home() {
       >
         <div className="caixa">
           <div className="tab:flex tab:items-end tab:justify-between">
-            <div>
+            <div data-anima="sobe">
               <h2 className="t-h2">Vamos Construir Juntos?</h2>
               <p className="t-lead mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(16), "--w": v(675) } as React.CSSProperties}>
                 Conte-nos sobre o seu projeto e entraremos em contato para transformar a sua ideia em realidade.
               </p>
             </div>
-            <div className="mt-[36px] tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(8) } as React.CSSProperties}>
+            <div data-anima="fade" className="mt-[36px] tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(8) } as React.CSSProperties}>
               <BotaoSeta href={WHATSAPP_ORCAMENTO} externo variante="cheio" largura={[175, 191]} escuro>
                 WhatsApp
               </BotaoSeta>
@@ -299,13 +301,13 @@ export default function Home() {
       >
         <div className="caixa">
           <div className="tab:flex tab:items-end tab:justify-between">
-            <div>
+            <div data-anima="sobe">
               <h2 className="t-h2">Construindo com Conhecimento</h2>
               <p className="t-lead mt-[9px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(16), "--w": v(719) } as React.CSSProperties}>
                 Conteúdo sobre arquitetura, engenharia e construção civil para quem quer se inspirar e se informar.
               </p>
             </div>
-            <div className="mt-[37px] tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(0) } as React.CSSProperties}>
+            <div data-anima="fade" className="mt-[37px] tab:mb-[var(--mb)] tab:mt-0" style={{ "--mb": v(0) } as React.CSSProperties}>
               <BotaoSeta href="/#contato" variante="cheio" largura={[175, 191]} escuro>
                 Orçamentos
               </BotaoSeta>

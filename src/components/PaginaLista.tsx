@@ -27,7 +27,7 @@ export function PaginaLista({ titulo, texto, itens, foto, logo, trilha }: Props)
         )}
       </div>
       <section className="bg-[#16423a] pb-[54px] pt-[41px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]" style={{ "--pt": v(91), "--pb": v(133) } as React.CSSProperties}>
-        <div className="caixa text-center">
+        <div data-anima="fade" data-anima-agora className="caixa text-center">
           <h1 className="mx-auto max-w-[312px] [overflow-wrap:anywhere] font-display text-[60px] font-semibold leading-[1.3] tab:max-w-none tab:text-[length:var(--f)]" style={{ "--f": "clamp(47px, calc(47px + 13 * ((100vw - 1100px) / 340)), 60px)" } as React.CSSProperties}>
             {titulo}
           </h1>

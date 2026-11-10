@@ -18,11 +18,13 @@ export function TopoPagina({ titulo, texto, pagina, foto, respiro = 57 }: Props)
   return (
     <section className="pt-[31px] tab:pt-[var(--pt)]" style={{ "--pt": v(87) } as React.CSSProperties}>
       <JsonLd dados={dadosBreadcrumb([pagina])} />
-      <div className="caixa text-center">
-        <h1 className="t-h1">{titulo}</h1>
-        <p className="t-lead mx-auto mt-[9px] max-w-[351px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(17), "--w": v(771) } as React.CSSProperties}>
-          {texto}
-        </p>
+      <div data-anima="fade" data-anima-agora className="caixa text-center">
+        <div data-anima="sobe" data-anima-agora>
+          <h1 className="t-h1">{titulo}</h1>
+          <p className="t-lead mx-auto mt-[9px] max-w-[351px] tab:mt-[var(--m)] tab:max-w-[var(--w)]" style={{ "--m": v(17), "--w": v(771) } as React.CSSProperties}>
+            {texto}
+          </p>
+        </div>
         <nav aria-label="Trilha de navegação" className="mt-[30px] tab:mt-[var(--m2)]" style={{ "--m2": v(respiro) } as React.CSSProperties}>
           <ol
             className="inline-flex items-center gap-[8px] rounded-full bg-teal px-[18px] py-[6px] text-[13px] tab:h-[var(--h)] tab:px-[var(--px)] tab:text-[length:var(--f)]"
