@@ -33,8 +33,9 @@ export function CarrosselInstagram() {
         className="absolute right-[20px] top-1/2 grid size-[24px] -translate-y-1/2 place-items-center rounded-full bg-white/60 text-fundo hover:bg-white tab:right-[var(--r)] tab:size-[var(--s)]"
         style={{ "--r": v(32), "--s": v(50) } as React.CSSProperties}
       >
-        <svg aria-hidden viewBox="0 0 60 60" className="w-[70%]" fill="currentColor">
-          <path d="M41.5,30l-17,10V20L41.5,30z" />
+        {/* Chevron fino, como no Wix (o triângulo cheio parecia botão de play de vídeo). */}
+        <svg aria-hidden viewBox="0 0 60 60" className="w-[60%]" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M25 18l12 12-12 12" />
         </svg>
         <span className="sr-only">Próxima publicação</span>
       </button>
