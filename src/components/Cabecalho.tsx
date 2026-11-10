@@ -21,7 +21,7 @@ export function Cabecalho() {
       </a>
 
       {/* Desktop (>= 1001px) */}
-      <div className="relative hidden desk:block" style={{ height: fluido(91, 111) }}>
+      <div className="relative hidden desk:block" style={{ height: "var(--altura-cabecalho)" }}>
         <Link href="/" aria-label="Grupo Concretiza, página inicial" className="absolute left-[5%] top-1/2 -translate-y-1/2" style={{ width: fluido(183, 240) }}>
           <Foto nome="logo-concretiza-branco" alt="" largura={240} className="h-auto w-full" />
         </Link>
@@ -83,7 +83,7 @@ export function Cabecalho() {
       </div>
 
       {/* Celular e tablet (< 1001px) */}
-      <div className="flex h-[71px] items-center justify-between px-[20px] desk:hidden">
+      <div className="flex h-[var(--altura-cabecalho)] items-center justify-between px-[20px] desk:hidden">
         <Link href="/" aria-label="Grupo Concretiza, página inicial" className="block w-[66px]">
           <Foto nome="logo-concretiza-branco" alt="" largura={66} className="h-auto w-full" />
         </Link>

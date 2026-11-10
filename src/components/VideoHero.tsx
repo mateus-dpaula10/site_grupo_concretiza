@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 
 // Vídeo de fundo do topo: corte de 6 s de concretiza.mp4 (vídeo do cliente), sem áudio,
-// ~0,75 MB. A foto de capa continua sendo o LCP; o vídeo só entra depois do evento load,
-// em telas >= 1001px, e nunca com prefers-reduced-motion ou Save-Data.
+// ~0,75 MB. A foto de capa continua sendo o LCP; o vídeo só entra depois do evento load
+// (em todas as larguras, como no Wix) e nunca com prefers-reduced-motion ou Save-Data.
 export function VideoHero() {
   const [ativo, setAtivo] = useState(false);
   const [visivel, setVisivel] = useState(false);
@@ -12,7 +12,6 @@ export function VideoHero() {
   useEffect(() => {
     const conexao = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     const permitido =
-      window.matchMedia("(min-width: 1001px)").matches &&
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
       !conexao?.saveData;
     if (!permitido) return;

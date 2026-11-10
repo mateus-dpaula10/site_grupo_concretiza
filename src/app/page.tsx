@@ -25,46 +25,34 @@ export const metadata = metadados({
 export default function Home() {
   return (
     <>
-      {/* 1. Abertura com vídeo (o Wix usava vídeo do banco do Wix; aqui é vídeo do cliente) */}
-      <section
-        className="relative overflow-hidden tab:h-[var(--h)]"
-        style={{ "--h": v(666) } as React.CSSProperties}
-      >
+      {/* 1. Abertura com vídeo. Medidas em .hero (globals.css). O Wix usava vídeo do banco do Wix,
+          que só pode ser usado lá; aqui é vídeo do cliente, com a mesma opacidade. */}
+      <section className="hero">
         <div className="absolute inset-0">
           <Foto nome="hero-capa" alt="" fill prioridade="lcp" sizes="100vw" className="object-cover" />
           <VideoHero />
-          <div aria-hidden className="absolute inset-0 bg-fundo/75" />
+          <div aria-hidden className="absolute inset-0 bg-fundo/[0.83]" />
         </div>
-        <div data-anima="fade-lento" data-anima-agora className="caixa relative pb-[39px] pt-[10px] tab:pb-0 tab:pt-[var(--pt)]" style={{ "--pt": v(105) } as React.CSSProperties}>
-          {/* Selo sem as fotos de pessoas (eram do Unsplash e o cliente via como "logos embaralhados"). */}
-          <div
-            className="inline-flex h-[66px] items-center rounded-full border border-white/15 bg-white/10 px-[24px] backdrop-blur-sm tab:h-[var(--bh)] tab:px-[var(--bp)]"
-            style={{ "--bh": v(79), "--bp": v(28), "--st": v(84) } as React.CSSProperties}
-          >
-            <div>
-              <p className="flex items-center gap-[10px] whitespace-nowrap text-[12px] text-cinza tab:text-[length:var(--t1)]" style={{ "--t1": v(14) } as React.CSSProperties}>
-                <IconeEstrelas className="w-[70px] text-menta tab:w-[var(--st)]" />
-                <span>5.0 Nota</span>
-              </p>
-              <p className="mt-[4px] text-[13px] tab:text-[length:var(--t2)]" style={{ "--t2": v(16) } as React.CSSProperties}>
-                500+ Clientes
-              </p>
+        <div data-anima="fade-lento" data-anima-agora className="hero-caixa">
+          {/* Selo sem as fotos de pessoas do Wix (eram do Unsplash; o cliente pediu para tirar em
+              07/11/2026 e o usuário confirmou em 10/11). Por isso o layout é o .sem-fotos. */}
+          <div className="hero-selo sem-fotos">
+            <div className="hero-selo-linha">
+              <IconeEstrelas className="hero-estrelas text-menta" />
+              <p className="hero-nota">5.0 Nota</p>
             </div>
+            <p className="hero-clientes">500+ Clientes</p>
           </div>
 
-          <h1 className="t-h1 mt-[17px] max-w-[355px] tab:mt-[var(--g1)] tab:max-w-[var(--w)]" style={{ "--g1": v(23), "--w": v(1110) } as React.CSSProperties}>
-            Soluções completas em engenharia e execução de obras.
-          </h1>
-          <p className="t-lead mt-[6px] max-w-[355px] tab:mt-[var(--g2)] tab:max-w-none" style={{ "--g2": v(12) } as React.CSSProperties}>
-            Planejamento, agilidade e compromisso para entregar obras com precisão e alto padrão.
-          </p>
-          <div className="mt-[42px] flex flex-col items-start gap-[16px] tab:mt-[var(--g3)] tab:flex-row tab:gap-[var(--g4)]" style={{ "--g3": v(57), "--g4": v(28) } as React.CSSProperties}>
+          <h1 className="hero-titulo">Soluções completas em engenharia e execução de obras.</h1>
+          <p className="hero-lead">Planejamento, agilidade e compromisso para entregar obras com precisão e alto padrão.</p>
+          <div className="hero-botoes">
             {/* Cada botão leva a um lugar: Orçamento → formulário; Contato → página com todos os canais.
                 O WhatsApp fica só no cabeçalho. */}
-            <BotaoSeta href="/#contato" variante="cheio" largura={[185, 210]}>
+            <BotaoSeta href="/#contato" variante="cheio" largura={[185, 210]} fixo={{ celular: 184.8, tablet: 184.6, desktop: 209.9 }}>
               Orçamento de projetos
             </BotaoSeta>
-            <BotaoSeta href="/contato" variante="contorno" largura={[155, 157]}>
+            <BotaoSeta href="/contato" variante="contorno" largura={[155, 157]} fixo={{ celular: 154.8, tablet: 135.7, desktop: 156.9 }}>
               Contato
             </BotaoSeta>
           </div>

@@ -13,22 +13,27 @@ type Props = {
   /** Botões secundários do original: texto 15px verde-oliva (os do topo usam 16px). */
   escuro?: boolean;
   externo?: boolean;
+  /** Botões do topo da home: no Wix têm largura fixa em px por faixa de tela e não escalam. */
+  fixo?: { celular: number; tablet: number; desktop: number };
 };
 
 // Botão em pílula com a seta diagonal do original. No celular o Wix usa verde-limão
 // no botão cheio; no desktop, verde-menta.
-export function BotaoSeta({ href, children, variante, largura, escuro, externo }: Props) {
+export function BotaoSeta({ href, children, variante, largura, escuro, externo, fixo }: Props) {
   const cheio = variante !== "contorno";
-  const fundo = variante === "lima" ? "bg-lima" : "bg-lima tab:bg-menta";
+  const fundo = variante === "lima" ? "bg-lima" : fixo ? "bg-lima desk:bg-menta" : "bg-lima tab:bg-menta";
   const classes = [
     "inline-flex h-[45px] w-[var(--wm)] items-center justify-center gap-[7px] rounded-full text-[14px] transition-colors",
-    "tab:h-[var(--h)] tab:w-[var(--wd)]",
-    escuro ? "tab:text-[length:var(--f15)]" : "tab:text-[length:var(--f16)]",
+    fixo ? "tab:w-[var(--wt)] desk:h-[50px] desk:w-[var(--wd)] desk:text-[16px]" : "tab:h-[var(--h)] tab:w-[var(--wd)]",
+    fixo ? "" : escuro ? "tab:text-[length:var(--f15)]" : "tab:text-[length:var(--f16)]",
     cheio
       ? `${fundo} hover:bg-white ${escuro ? "text-oliva" : "text-tinta"}`
       : "border border-menta text-menta hover:bg-menta/10",
   ].join(" ");
-  const estilo = { "--wm": `${largura[0]}px`, "--wd": v(largura[1]), "--h": v(50), "--f15": v(15), "--f16": v(16) } as React.CSSProperties;
+  const variaveis: Record<string, string> = fixo
+    ? { "--wm": `${fixo.celular}px`, "--wt": `${fixo.tablet}px`, "--wd": `${fixo.desktop}px`, "--s": "16px" }
+    : { "--wm": `${largura[0]}px`, "--wd": v(largura[1]), "--h": v(50), "--f15": v(15), "--f16": v(16), "--s": v(16) };
+  const estilo = variaveis as React.CSSProperties;
   const conteudo = (
     <>
       <span>{children}</span>
@@ -36,11 +41,11 @@ export function BotaoSeta({ href, children, variante, largura, escuro, externo }
     </>
   );
   return externo ? (
-    <a href={href} target="_blank" rel="noopener" className={classes} style={{ ...estilo, "--s": v(16) } as React.CSSProperties}>
+    <a href={href} target="_blank" rel="noopener" className={classes} style={estilo}>
       {conteudo}
     </a>
   ) : (
-    <Link href={href} className={classes} style={{ ...estilo, "--s": v(16) } as React.CSSProperties}>
+    <Link href={href} className={classes} style={estilo}>
       {conteudo}
     </Link>
   );

@@ -22,12 +22,18 @@
   --breakpoint-desk: 1001px;
 }
 
-/* Altura do cabeçalho fixo (mesma conta de Cabecalho.tsx): usada pelo menu interno das obras
-   e para as âncoras não ficarem escondidas atrás do menu. */
+/* Altura do cabeçalho fixo, medida no Wix em 360–2560px. Usada pelo próprio cabeçalho, pelo hero
+   (que começa atrás dele), pelo menu interno das obras e pelas âncoras. */
 :root {
-  --altura-cabecalho: 71px;
+  --altura-cabecalho: calc(40px + 8vw);
+  @media (width >= 751px) {
+    --altura-cabecalho: calc(56.9px + 4vw);
+  }
   @media (width >= 1001px) {
-    --altura-cabecalho: clamp(91px, calc(91px + 20 * ((100vw - 1100px) / 340)), 111px);
+    --altura-cabecalho: calc(91px + 20 * ((100vw - 1100px) / 340));
+  }
+  @media (width >= 1441px) {
+    --altura-cabecalho: calc(0.6px + 7.69vw);
   }
 }
 
@@ -215,5 +221,201 @@
     animation:
       anima-cresce 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) backwards,
       anima-fade 1.188s cubic-bezier(0.645, 0.045, 0.355, 1) backwards;
+  }
+}
+
+/* Hero da home: réplica medida no Wix em 360–2560px. Três faixas (celular < 751, tablet 751–1000,
+   desktop >= 1001). No desktop o conteúdo fica em 1600px centralizados com margem de 5vw; selo e
+   botões têm tamanho fixo. A seção começa atrás do cabeçalho, como no Wix: até ~818px o cabeçalho
+   cobre o alto do selo (comportamento do original). */
+.hero {
+  --pt: 10vw;
+  --pb: 10vw;
+  --selo-w: 83.1vw;
+  --selo-h: 17.55vw;
+  --av: calc(11.54vw + 2px);
+  --av-x: 2.68vw;
+  --av-y: 2.69vw;
+  --av-passo: 6.165vw;
+  --st-x: 34.46vw;
+  --st-y: calc(6.1vw - 6.3px);
+  --st-w: 19.36vw;
+  --nota-x: 54.6vw;
+  --nota-y: min(calc(7.5vw - 13.7px), calc(5.4vw - 1.3px));
+  --nota-f: max(12px, 2.183vw);
+  --cli-x: 34.46vw;
+  --cli-y: calc(9.8vw - 3.9px);
+  --cli-f: max(13px, 2.456vw);
+  --t-mt: 4.02vw;
+  --t-f: max(40px, 6.14vw);
+  --t-w: 91vw;
+  --l-mt: 1.6vw;
+  --l-f: max(16px, 2.456vw);
+  --l-w: 91vw;
+  --b-mt: 10.72vw;
+  --b-gap: 4.02vw;
+  position: relative;
+  overflow: hidden;
+  margin-top: calc(-1 * var(--altura-cabecalho));
+  padding-bottom: var(--pb);
+
+  @media (width >= 751px) {
+    --selo-w: 354.5px;
+    --selo-h: 75px;
+    --av: 45px;
+    --av-x: 1.6vw;
+    --av-y: 14.75px;
+    --av-passo: calc(45px - 2vw);
+    --st-x: calc(180.3px - 3.2vw);
+    --st-y: 18.3px;
+    --st-w: 78.2px;
+    --nota-x: calc(258.5px - 2.4vw);
+    --nota-y: 15.7px;
+    --nota-f: 14px;
+    --cli-x: calc(180.9px - 3.2vw);
+    --cli-y: calc(35.4px + 0.32vw);
+    --cli-f: 16px;
+    --t-mt: 2.66vw;
+    --t-f: max(50px, 5.595vw);
+    --t-w: 84.75vw;
+    --l-mt: 1.27vw;
+    --l-f: max(16px, 1.831vw);
+    --l-w: 80vw;
+    --b-mt: 5.38vw;
+    --b-gap: 1.98vw;
+  }
+  @media (width >= 819px) {
+    --pt: calc(52.5vw - 322.8px);
+    min-height: 72.1vw;
+  }
+  @media (width >= 891px) {
+    --pt: calc(29.8vw - 120.2px);
+  }
+  @media (width >= 1001px) {
+    --pt: 15vw;
+    --pb: 9.97vw;
+    --selo-h: clamp(75px, calc(39.1px + 2.875vw), 85.1px);
+    --av-x: min(0.794vw, 12.7px);
+    --av-y: clamp(15.3px, 1.22vw, 19.5px);
+    --av-passo: max(26.05px, calc(45.06px - 1.188vw));
+    --st-x: max(155.4px, calc(179.4px - 1.5vw));
+    --st-y: calc(var(--av-y) + 1.4px);
+    --st-w: 84.2px;
+    --nota-x: calc(var(--st-x) + 84.2px + clamp(7.8px, calc(0.8vw - 0.2px), 12.6px));
+    --nota-y: calc(var(--av-y) - 1px);
+    --cli-x: var(--st-x);
+    --cli-y: calc(var(--nota-y) + clamp(23.5px, calc(16.81px + 0.668vw), 27.5px));
+    --t-mt: min(1.585vw, 25.36px);
+    --t-f: clamp(55px, 4.7506vw, 76.01px);
+    --t-w: 85.63%;
+    --l-mt: min(0.7875vw, 12.6px);
+    --l-f: clamp(16px, 1.40625vw, 22.5px);
+    --l-w: auto;
+    --b-mt: min(3.958vw, 63.3px);
+    --b-gap: min(1.98vw, 31.7px);
+    min-height: 0;
+  }
+}
+.hero-caixa {
+  position: relative;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-inline: 5vw;
+  padding-top: var(--pt);
+}
+.hero-selo {
+  position: relative;
+  width: var(--selo-w);
+  height: var(--selo-h);
+  border-radius: 300px;
+  background: rgb(207 208 206 / 0.08);
+  box-shadow: inset 0 0 0 1px rgb(207 208 206 / 0.2);
+  backdrop-filter: blur(10px);
+}
+.hero-avatares {
+  position: absolute;
+  left: var(--av-x);
+  top: var(--av-y);
+  display: flex;
+}
+.hero-avatar {
+  flex: none;
+  width: var(--av);
+  height: var(--av);
+  overflow: hidden;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+.hero-avatar + .hero-avatar {
+  margin-left: calc(var(--av-passo) - var(--av));
+}
+.hero-estrelas {
+  position: absolute;
+  left: var(--st-x);
+  top: var(--st-y);
+  width: var(--st-w);
+}
+.hero-nota,
+.hero-clientes {
+  position: absolute;
+  line-height: normal;
+  white-space: nowrap;
+}
+.hero-nota {
+  left: var(--nota-x);
+  top: var(--nota-y);
+  font-size: var(--nota-f);
+  color: var(--color-cinza);
+}
+.hero-clientes {
+  left: var(--cli-x);
+  top: var(--cli-y);
+  font-size: var(--cli-f);
+}
+/* Selo sem as fotos: mesma altura e vidro do original, largura pelo conteúdo e textos em fluxo
+   (as posições absolutas acima foram medidas com as fotos ao lado). */
+.hero-selo.sem-fotos {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  padding-inline: calc(var(--selo-h) * 0.36);
+}
+.sem-fotos .hero-estrelas,
+.sem-fotos .hero-nota,
+.sem-fotos .hero-clientes {
+  position: static;
+}
+.hero-selo-linha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sem-fotos .hero-clientes {
+  margin-top: 4px;
+}
+.hero-titulo {
+  width: var(--t-w);
+  margin-top: var(--t-mt);
+  font-family: var(--font-display);
+  font-size: var(--t-f);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.hero-lead {
+  width: var(--l-w);
+  margin-top: var(--l-mt);
+  font-size: var(--l-f);
+  line-height: 1.6;
+  color: var(--color-cinza);
+}
+.hero-botoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--b-gap);
+  margin-top: var(--b-mt);
+  @media (width >= 751px) {
+    flex-direction: row;
   }
 }
