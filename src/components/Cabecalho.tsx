@@ -28,8 +28,8 @@ export function Cabecalho() {
 
         <nav
           aria-label="Principal"
-          className="absolute top-1/2 flex -translate-y-1/2 items-center rounded-full bg-menta/40 px-[13px]"
-          style={{ left: fluido(353, 532), height: fluido(47, 53), fontSize: fluido(14, 18) }}
+          className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center rounded-full bg-menta/40 px-[13px]"
+          style={{ height: fluido(47, 53), fontSize: fluido(14, 18) }}
         >
           <ul className="flex items-center gap-[9px]">
             {MENU.itens.map((item) => (
