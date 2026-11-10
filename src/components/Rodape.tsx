@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { IconeEmail, IconeInstagram, IconeLinkedin, IconeLocal, IconeTelefone, IconeWhatsapp } from "@/components/Icones";
-import { EMAILS_SETOR, EMPRESA, FORMULARIO_FORNECEDOR, LINK_FORNECEDOR, MAPS_EMBED, MAPS_URL, whatsappUrl } from "@/lib/site";
+import { EMPRESA, LINK_FORNECEDOR, MAPS_EMBED, MAPS_URL, whatsappUrl } from "@/lib/site";
 
 const fluido = (a: number, b: number) => `clamp(${a}px, calc(${a}px + ${b - a} * ((100vw - 1100px) / 340)), ${b}px)`;
 
@@ -22,7 +22,7 @@ const MENU_RODAPE: LinkRodape[] = [
 ];
 const RECURSOS: LinkRodape[] = [
   { href: "/contato", rotulo: "Contato" },
-  { href: LINK_FORNECEDOR, rotulo: "Seja nosso fornecedor", externo: Boolean(FORMULARIO_FORNECEDOR) },
+  { href: LINK_FORNECEDOR, rotulo: "Seja nosso fornecedor", externo: true },
   { href: "/politica-de-privacidade", rotulo: "Privacidade e LGPD" },
 ];
 
@@ -87,14 +87,6 @@ export function Rodape() {
               <IconeEmail className="size-[20px] shrink-0 text-menta-escuro tab:size-[26px]" />
               <span className="tab:text-[0.875em]">{EMPRESA.email}</span>
             </a>
-            {EMAILS_SETOR.map((s) => (
-              <a key={s.setor} href={`mailto:${s.email}`} className="flex items-center gap-[11px] hover:text-white tab:gap-[18px]">
-                <IconeEmail className="size-[20px] shrink-0 text-menta-escuro tab:size-[26px]" />
-                <span className="min-w-0 break-words tab:text-[0.875em]">
-                  {s.setor}: {s.email}
-                </span>
-              </a>
-            ))}
             <a href={`tel:${EMPRESA.telefoneE164}`} className="flex items-center gap-[11px] hover:text-white tab:gap-[18px]">
               <IconeTelefone className="size-[20px] shrink-0 text-menta-escuro tab:size-[26px]" />
               {EMPRESA.telefone}

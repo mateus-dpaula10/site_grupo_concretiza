@@ -4,7 +4,7 @@ import { FormContato } from "@/components/FormContato";
 import { IconeEmail, IconeLocal, IconeTelefone, IconeWhatsapp } from "@/components/Icones";
 import { JsonLd, dadosBreadcrumb } from "@/components/JsonLd";
 import { metadados } from "@/lib/seo";
-import { EMAILS_SETOR, EMPRESA, FORMULARIO_FORNECEDOR, LINK_FORNECEDOR, MAPS_URL, whatsappUrl } from "@/lib/site";
+import { EMAIL_FORNECEDOR, EMPRESA, LINK_FORNECEDOR, MAPS_URL, SETORES, type Setor, soDigitos, whatsappSetorUrl, whatsappUrl } from "@/lib/site";
 import { v } from "@/lib/medidas";
 
 // Página que não existe no original (lá o contato é só uma seção da home). Desde 07/11/2026 é o
@@ -37,6 +37,36 @@ function Canal({ href, icone, titulo, children, externo }: { href: string; icone
   );
 }
 
+// Cartão de setor: WhatsApp (prioridade pedida pelo cliente) antes do e-mail; cada canal é um link.
+function CartaoSetor({ setor, whatsapp, telefone, email }: Setor) {
+  const linha = "flex items-center gap-[10px] text-[14px] leading-[1.5] text-cinza hover:text-white tab:text-[15px]";
+  return (
+    <li className="rounded-[20px] bg-[#16423a] p-[20px] tab:p-[var(--p)]" style={{ "--p": v(28) } as React.CSSProperties}>
+      <p className="font-display text-[18px] font-semibold leading-[1.3] text-white">{setor}</p>
+      <div className="mt-[12px] grid gap-[10px]">
+        {whatsapp && (
+          <a href={whatsappSetorUrl(whatsapp)} target="_blank" rel="noopener" className={linha}>
+            <IconeWhatsapp className="size-[20px] shrink-0 text-oliva" />
+            <span>{whatsapp}</span>
+          </a>
+        )}
+        {telefone && (
+          <a href={`tel:+${soDigitos(telefone)}`} className={linha}>
+            <IconeTelefone className="size-[20px] shrink-0 text-oliva" />
+            <span>{telefone}</span>
+          </a>
+        )}
+        {email && (
+          <a href={`mailto:${email}`} className={linha}>
+            <IconeEmail className="size-[20px] shrink-0 text-oliva" />
+            <span className="min-w-0 break-words">{email}</span>
+          </a>
+        )}
+      </div>
+    </li>
+  );
+}
+
 export default function Contato() {
   const icone = "size-[22px]";
   return (
@@ -55,7 +85,7 @@ export default function Contato() {
           <Canal href={whatsappUrl()} externo icone={<IconeWhatsapp className={icone} />} titulo="WhatsApp">
             {EMPRESA.whatsapp}
           </Canal>
-          <Canal href={`tel:${EMPRESA.telefoneE164}`} icone={<IconeTelefone className={icone} />} titulo="Telefone">
+          <Canal href={`tel:${EMPRESA.telefoneE164}`} icone={<IconeTelefone className={icone} />} titulo="Telefone (outros assuntos)">
             {EMPRESA.telefone}
           </Canal>
           <Canal href={`mailto:${EMPRESA.email}`} icone={<IconeEmail className={icone} />} titulo="E-mail">
@@ -66,20 +96,14 @@ export default function Contato() {
           </Canal>
         </ul>
 
-        {EMAILS_SETOR.length > 0 && (
-          <>
-            <h2 className="mt-[48px] font-display text-[22px] font-semibold tab:mt-[var(--mt)] tab:text-[length:var(--f)]" style={{ "--mt": v(64), "--f": v(28) } as React.CSSProperties}>
-              Fale direto com o setor
-            </h2>
-            <ul className="mt-[20px] grid gap-[16px] tab:grid-cols-3 tab:gap-[var(--g)]" style={{ "--g": v(20) } as React.CSSProperties}>
-              {EMAILS_SETOR.map((s) => (
-                <Canal key={s.setor} href={`mailto:${s.email}`} icone={<IconeEmail className={icone} />} titulo={s.setor}>
-                  {s.email}
-                </Canal>
-              ))}
-            </ul>
-          </>
-        )}
+        <h2 className="mt-[48px] font-display text-[22px] font-semibold tab:mt-[var(--mt)] tab:text-[length:var(--f)]" style={{ "--mt": v(64), "--f": v(28) } as React.CSSProperties}>
+          Fale direto com o setor
+        </h2>
+        <ul className="mt-[20px] grid gap-[16px] tab:grid-cols-2 tab:gap-[var(--g)] desk:grid-cols-3" style={{ "--g": v(20) } as React.CSSProperties}>
+          {SETORES.map((s) => (
+            <CartaoSetor key={s.setor} {...s} />
+          ))}
+        </ul>
 
         <div
           id="fornecedor"
@@ -96,9 +120,12 @@ export default function Contato() {
             </p>
           </div>
           <div className="mt-[24px] shrink-0 tab:mt-0">
-            <BotaoSeta href={LINK_FORNECEDOR} externo={Boolean(FORMULARIO_FORNECEDOR)} variante="cheio" largura={[200, 230]} escuro>
+            <BotaoSeta href={LINK_FORNECEDOR} externo variante="cheio" largura={[200, 230]} escuro>
               Quero ser fornecedor
             </BotaoSeta>
+            <a href={`mailto:${EMAIL_FORNECEDOR}`} className="mt-[12px] block text-[14px] text-cinza underline-offset-2 hover:text-white hover:underline">
+              ou {EMAIL_FORNECEDOR}
+            </a>
           </div>
         </div>
 

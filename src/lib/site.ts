@@ -49,19 +49,29 @@ export function whatsappUrl(texto?: string) {
 
 export const WHATSAPP_ORCAMENTO = whatsappUrl("Olá! Vim pelo site e gostaria de pedir um orçamento.");
 
-// "Seja nosso fornecedor" (pedido do cliente em 07/11/2026). TODO: link do Google Forms do cliente.
-// Enquanto estiver vazio, o botão abre um e-mail para o contato geral com o assunto pronto.
-export const FORMULARIO_FORNECEDOR = "";
-export const LINK_FORNECEDOR =
-  FORMULARIO_FORNECEDOR || `mailto:${EMPRESA.email}?subject=${encodeURIComponent("Quero ser fornecedor do Grupo Concretiza")}`;
+// Contatos por setor, enviados pelo cliente em 10/11/2026 (mensagem automática do WhatsApp deles).
+// O cliente pediu prioridade para o WhatsApp: no site ele vem antes do e-mail.
+// whatsapp/telefone no formato exibido; o número do link é tirado dos dígitos (DDI 55 na frente).
+export type Setor = { setor: string; whatsapp?: string; telefone?: string; email?: string };
+export const SETORES: Setor[] = [
+  { setor: "Suprimentos", whatsapp: "(44) 99107-8267", email: "compras@grupoconcretiza.com.br" },
+  { setor: "Dpto. Técnico / Engenharia", whatsapp: "(44) 99175-4229", email: "engenharia@grupoconcretiza.com.br" },
+  { setor: "Financeiro", whatsapp: "(44) 99176-4789", email: "financeiro@grupoconcretiza.com.br" },
+  { setor: "Vem pro nosso time", email: "rh@grupoconcretiza.com.br" },
+  { setor: "Concretiza SC / Concrequipa", telefone: "(49) 3544-0347" },
+];
 
-// E-mails por setor (pedido do cliente em 07/11/2026). TODO: preencher com os endereços reais.
-// Setor com e-mail vazio não aparece no site, para não publicar endereço errado.
-export const EMAILS_SETOR: { setor: string; email: string }[] = [
-  { setor: "Suprimentos", email: "" },
-  { setor: "Financeiro", email: "" },
-  { setor: "Engenharia", email: "" },
-].filter((s) => s.email);
+export const soDigitos = (n: string) => "55" + n.replace(/\D/g, "");
+export const whatsappSetorUrl = (n: string, texto?: string) =>
+  `https://wa.me/${soDigitos(n)}${texto ? `?text=${encodeURIComponent(texto)}` : ""}`;
+
+// "Seja nosso fornecedor" (pedido do cliente em 07/11/2026). Se o cliente mandar um Google Forms,
+// ele tem prioridade. Sem ele, o botão abre o WhatsApp de Suprimentos com a mensagem pronta.
+export const FORMULARIO_FORNECEDOR = "";
+const SUPRIMENTOS = SETORES[0];
+export const LINK_FORNECEDOR =
+  FORMULARIO_FORNECEDOR || whatsappSetorUrl(SUPRIMENTOS.whatsapp!, "Olá! Vim pelo site e quero ser fornecedor do Grupo Concretiza.");
+export const EMAIL_FORNECEDOR = SUPRIMENTOS.email!;
 
 // Menu idêntico ao do site original: Serviços abre "Construtora" (4 tipos de obra) e "Energia".
 // "Clientes" leva à seção da home, como no Wix; "Contato" leva à página /contato (todos os canais).
