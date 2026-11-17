@@ -20,9 +20,11 @@ export function CarrosselInstagram() {
     <div className="relative">
       <ul ref={trilho} className="flex snap-x snap-mandatory gap-[12px] overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {INSTAGRAM_POSTS.map((p) => (
-          <li key={p.nome} className="w-full shrink-0 snap-start tab:w-[var(--w)]" style={{ "--w": v(500) } as React.CSSProperties}>
+          // Os cards dividem a largura do container (3 no desktop, 2 no tablet, 1 no celular), descontado o
+          // gap de 12px: antes cada um tinha 500/1440 da tela e o terceiro saía cortado na borda (17/11/2026).
+          <li key={p.nome} className="w-full shrink-0 snap-start tab:w-[calc((100%-12px)/2)] desk:w-[calc((100%-24px)/3)]">
             <a href={EMPRESA.instagram} target="_blank" rel="noopener" className="relative block aspect-square overflow-hidden">
-              <Foto nome={p.nome} alt={p.alt} fill sizes="(min-width: 751px) 35vw, 100vw" className="object-cover" />
+              <Foto nome={p.nome} alt={p.alt} fill sizes="(min-width: 1001px) 32vw, (min-width: 751px) 48vw, 100vw" className="object-cover" />
             </a>
           </li>
         ))}

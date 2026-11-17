@@ -8,8 +8,8 @@ import { EMAIL_FORNECEDOR, EMPRESA, LINK_FORNECEDOR, MAPS_URL, SETORES, type Set
 import { v } from "@/lib/medidas";
 
 // Página que não existe no original (lá o contato é só uma seção da home). Desde 07/11/2026 é o
-// destino do botão "Contato" (topo da home, menu e rodapé): reúne todos os canais, os e-mails por
-// setor e o "Seja nosso fornecedor", com o formulário de orçamento no fim.
+// destino do botão "Contato" (topo da home, menu e rodapé): reúne todos os canais (gerais e por
+// setor, num bloco só desde 17/11/2026) e o "Seja nosso fornecedor", com o formulário de orçamento no fim.
 export const metadata = metadados({
   titulo: "Contato",
   descricao:
@@ -81,7 +81,12 @@ export default function Contato() {
           Escolha o canal que preferir. Para orçamento, use o formulário no fim da página.
         </p>
 
-        <ul className="mt-[36px] grid gap-[16px] tab:mt-[var(--mt)] tab:grid-cols-2 tab:gap-[var(--g)]" style={{ "--mt": v(48), "--g": v(20) } as React.CSSProperties}>
+        {/* Todos os canais num bloco só (pedido de 17/11/2026): gerais, setores e endereço por último.
+            São 9 cartões: no desktop fecham uma grade 3 x 3. */}
+        <ul
+          className="mt-[36px] grid gap-[16px] tab:mt-[var(--mt)] tab:grid-cols-2 tab:gap-[var(--g)] desk:grid-cols-3"
+          style={{ "--mt": v(48), "--g": v(20) } as React.CSSProperties}
+        >
           <Canal href={whatsappUrl()} externo icone={<IconeWhatsapp className={icone} />} titulo="WhatsApp">
             {EMPRESA.whatsapp}
           </Canal>
@@ -91,18 +96,12 @@ export default function Contato() {
           <Canal href={`mailto:${EMPRESA.email}`} icone={<IconeEmail className={icone} />} titulo="E-mail">
             {EMPRESA.email}
           </Canal>
-          <Canal href={MAPS_URL} externo icone={<IconeLocal className={icone} />} titulo="Endereço">
-            {EMPRESA.endereco.rodape}, {EMPRESA.endereco.cidade} - {EMPRESA.endereco.uf}
-          </Canal>
-        </ul>
-
-        <h2 className="mt-[48px] font-display text-[22px] font-semibold tab:mt-[var(--mt)] tab:text-[length:var(--f)]" style={{ "--mt": v(64), "--f": v(28) } as React.CSSProperties}>
-          Fale direto com o setor
-        </h2>
-        <ul className="mt-[20px] grid gap-[16px] tab:grid-cols-2 tab:gap-[var(--g)] desk:grid-cols-3" style={{ "--g": v(20) } as React.CSSProperties}>
           {SETORES.map((s) => (
             <CartaoSetor key={s.setor} {...s} />
           ))}
+          <Canal href={MAPS_URL} externo icone={<IconeLocal className={icone} />} titulo="Endereço">
+            {EMPRESA.endereco.rodape}, {EMPRESA.endereco.cidade} - {EMPRESA.endereco.uf}, CEP {EMPRESA.endereco.cep}
+          </Canal>
         </ul>
 
         <div

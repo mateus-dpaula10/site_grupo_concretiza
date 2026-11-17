@@ -93,7 +93,11 @@ export function Rodape() {
             </a>
             <a href={MAPS_URL} target="_blank" rel="noopener" className="flex items-center gap-[11px] hover:text-white tab:gap-[18px]">
               <IconeLocal className="size-[20px] shrink-0 text-menta-escuro tab:size-[26px]" />
-              <span className="max-w-[16em]">{EMPRESA.endereco.rodape}</span>
+              <span className="max-w-[16em]">
+                {EMPRESA.endereco.rodape}
+                <br />
+                CEP {EMPRESA.endereco.cep}
+              </span>
             </a>
           </address>
           <div className="mt-[40px] aspect-[351/190] w-full overflow-hidden bg-[#3a3a3a] tab:mt-[48px] tab:aspect-[304/193] tab:max-w-[304px]">
@@ -115,6 +119,9 @@ export function Rodape() {
             Casa Publicidade
           </a>
           <span className="text-lima">.</span>
+        </p>
+        <p className="mt-[6px] text-[0.75em]">
+          {EMPRESA.razaoSocial} · CNPJ {EMPRESA.cnpj}
         </p>
       </div>
     </footer>

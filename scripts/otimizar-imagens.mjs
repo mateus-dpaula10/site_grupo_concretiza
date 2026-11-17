@@ -21,7 +21,8 @@ for (const pasta of ['fotos', 'logos']) {
     const origem = path.join(dir, arquivo);
     const { width, height } = await sharp(origem).metadata();
     mapa[nome] = { w: width, h: height };
-    const qualidade = pasta === 'logos' ? 90 : 72;
+    // Fotos em 85 (eram 72 até 17/11/2026: o cliente achou as fotos borradas/opacas).
+    const qualidade = pasta === 'logos' ? 90 : 85;
     for (const w of LARGURAS) {
       const destino = path.join(saida, `${nome}-${w}.webp`);
       if (fs.existsSync(destino) && fs.statSync(destino).mtimeMs > fs.statSync(origem).mtimeMs) continue;
