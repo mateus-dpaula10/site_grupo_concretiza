@@ -1,6 +1,6 @@
 // Redirects 301 das URLs antigas do site Wix para as novas URLs em pt-BR.
-// Fonte única: usada pelo next.config.ts (modo servidor) e por
-// scripts/gerar-nginx-redirects.mjs (export estático, gera deploy/nginx-redirects.conf).
+// Fonte única: usada pelo next.config.ts, por scripts/gerar-nginx-redirects.mjs (vercel.json) e por
+// deploy/nginx-redirects.conf (legado do plano de hospedar no aaPanel).
 // `de` dos posts antigos vai em forma percent-encoded (é como o navegador pede).
 export const REDIRECTS = [
   { de: "/site", para: "/" },

@@ -1,5 +1,6 @@
 import { JsonLd, dadosBreadcrumb } from "@/components/JsonLd";
 import { metadados } from "@/lib/seo";
+import { ANEXO } from "@/lib/anexo";
 import { EMPRESA } from "@/lib/site";
 import { v } from "@/lib/medidas";
 
@@ -26,8 +27,14 @@ export default function Privacidade() {
         </p>
         <h2 className={`${h2} text-white`}>Quais dados recebemos</h2>
         <p className="mt-[8px]">
-          Os formulários do site pedem nome, e-mail, telefone e uma mensagem. O site não grava essas informações: ao enviar, elas
-          são abertas no seu WhatsApp, e só chegam à nossa equipe quando você confirma o envio por lá.
+          Os formulários do site pedem nome, e-mail, telefone, endereço da obra (opcional) e uma mensagem. O site não grava essas
+          informações: ao enviar, elas são abertas no seu WhatsApp, e só chegam à nossa equipe quando você confirma o envio por lá.
+        </p>
+        <h2 className={`${h2} text-white`}>Arquivos anexados</h2>
+        <p className="mt-[8px]">
+          Se você anexar um arquivo do seu projeto, ele é guardado no serviço de armazenamento da Vercel (Vercel Blob) e a mensagem
+          do WhatsApp leva um link para ele. O link tem um endereço aleatório e só é conhecido por quem recebe a mensagem. O arquivo
+          é apagado automaticamente {ANEXO.dias} dias depois do envio; se quiser que ele seja apagado antes, escreva para o e-mail abaixo.
         </p>
         <h2 className={`${h2} text-white`}>Para que usamos</h2>
         <p className="mt-[8px]">

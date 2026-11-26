@@ -1,34 +1,81 @@
 "use client";
 
+import { upload } from "@vercel/blob/client";
 import { useState, type FormEvent } from "react";
+import { ANEXO, ANEXO_ACCEPT, caminhoAnexo } from "@/lib/anexo";
 import { whatsappUrl } from "@/lib/site";
 import { v } from "@/lib/medidas";
 
-// Mesmo formulário do Wix (Nome, Sobrenome, Email*, Telefone, Mensagem*, Enviar).
-// O site é estático, então o envio monta a mensagem e abre o WhatsApp da empresa.
+// Mesmo formulário do Wix (Nome, Sobrenome, Email*, Telefone, Mensagem*, Enviar), mais
+// "Endereço da obra" e o anexo pedidos pelo cliente em 25/11/2026. O envio monta a mensagem e
+// abre o WhatsApp da empresa; se houver anexo, ele sobe antes para o Vercel Blob (/api/anexo)
+// e o link do arquivo vai junto na mensagem.
 const campo =
   "mt-[8px] block h-[40px] w-full border border-menta/60 bg-transparent px-[12px] text-[16px] text-white placeholder:text-white focus:border-menta focus:outline-none tab:mt-[9px]";
 const rotulo = "block text-[14px] leading-[1.4] text-white";
+const mb = (bytes: number) => `${Math.round(bytes / 1024 / 1024)} MB`;
+
+type Estado =
+  | { tipo: "parado" }
+  | { tipo: "enviando"; pct: number }
+  | { tipo: "erro"; msg: string }
+  | { tipo: "pronto"; link: string };
 
 export function FormContato() {
-  const [enviado, setEnviado] = useState<string | null>(null);
+  const [estado, setEstado] = useState<Estado>({ tipo: "parado" });
 
-  function enviar(e: FormEvent<HTMLFormElement>) {
+  async function enviar(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (estado.tipo === "enviando") return;
     const d = new FormData(e.currentTarget);
+    const arquivo = d.get("arquivo");
+    const temArquivo = arquivo instanceof File && arquivo.size > 0;
+
+    let linkArquivo = "";
+    let janela: Window | null = null;
+    if (temArquivo) {
+      const { caminho, extensao } = caminhoAnexo(arquivo.name);
+      if (!(extensao in ANEXO.tipos)) return setEstado({ tipo: "erro", msg: "Tipo de arquivo não aceito. Envie PDF, imagem, DWG ou ZIP." });
+      if (arquivo.size > ANEXO.maxBytes) return setEstado({ tipo: "erro", msg: `O arquivo passa de ${mb(ANEXO.maxBytes)}. Envie um menor ou mande pelo WhatsApp depois.` });
+      // A aba do WhatsApp é aberta já no clique (depois do envio o navegador bloquearia o pop-up).
+      janela = window.open("", "_blank");
+      if (janela) janela.opener = null;
+      setEstado({ tipo: "enviando", pct: 0 });
+      try {
+        const blob = await upload(caminho, arquivo, {
+          access: "public",
+          handleUploadUrl: "/api/anexo",
+          contentType: ANEXO.tipos[extensao],
+          multipart: arquivo.size > 8 * 1024 * 1024,
+          onUploadProgress: ({ percentage }) => setEstado({ tipo: "enviando", pct: Math.round(percentage) }),
+        });
+        linkArquivo = blob.url;
+      } catch {
+        janela?.close();
+        return setEstado({ tipo: "erro", msg: "Não conseguimos enviar o arquivo. Tente de novo ou envie sem anexo." });
+      }
+    }
+
     const nome = `${d.get("nome") ?? ""} ${d.get("sobrenome") ?? ""}`.trim();
     const tel = String(d.get("telefone") ?? "").trim();
     const endereco = String(d.get("endereco") ?? "").trim();
     const texto = [
       "Olá! Vim pelo site e gostaria de falar sobre um projeto.",
-      [nome && `Nome: ${nome}`, `E-mail: ${d.get("email")}`, tel && `Telefone: ${tel}`, endereco && `Endereço da obra: ${endereco}`]
+      [
+        nome && `Nome: ${nome}`,
+        `E-mail: ${d.get("email")}`,
+        tel && `Telefone: ${tel}`,
+        endereco && `Endereço da obra: ${endereco}`,
+        linkArquivo && `Arquivo do projeto: ${linkArquivo}`,
+      ]
         .filter(Boolean)
         .join("\n"),
       String(d.get("mensagem") ?? "").trim(),
     ].join("\n\n");
     const link = whatsappUrl(texto);
-    window.open(link, "_blank", "noopener");
-    setEnviado(link);
+    if (janela) janela.location.href = link;
+    else window.open(link, "_blank", "noopener");
+    setEstado({ tipo: "pronto", link });
   }
 
   return (
@@ -91,19 +138,37 @@ export function FormContato() {
           </label>
           <textarea id="mensagem" name="mensagem" required placeholder="Mensagem" rows={3} className={`${campo} h-[74px] resize-y py-[8px]`} />
         </div>
+        <div className="tab:col-span-2">
+          <label htmlFor="arquivo" className={rotulo}>
+            Caso queira fazer uma análise do seu projeto, anexe o arquivo (opcional)
+          </label>
+          <input
+            id="arquivo"
+            name="arquivo"
+            type="file"
+            accept={ANEXO_ACCEPT}
+            aria-describedby="arquivo-dica"
+            className="mt-[8px] block w-full text-[14px] text-cinza file:mr-[12px] file:cursor-pointer file:border file:border-menta/60 file:bg-transparent file:px-[14px] file:py-[8px] file:text-[14px] file:text-white hover:file:border-menta tab:mt-[9px]"
+          />
+          <p id="arquivo-dica" className="mt-[6px] text-[12px] text-cinza">
+            PDF, imagem, DWG ou ZIP, até {mb(ANEXO.maxBytes)}. O link do arquivo vai junto na mensagem do WhatsApp.
+          </p>
+        </div>
       </div>
       <button
         type="submit"
-        className="mt-[32px] h-[41px] w-full bg-menta text-[16px] text-white hover:bg-menta-escuro tab:mt-[var(--mt)] tab:w-[calc(50%-var(--gx)/2)]"
+        disabled={estado.tipo === "enviando"}
+        className="mt-[32px] h-[41px] w-full bg-menta text-[16px] text-white hover:bg-menta-escuro disabled:cursor-wait disabled:opacity-70 tab:mt-[var(--mt)] tab:w-[calc(50%-var(--gx)/2)]"
         style={{ "--mt": v(32), "--gx": v(37) } as React.CSSProperties}
       >
-        Enviar
+        {estado.tipo === "enviando" ? `Enviando arquivo… ${estado.pct}%` : "Enviar"}
       </button>
-      <p role="status" className="mt-[12px] text-[14px] text-cinza empty:hidden">
-        {enviado && (
+      <p role="status" className={`mt-[12px] text-[14px] empty:hidden ${estado.tipo === "erro" ? "text-lima" : "text-cinza"}`}>
+        {estado.tipo === "erro" && estado.msg}
+        {estado.tipo === "pronto" && (
           <>
             Abrimos o WhatsApp com a sua mensagem.{" "}
-            <a href={enviado} target="_blank" rel="noopener" className="underline">
+            <a href={estado.link} target="_blank" rel="noopener" className="underline">
               Abrir de novo
             </a>
           </>

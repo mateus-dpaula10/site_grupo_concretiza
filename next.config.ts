@@ -2,20 +2,14 @@ import type { NextConfig } from "next";
 import { DEVICE_SIZES, IMAGE_SIZES } from "./src/lib/larguras.mjs";
 import { REDIRECTS } from "./src/lib/redirects.mjs";
 
-// Padrão: export estático (pasta out/), servido pelo nginx no aaPanel.
-// Com NEXT_MODO=servidor o site roda com `next start` (PM2) e os redirects 301
-// das URLs antigas do Wix passam a valer pelo próprio Next. No export estático
-// os mesmos redirects estão em deploy/nginx-redirects.conf.
-const modoServidor = process.env.NEXT_MODO === "servidor";
-
+// Até 26/11/2026 o site era gerado como export estático (pasta out/). Com o anexo do formulário
+// (rota /api/anexo, que autoriza o envio do arquivo ao Vercel Blob) ele passou a rodar como Next
+// normal: as páginas continuam pré-geradas no build, só a rota da API roda sob demanda.
+// Os redirects 301 das URLs antigas do Wix valem pelo Next e também pelo vercel.json.
 const nextConfig: NextConfig = {
-  ...(modoServidor
-    ? {
-        async redirects() {
-          return REDIRECTS.map(({ de, para }) => ({ source: de, destination: para, permanent: true }));
-        },
-      }
-    : { output: "export" as const }),
+  async redirects() {
+    return REDIRECTS.map(({ de, para }) => ({ source: de, destination: para, permanent: true }));
+  },
   poweredByHeader: false,
   devIndicators: false,
   images: {

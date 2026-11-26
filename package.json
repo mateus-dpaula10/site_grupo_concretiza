@@ -5,16 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx serve@14 out -l 3000",
+    "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "imagens": "node scripts/otimizar-imagens.mjs",
     "icones": "node scripts/gerar-icones.mjs",
-    "redirects": "node scripts/gerar-nginx-redirects.mjs",
-    "start:servidor": "next start",
-    "postbuild": "node scripts/pos-build.mjs"
+    "redirects": "node scripts/gerar-nginx-redirects.mjs"
   },
   "dependencies": {
+    "@vercel/blob": "^2.9.0",
     "next": "16.4.5",
     "react": "19.3.0",
     "react-dom": "19.3.0"

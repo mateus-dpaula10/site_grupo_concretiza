@@ -1,15 +1,16 @@
 # Grupo Concretiza — site
 
 Reescrita em Next.js do site grupoconcretiza.com.br (antes no Wix).
-Next 16 (App Router) + TypeScript + Tailwind 4, gerado como **site estático** (`out/`).
+Next 16 (App Router) + TypeScript + Tailwind 4, publicado na Vercel. As páginas são pré-geradas no
+build; só a rota `/api/anexo` (anexo do formulário) roda sob demanda. Até 26/11/2026 era export estático (`out/`).
 
 ## Rodar
 
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run build      # gera out/ (e roda scripts/pos-build.mjs)
-npm run start      # serve out/ em http://localhost:3000
+npm run build
+npm run start      # serve o build em http://localhost:3000
 ```
 
 ## Onde mexer
@@ -33,21 +34,17 @@ npm run start      # serve out/ em http://localhost:3000
 
 ## Publicar (Vercel)
 
-Importar o repositório na Vercel, sem variáveis de ambiente. Os redirects 301 das URLs antigas ficam
-em `vercel.json`, gerado por `npm run redirects` a partir de `src/lib/redirects.mjs`.
+Projeto `site_grupo_concretiza` na Vercel, com deploy automático a cada push na `main`. Os redirects 301
+das URLs antigas ficam em `vercel.json`, gerado por `npm run redirects` a partir de `src/lib/redirects.mjs`
+(e valem também pelo `next.config.ts`). `deploy/nginx-redirects.conf` é legado do plano de usar o aaPanel.
 
-## Publicar (aaPanel, nginx)
+## Anexo do formulário (Vercel Blob)
 
-O site é estático: basta servir a pasta `out/`. No vhost:
+O campo de anexo do formulário de contato envia o arquivo direto do navegador para o Vercel Blob
+(store `concretiza-anexos`, pública, região GRU1) e o link vai na mensagem do WhatsApp.
+A rota `src/app/api/anexo/route.ts` só autoriza o envio; as regras (tipos aceitos, 20 MB por arquivo,
+exclusão automática em 60 dias) ficam em `src/lib/anexo.ts`. Precisa da variável `BLOB_READ_WRITE_TOKEN`
+no projeto da Vercel (criada ao conectar a store). Plano grátis: 1 GB guardado e 2.000 envios por mês;
+se passar, a Vercel bloqueia o Blob por 30 dias (não cobra).
 
-```nginx
-root /www/wwwroot/grupoconcretiza.com.br/out;
-include /www/wwwroot/grupoconcretiza.com.br/deploy/nginx-redirects.conf;
-location / { try_files $uri $uri.html $uri/ =404; }
-error_page 404 /404.html;
-gzip on; gzip_types text/plain text/css application/javascript application/json image/svg+xml application/manifest+json;
-location ~* ^/(_next/static|img|video)/ { expires 1y; add_header Cache-Control "public, immutable"; }
-```
-
-Para rodar com servidor Node (PM2) em vez de estático: `NEXT_MODO=servidor npm run build`
-e `npm run start:servidor`; nesse modo os redirects 301 saem do próprio Next.
+Para testar localmente, copie o token para `.env.local` (fora do git) e rode `npm run dev`.
