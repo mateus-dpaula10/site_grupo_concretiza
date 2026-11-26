@@ -226,10 +226,11 @@
 
 /* Hero da home: réplica medida no Wix em 360–2560px. Três faixas (celular < 751, tablet 751–1000,
    desktop >= 1001). No desktop o conteúdo fica em 1600px centralizados com margem de 5vw; selo e
-   botões têm tamanho fixo. A seção começa atrás do cabeçalho, como no Wix: até ~818px o cabeçalho
-   cobre o alto do selo (comportamento do original). */
+   botões têm tamanho fixo. A seção começa atrás do cabeçalho, como no Wix. No Wix, até ~818px o
+   cabeçalho cobria o alto do selo; em 26/11/2026 o usuário viu o selo de avaliações cortado no
+   celular, então abaixo de 819px o conteúdo começa depois do cabeçalho (altura + 7vw). */
 .hero {
-  --pt: 10vw;
+  --pt: calc(var(--altura-cabecalho) + 7vw);
   --pb: 10vw;
   --selo-w: 83.1vw;
   --selo-h: 17.55vw;
