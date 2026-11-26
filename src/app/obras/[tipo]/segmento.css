@@ -583,4 +583,4 @@
 html:has(.seg) { scroll-padding-top: calc(var(--altura-cabecalho) + 64px); }
 
 /* Pedido do cliente (reunião de 25/11/2026): título e texto do topo em letra branca. */
-.seg .hero-h1, .seg .hero-h1 em, .seg .hero-sub { color: #fff; }
+.seg .hero-h1, .seg .hero-h1 em, .seg .hero-sub, .seg .hero-eyebrow { color: #fff; }
