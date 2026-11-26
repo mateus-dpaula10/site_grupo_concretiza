@@ -40,9 +40,9 @@ export const MAPS_EMBED =
   "https://www.google.com/maps?output=embed&z=14&q=" +
   encodeURIComponent("Av. Getúlio Vargas, 72, Zona 01, Maringá - PR");
 
-// Ícone do Google no rodapé (pedido de 25/11/2026). TODO: trocar pelo link do perfil da empresa no Google
-// (de preferência o de avaliações, g.page/r/...) quando o cliente passar; por ora abre a busca no Maps.
-export const GOOGLE_PERFIL = MAPS_URL;
+// Ícone do Google no rodapé (pedido de 25/11/2026): perfil "Grupo Concretiza - Construtora" no Google
+// (link de compartilhamento passado pelo usuário em 26/11/2026; kgmid /g/11h60f8b54).
+export const GOOGLE_PERFIL = "https://share.google/fbWtmwk75Z7GMuHvQ";
 
 export function whatsappUrl(texto?: string) {
   const base = `https://wa.me/${EMPRESA.whatsappNumero}`;
