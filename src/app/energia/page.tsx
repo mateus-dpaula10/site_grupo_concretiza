@@ -5,7 +5,7 @@ import { ENERGIA } from "@/lib/site";
 export const metadata = metadados({
   titulo: "Energia",
   descricao:
-    "Concretiza Energia: projetos e instalação de estações de carregamento de veículos elétricos para condomínios, empresas, lojas e empreendimentos.",
+    "Concretiza Energia: eletropostos, carregadores para condomínios e energia solar para empresas, lojas e empreendimentos.",
   caminho: "/energia",
 });
 
@@ -14,7 +14,7 @@ export default function Energia() {
     <PaginaLista
       titulo={ENERGIA.titulo}
       texto={ENERGIA.resumo}
-      itens={ENERGIA.itens}
+      frentes={ENERGIA.frentes}
       // Exceção: no original a faixa usa foto do banco do Wix (carro carregando); aqui vai foto
       // do cliente (fachada da concessionária Drugovich) com o mesmo logo por cima.
       foto={{ nome: "fachada-drugovich", alt: "Fachada da concessionária Drugovich" }}

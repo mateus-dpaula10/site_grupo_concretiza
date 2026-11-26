@@ -79,9 +79,10 @@ export default function Home() {
                 className="mt-[47px] grid grid-cols-2 gap-[21px] tab:ml-[var(--ml)] tab:mt-[var(--mt)] tab:flex tab:gap-[var(--gap)]"
                 style={{ "--ml": v(194), "--mt": v(34), "--gap": v(34) } as React.CSSProperties}
               >
+                {/* 25/11/2026 (cliente): "+20 anos" em destaque; o "+747 projetos" continua. */}
                 {[
+                  ["+20 anos", "De experiência, inovação e compromisso com a excelência."],
                   ["+747 projetos", "Residências, edifícios e grandes complexos entregues."],
-                  ["20 anos", "De experiência, inovação e compromisso com a excelência."],
                 ].map(([t, d]) => (
                   <li key={t} className="tab:w-[var(--sw)]" style={{ "--sw": v(159) } as React.CSSProperties}>
                     <h3 className="t-h3 border-b border-white pb-[4px]">{t}</h3>
@@ -121,10 +122,10 @@ export default function Home() {
             {SERVICOS_HOME.map((s) => (
               <li key={s.titulo} className="group">
                 <div
-                  className="grid size-[52px] place-items-center rounded-[8px] border-[4px] border-[#2d6c5e] bg-menta-escuro tab:mx-auto tab:size-[var(--b)] tab:rounded-[var(--r)] tab:border-[length:var(--bd)]"
-                  style={{ "--b": v(69), "--r": v(10), "--bd": v(5), "--i": v(40) } as React.CSSProperties}
+                  className="grid size-[64px] place-items-center rounded-[10px] border-[4px] border-[#2d6c5e] bg-menta-escuro tab:mx-auto tab:size-[var(--b)] tab:rounded-[var(--r)] tab:border-[length:var(--bd)]"
+                  style={{ "--b": v(88), "--r": v(12), "--bd": v(5), "--i": v(54) } as React.CSSProperties}
                 >
-                  <IconeServico tipo={s.icone} className="w-[31px] text-teal tab:w-[var(--i)]" />
+                  <IconeServico tipo={s.icone} className="w-[40px] text-teal tab:w-[var(--i)]" />
                 </div>
                 <h3 className="t-h3 mt-[30px] tab:mt-[var(--m)]" style={{ "--m": v(40) } as React.CSSProperties}>
                   <Link href={s.href} className="hover:text-menta">
@@ -202,11 +203,11 @@ export default function Home() {
       </section>
 
       {/* 6. Nossos Clientes */}
-      <section id="clientes" className="scroll-mt-[20px] bg-black pb-[60px] pt-[17px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]" style={{ "--pt": v(64), "--pb": v(40) } as React.CSSProperties}>
+      <section id="clientes" className="scroll-mt-[20px] bg-white pb-[60px] pt-[17px] tab:pb-[var(--pb)] tab:pt-[var(--pt)]" style={{ "--pt": v(64), "--pb": v(40) } as React.CSSProperties}>
         <div className="px-[25px] tab:px-[var(--px)]" style={{ "--px": v(92) } as React.CSSProperties}>
-          <h2 className="t-h2">Nossos Clientes</h2>
-          <p className="t-lead mt-[9px] tab:mt-[var(--m)]" style={{ "--m": v(17) } as React.CSSProperties}>
-            Grandes marcas e histórias reais que confiam na Concretiza para construir o que importa.
+          <h2 className="t-h2 text-fundo">Nossos Clientes</h2>
+          <p className="t-lead mt-[9px] !text-[#3d4038] tab:mt-[var(--m)]" style={{ "--m": v(17) } as React.CSSProperties}>
+            Grandes marcas e histórias reais que confiam no Grupo Concretiza para construir o que importa.
           </p>
         </div>
         <ul data-anima="cresce" className="mt-[24px] grid grid-cols-5 items-center gap-y-[14px] px-[16px] tab:mt-[var(--mt)] tab:gap-y-0 tab:px-[var(--px)]" style={{ "--mt": v(31), "--px": v(76) } as React.CSSProperties}>
@@ -229,7 +230,7 @@ export default function Home() {
           <div data-anima="sobe" className="tab:mt-[var(--mt)] tab:max-w-[var(--w)] tab:pl-[var(--pl)] tab:pr-0" style={{ "--mt": v(96), "--w": v(770), "--pl": v(7) } as React.CSSProperties}>
             <h2 className="t-h2">Presença que constrói confiança em todo o Brasil</h2>
             <p className="t-lead mt-[9px] tab:mt-[var(--m)]" style={{ "--m": v(18) } as React.CSSProperties}>
-              Obras realizadas em diversas cidades comprovam a solidez e a credibilidade da Concretiza.
+              Obras realizadas em diversas cidades comprovam a solidez e a credibilidade do Grupo Concretiza.
             </p>
           </div>
           <div className="absolute right-[19px] top-[-26px] w-[115px] tab:static tab:mr-[var(--mr)] tab:w-[var(--w2)]" style={{ "--w2": v(423), "--mr": v(-2) } as React.CSSProperties}>

@@ -81,6 +81,15 @@ export function MenuMobile() {
                   <Link href={s.energia.href} onClick={fechar} className="mt-[16px] block text-[15px] text-[#263017]/70">
                     {s.energia.rotulo}
                   </Link>
+                  <ul className="mt-[6px] text-[14px] leading-[24px] text-fundo">
+                    {s.energia.itens.map((o) => (
+                      <li key={o.href}>
+                        <Link href={o.href} onClick={fechar} className="-ml-[4px] block">
+                          {o.rotulo}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </li>

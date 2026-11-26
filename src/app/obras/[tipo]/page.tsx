@@ -5,7 +5,7 @@ import { preload } from "react-dom";
 import { JsonLd, dadosBreadcrumb } from "@/components/JsonLd";
 import { SegmentoInterativo } from "@/components/SegmentoInterativo";
 import { metadados } from "@/lib/seo";
-import { TIPOS_OBRA } from "@/lib/site";
+import { TIPOS_OBRA, WHATSAPP_SITE } from "@/lib/site";
 import "./segmento.css";
 
 // No site original, cada página de obras é um HTML próprio dentro de um iframe do Wix
@@ -43,6 +43,8 @@ function montarHtml(tipo: string) {
   });
   html = html.replace(/<img src="__IMG__([a-z]+-\d+)__"/g, (_m, nome) => `<img src="/img/seg-${nome}-1080.webp" decoding="async" loading="lazy"`);
   html = html.replace(/loading="lazy" loading="lazy"/g, 'loading="lazy"');
+  // Botão flutuante do WhatsApp com a mensagem pronta (pedido do cliente em 25/11/2026).
+  html = html.replace(/href="https:\/\/wa\.me\/\d+"/g, `href="${WHATSAPP_SITE}"`);
   return { html, primeiraFoto };
 }
 

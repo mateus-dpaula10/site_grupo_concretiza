@@ -4,7 +4,7 @@ import { FormContato } from "@/components/FormContato";
 import { IconeEmail, IconeLocal, IconeTelefone, IconeWhatsapp } from "@/components/Icones";
 import { JsonLd, dadosBreadcrumb } from "@/components/JsonLd";
 import { metadados } from "@/lib/seo";
-import { EMAIL_FORNECEDOR, EMPRESA, LINK_FORNECEDOR, MAPS_URL, SETORES, type Setor, soDigitos, whatsappSetorUrl, whatsappUrl } from "@/lib/site";
+import { EMAIL_FORNECEDOR, EMPRESA, LINK_FORNECEDOR, MAPS_URL, SETORES, type Setor, soDigitos, WHATSAPP_SITE, whatsappSetorUrl } from "@/lib/site";
 import { v } from "@/lib/medidas";
 
 // Página que não existe no original (lá o contato é só uma seção da home). Desde 07/11/2026 é o
@@ -87,7 +87,7 @@ export default function Contato() {
           className="mt-[36px] grid gap-[16px] tab:mt-[var(--mt)] tab:grid-cols-2 tab:gap-[var(--g)] desk:grid-cols-3"
           style={{ "--mt": v(48), "--g": v(20) } as React.CSSProperties}
         >
-          <Canal href={whatsappUrl()} externo icone={<IconeWhatsapp className={icone} />} titulo="WhatsApp">
+          <Canal href={WHATSAPP_SITE} externo icone={<IconeWhatsapp className={icone} />} titulo="WhatsApp">
             {EMPRESA.whatsapp}
           </Canal>
           <Canal href={`tel:${EMPRESA.telefoneE164}`} icone={<IconeTelefone className={icone} />} titulo="Telefone (outros assuntos)">

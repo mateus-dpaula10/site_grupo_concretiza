@@ -22,7 +22,7 @@ export default function Privacidade() {
       <div className="caixa max-w-[900px] text-[16px] leading-[1.7] text-cinza">
         <h1 className="t-h2 text-white">Política de privacidade</h1>
         <p className="mt-[16px]">
-          Este site é mantido por {EMPRESA.razaoSocial}, CNPJ {EMPRESA.cnpj}.
+          Site mantido pelo Grupo Concretiza.
         </p>
         <h2 className={`${h2} text-white`}>Quais dados recebemos</h2>
         <p className="mt-[8px]">

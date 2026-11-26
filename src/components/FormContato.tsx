@@ -18,9 +18,12 @@ export function FormContato() {
     const d = new FormData(e.currentTarget);
     const nome = `${d.get("nome") ?? ""} ${d.get("sobrenome") ?? ""}`.trim();
     const tel = String(d.get("telefone") ?? "").trim();
+    const endereco = String(d.get("endereco") ?? "").trim();
     const texto = [
       "Olá! Vim pelo site e gostaria de falar sobre um projeto.",
-      [nome && `Nome: ${nome}`, `E-mail: ${d.get("email")}`, tel && `Telefone: ${tel}`].filter(Boolean).join("\n"),
+      [nome && `Nome: ${nome}`, `E-mail: ${d.get("email")}`, tel && `Telefone: ${tel}`, endereco && `Endereço da obra: ${endereco}`]
+        .filter(Boolean)
+        .join("\n"),
       String(d.get("mensagem") ?? "").trim(),
     ].join("\n\n");
     const link = whatsappUrl(texto);
@@ -74,6 +77,13 @@ export function FormContato() {
             </span>
             <input id="telefone" name="telefone" type="tel" placeholder="Telefone" autoComplete="tel" inputMode="tel" className={`${campo} pl-[54px]`} />
           </div>
+        </div>
+        {/* Pedido do cliente (25/11/2026). */}
+        <div className="tab:col-span-2">
+          <label htmlFor="endereco" className={rotulo}>
+            Endereço da obra (opcional)
+          </label>
+          <input id="endereco" name="endereco" placeholder="Endereço da obra" autoComplete="street-address" className={campo} />
         </div>
         <div className="tab:col-span-2">
           <label htmlFor="mensagem" className={rotulo}>

@@ -419,3 +419,24 @@
     flex-direction: row;
   }
 }
+
+/* "Seja nosso fornecedor" no rodapé: pulsa para chamar atenção (pedido do cliente em 25/11/2026).
+   Quem pede menos movimento no sistema vê o botão parado. */
+@keyframes pulsar {
+  0%, 100% {
+    scale: 1;
+    box-shadow: 0 0 0 0 rgb(219 255 152 / 0.55);
+  }
+  50% {
+    scale: 1.05;
+    box-shadow: 0 0 0 12px rgb(219 255 152 / 0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pulsar {
+    animation: pulsar 1.8s ease-in-out infinite;
+  }
+  .pulsar:hover {
+    animation-play-state: paused;
+  }
+}

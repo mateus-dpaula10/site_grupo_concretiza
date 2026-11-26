@@ -12,30 +12,28 @@ export const metadata = metadados({
   caminho: "/sobre",
 });
 
-// Revisado a pedido do cliente (07/11/2026): o título dizia "Missão, Visão e Valores", mas os quadros
-// eram Compromisso, Visão, Inovação e Confiança. Agora são os três, na ordem do título.
-// TODO (cliente): aprovar o texto da Visão, que não existia no site antigo.
+// Texto enviado pelo cliente (reunião de 25/11/2026), substitui o de 07/11/2026.
 const VALORES = [
   {
     icone: "compromisso",
     titulo: "Missão",
     texto:
-      "Trabalhar com responsabilidade, inovação e excelência para desenvolver projetos que geram valor, constroem confiança e deixam resultados duradouros.",
+      "Transformar o projeto do cliente em realidade com total dedicação, executando obras de qualidade diferenciada e alta confiabilidade por meio de uma equipe de profissionais capacitados e comprometidos em cumprir prazo e reduzir custo.",
   },
   {
     icone: "visao",
     titulo: "Visão",
     texto:
-      "Ser referência em engenharia e execução de obras, reconhecida pela qualidade técnica, pelo cumprimento de prazos e pela confiança de clientes, parceiros e investidores.",
+      "Ser referência na administração de obras diversificadas, unindo engenharia capacitada, rastreabilidade e eficiência técnica e financeira em cada entrega.",
   },
   {
     icone: "confianca",
     titulo: "Valores",
     itens: [
-      ["Compromisso", "rigor técnico, atenção aos detalhes e alto padrão de execução em cada obra."],
-      ["Visão de longo prazo", "construir pensando na durabilidade, na valorização e no impacto positivo de cada empreendimento."],
-      ["Inovação e tecnologia", "processos modernos de gestão e projeto para mais precisão, eficiência e segurança."],
-      ["Confiança e transparência", "relações baseadas em seriedade, clareza e responsabilidade."],
+      ["Excelência e Satisfação do Cliente", "priorizar o atendimento de alto padrão, garantindo que as expectativas sejam superadas e os projetos entregues com máxima dedicação."],
+      ["Comprometimento com a Qualidade", "manter o rigor técnico e a excelência como pilares fundamentais de alto nível em todos os serviços prestados."],
+      ["Planejamento e Cumprimento de Prazo", "atuar com eficiência operacional e transparência para honrar todos os cronogramas estabelecidos."],
+      ["Profissionalismo e Harmonia da Equipe", "fomentar um ambiente colaborativo e sinérgico, onde talentos capacitados trabalham lado a lado para entregar os melhores resultados."],
     ],
   },
 ] as const;

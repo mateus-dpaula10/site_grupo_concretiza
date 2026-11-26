@@ -3,7 +3,7 @@ import { Foto } from "@/components/Foto";
 import { IconeSeletor } from "@/components/Icones";
 import { LinkMenu } from "@/components/LinkMenu";
 import { MenuMobile } from "@/components/MenuMobile";
-import { MENU, whatsappUrl } from "@/lib/site";
+import { MENU, WHATSAPP_SITE } from "@/lib/site";
 
 // Medidas do cabeçalho do original: 111px de altura em 1440px e 91px em 1100px
 // (escala com a largura), menu em "pílula" verde translúcida e Home destacada.
@@ -55,9 +55,18 @@ export function Cabecalho() {
                     </li>
                   ))}
                 </ul>
-                <Link href={s.energia.href} className="mt-[10px] block px-[11px] pb-[4px] text-[17px] hover:underline">
+                <Link href={s.energia.href} className="mt-[10px] block rounded-full bg-white px-[11px] py-[5px] text-[17px] hover:underline">
                   {s.energia.rotulo}
                 </Link>
+                <ul className="mt-[6px] px-[9px] pb-[4px] text-[13px] leading-[22px]">
+                  {s.energia.itens.map((o) => (
+                    <li key={o.href}>
+                      <Link href={o.href} className="block hover:underline">
+                        {o.rotulo}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </li>
             {MENU.finais.map((item) => (
@@ -71,7 +80,7 @@ export function Cabecalho() {
         </nav>
 
         <a
-          href={whatsappUrl()}
+          href={WHATSAPP_SITE}
           target="_blank"
           rel="noopener"
           aria-label="WhatsApp"
@@ -88,7 +97,7 @@ export function Cabecalho() {
           <Foto nome="logo-concretiza-branco" alt="" largura={66} className="h-auto w-full" />
         </Link>
         <div className="flex items-center gap-[6px]">
-          <a href={whatsappUrl()} target="_blank" rel="noopener" aria-label="WhatsApp" className="block w-[40px]">
+          <a href={WHATSAPP_SITE} target="_blank" rel="noopener" aria-label="WhatsApp" className="block w-[40px]">
             <Foto nome="whatsapp-horizontal" alt="" largura={40} className="h-auto w-full" />
           </a>
           <MenuMobile />

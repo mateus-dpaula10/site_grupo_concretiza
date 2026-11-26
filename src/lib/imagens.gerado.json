@@ -451,6 +451,10 @@
     "w": 1178,
     "h": 900
   },
+  "cliente-alem-do-olhar-preto": {
+    "w": 713,
+    "h": 203
+  },
   "cliente-alem-do-olhar": {
     "w": 713,
     "h": 203
@@ -475,6 +479,10 @@
     "w": 1200,
     "h": 272
   },
+  "cliente-camargo-correa-preto": {
+    "w": 1200,
+    "h": 466
+  },
   "cliente-camargo-correa": {
     "w": 1200,
     "h": 466
@@ -487,6 +495,10 @@
     "w": 208,
     "h": 49
   },
+  "cliente-copercampos-preto": {
+    "w": 1200,
+    "h": 311
+  },
   "cliente-copercampos": {
     "w": 1200,
     "h": 311
@@ -494,6 +506,10 @@
   "cliente-drugovich": {
     "w": 200,
     "h": 170
+  },
+  "cliente-emporio-francesca-preto": {
+    "w": 676,
+    "h": 600
   },
   "cliente-emporio-francesca": {
     "w": 676,
@@ -514,6 +530,10 @@
   "cliente-ipiranga": {
     "w": 1200,
     "h": 334
+  },
+  "cliente-jeep-preto": {
+    "w": 700,
+    "h": 281
   },
   "cliente-jeep": {
     "w": 700,
@@ -539,6 +559,10 @@
     "w": 548,
     "h": 600
   },
+  "cliente-samae-preto": {
+    "w": 500,
+    "h": 285
+  },
   "cliente-samae": {
     "w": 500,
     "h": 285
@@ -550,6 +574,10 @@
   "cliente-senai": {
     "w": 1200,
     "h": 307
+  },
+  "cliente-vestsul-preto": {
+    "w": 1200,
+    "h": 365
   },
   "cliente-vestsul": {
     "w": 1200,

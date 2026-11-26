@@ -8,9 +8,7 @@ export const SITE_URL = "https://www.grupoconcretiza.com.br";
 export const EMPRESA = {
   nome: "Grupo Concretiza",
   nomeCurto: "Concretiza",
-  // Enviados pelo cliente em 17/11/2026 (substituem os do cadastro do domínio no Registro.br).
-  razaoSocial: "EVN SOLUÇÕES ADMINISTRATIVAS LTDA.",
-  cnpj: "59.912.351/0001-11",
+  // Razão social e CNPJ saíram do site a pedido do cliente (reunião de 25/11/2026).
   slogan: "Projetando ideias, concretizando sonhos.",
   desde: 2006,
   email: "contato@grupoconcretiza.com.br",
@@ -42,12 +40,20 @@ export const MAPS_EMBED =
   "https://www.google.com/maps?output=embed&z=14&q=" +
   encodeURIComponent("Av. Getúlio Vargas, 72, Zona 01, Maringá - PR");
 
+// Ícone do Google no rodapé (pedido de 25/11/2026). TODO: trocar pelo link do perfil da empresa no Google
+// (de preferência o de avaliações, g.page/r/...) quando o cliente passar; por ora abre a busca no Maps.
+export const GOOGLE_PERFIL = MAPS_URL;
+
 export function whatsappUrl(texto?: string) {
   const base = `https://wa.me/${EMPRESA.whatsappNumero}`;
   return texto ? `${base}?text=${encodeURIComponent(texto)}` : base;
 }
 
-export const WHATSAPP_ORCAMENTO = whatsappUrl("Olá! Vim pelo site e gostaria de pedir um orçamento.");
+// Mensagem pronta dos botões de WhatsApp (pedido do cliente em 25/11/2026). O "___" é para a pessoa
+// escrever o nome antes de enviar.
+export const MENSAGEM_WHATSAPP = "Oi, vim do site. Me chamo ___ e quero orçar uma obra.";
+export const WHATSAPP_SITE = whatsappUrl(MENSAGEM_WHATSAPP);
+export const WHATSAPP_ORCAMENTO = WHATSAPP_SITE;
 
 // Contatos por setor, enviados pelo cliente em 10/11/2026 (mensagem automática do WhatsApp deles).
 // O cliente pediu prioridade para o WhatsApp: no site ele vem antes do e-mail.
@@ -74,6 +80,7 @@ export const LINK_FORNECEDOR =
 export const EMAIL_FORNECEDOR = SUPRIMENTOS.email!;
 
 // Menu idêntico ao do site original: Serviços abre "Construtora" (4 tipos de obra) e "Energia".
+// 25/11/2026 (cliente): sem a palavra "Obras" nos itens e Energia com subitens, igual à Construtora.
 // "Clientes" leva à seção da home, como no Wix; "Contato" leva à página /contato (todos os canais).
 export const MENU = {
   itens: [
@@ -84,12 +91,20 @@ export const MENU = {
     rotulo: "Serviços",
     grupo: "Construtora",
     obras: [
-      { href: "/obras/corporativas", rotulo: "Obras Corporativas" },
-      { href: "/obras/comerciais", rotulo: "Obras Comerciais" },
-      { href: "/obras/industriais", rotulo: "Obras Industriais" },
-      { href: "/obras/residenciais", rotulo: "Obras Residenciais" },
+      { href: "/obras/corporativas", rotulo: "Corporativas" },
+      { href: "/obras/comerciais", rotulo: "Comerciais" },
+      { href: "/obras/industriais", rotulo: "Industriais" },
+      { href: "/obras/residenciais", rotulo: "Residenciais" },
     ],
-    energia: { href: "/energia", rotulo: "Energia" },
+    energia: {
+      href: "/energia",
+      rotulo: "Energia",
+      itens: [
+        { href: "/energia#eletropostos", rotulo: "Eletropostos" },
+        { href: "/energia#condominios", rotulo: "Condomínios" },
+        { href: "/energia#solar", rotulo: "Solar" },
+      ],
+    },
   },
   finais: [
     { href: "/#clientes", rotulo: "Clientes" },
@@ -124,7 +139,7 @@ export const SERVICOS_HOME = [
     href: "/obras/corporativas",
     icone: "corporativas",
     texto:
-      "Execução de ambientes empresariais, escritórios e operações corporativas com foco em agilidade, planejamento e qualidade de entrega.",
+      "Execução de ambientes empresariais, escritórios e operações corporativas com foco em agilidade, planejamento e qualidade na entrega.",
   },
   {
     titulo: "Comerciais",
@@ -148,22 +163,23 @@ export const SERVICOS_HOME = [
   },
 ] as const;
 
+// Nomes revistos com o cliente em 25/11/2026.
 export const ESPECIALIDADES = [
   {
-    titulo: "Obras Rápidas Comerciais",
+    titulo: "Obras Rápidas",
     texto: "Execução ágil para lojas, franquias e operações comerciais com mínimo impacto na operação.",
     foto: { nome: "farmacia-sao-joao", alt: "Unidade das Farmácias São João recém-inaugurada" },
     href: "/obras/comerciais",
   },
   {
-    titulo: "Execução de Empreendimentos",
+    titulo: "Grandes Empreendimentos",
     texto: "Da fundação ao acabamento, executamos empreendimentos com excelência técnica e previsibilidade.",
     foto: { nome: "hotel-palmeiras", alt: "Hotel de grande porte com fachada de vidro e palmeiras" },
     href: "/obras/corporativas",
   },
   {
     // Exceção: o original usava foto do banco do Wix (11062b); aqui vai foto de canteiro de obras.
-    titulo: "Obras Industriais",
+    titulo: "Indústria",
     texto: "Soluções industriais com eficiência operacional, precisão técnica e execução de grande porte.",
     foto: { nome: "obra-guindaste", alt: "Edifício em construção com guindaste e andaimes" },
     href: "/obras/industriais",
@@ -171,32 +187,33 @@ export const ESPECIALIDADES = [
 ];
 
 // Logos da seção "Nossos Clientes", na ordem e no tamanho (em px, a 1440px) do original.
+// 25/11/2026: a seção passou a ter fundo branco; os logos que eram brancos ganharam versão preta (*-preto).
 export const CLIENTES: { nome: string; logo: string; w: number }[] = [
   { nome: "McDonald's", logo: "cliente-mcdonalds", w: 145 },
   { nome: "Cacau Show", logo: "cliente-cacau-show", w: 250 },
   { nome: "Caixa", logo: "cliente-caixa", w: 216 },
   { nome: "Bradesco", logo: "cliente-bradesco", w: 220 },
-  { nome: "Jeep", logo: "cliente-jeep", w: 145 },
+  { nome: "Jeep", logo: "cliente-jeep-preto", w: 145 },
   { nome: "Senac", logo: "cliente-senac", w: 166 },
-  { nome: "Copercampos", logo: "cliente-copercampos", w: 240 },
+  { nome: "Copercampos", logo: "cliente-copercampos-preto", w: 240 },
   { nome: "Farmácias São João", logo: "cliente-farmacias-sao-joao", w: 230 },
   { nome: "Coocam", logo: "cliente-coocam", w: 236 },
-  { nome: "Camargo Corrêa", logo: "cliente-camargo-correa", w: 160 },
+  { nome: "Camargo Corrêa", logo: "cliente-camargo-correa-preto", w: 160 },
   { nome: "Paraná Moda Park", logo: "cliente-parana-moda-park", w: 183 },
   { nome: "Ipiranga", logo: "cliente-ipiranga", w: 170 },
   { nome: "Perdigão", logo: "cliente-perdigao", w: 82 },
   { nome: "Magalu", logo: "cliente-magalu", w: 246 },
   { nome: "Fiat", logo: "cliente-fiat", w: 110 },
-  { nome: "VestSul", logo: "cliente-vestsul", w: 183 },
+  { nome: "VestSul", logo: "cliente-vestsul-preto", w: 183 },
   { nome: "Senai", logo: "cliente-senai", w: 236 },
   { nome: "Hospital Bom Samaritano", logo: "cliente-bom-samaritano", w: 150 },
-  { nome: "Além do Olhar", logo: "cliente-alem-do-olhar", w: 221 },
+  { nome: "Além do Olhar", logo: "cliente-alem-do-olhar-preto", w: 221 },
   { nome: "Celesc", logo: "cliente-celesc", w: 80 },
   { nome: "Avenida Fashion", logo: "cliente-avenida-fashion", w: 208 },
   { nome: "Nobile Suites", logo: "cliente-nobile-suites", w: 268 },
   { nome: "Drugovich", logo: "cliente-drugovich", w: 118 },
-  { nome: "Samae", logo: "cliente-samae", w: 183 },
-  { nome: "Empório Francesca", logo: "cliente-emporio-francesca", w: 130 },
+  { nome: "Samae", logo: "cliente-samae-preto", w: 183 },
+  { nome: "Empório Francesca", logo: "cliente-emporio-francesca-preto", w: 130 },
 ];
 
 export const INSTAGRAM_POSTS: Foto[] = [
@@ -229,7 +246,7 @@ export const TIPOS_OBRA: TipoObra[] = [
     titulo: "Obras Corporativas",
     resumo: SERVICOS_HOME[0].texto,
     descricaoSeo:
-      "Obras corporativas: execução de ambientes empresariais, escritórios e operações corporativas com agilidade, planejamento e qualidade de entrega.",
+      "Obras corporativas: execução de ambientes empresariais, escritórios e operações corporativas com agilidade, planejamento e qualidade na entrega.",
   },
   {
     slug: "comerciais",
@@ -270,19 +287,30 @@ export const ADMINISTRACAO = {
   ],
 };
 
+// 25/11/2026 (cliente): a página passa a ter as frentes Eletropostos, Condomínios e Solar, cada uma com
+// subtítulo e âncora (os subitens do menu Energia levam a elas). Os itens são os da lista antiga,
+// redistribuídos. TODO (cliente): textos próprios de cada frente e o conteúdo de Solar (aqui é proposta nossa).
 export const ENERGIA = {
   titulo: "Concretiza Energia",
   resumo:
-    "Soluções inteligentes em infraestrutura para mobilidade elétrica, com projetos e instalações de carregamento para condomínios, empresas, lojas e empreendimentos.",
-  itens: [
-    "Estações de carregamento",
-    "Infraestrutura elétrica",
-    "Carregadores para condomínios",
-    "Carregadores corporativos",
-    "Soluções para varejo",
-    "Instalação especializada",
-    "Projetos elétricos",
-    "Gestão de consumo energético",
-    "Mobilidade elétrica sustentável",
+    "Soluções inteligentes em infraestrutura para mobilidade elétrica e energia, com projetos e instalações para condomínios, empresas, lojas e empreendimentos.",
+  frentes: [
+    {
+      id: "eletropostos",
+      titulo: "Eletropostos",
+      texto: "Estações de carregamento de veículos elétricos para empresas, lojas e empreendimentos, do projeto elétrico à instalação.",
+      itens: ["Estações de carregamento", "Carregadores corporativos", "Soluções para varejo", "Projetos elétricos", "Infraestrutura elétrica", "Instalação especializada"],
+    },
+    {
+      id: "condominios",
+      titulo: "Condomínios",
+      texto: "Carregadores para condomínios, com infraestrutura elétrica dimensionada e gestão do consumo de energia.",
+      itens: ["Carregadores para condomínios", "Gestão de consumo energético", "Mobilidade elétrica sustentável"],
+    },
+    {
+      id: "solar",
+      titulo: "Solar",
+      texto: "Projetos e instalação de sistemas de energia solar para empresas, condomínios e residências.",
+    },
   ],
-};
+} as const;
