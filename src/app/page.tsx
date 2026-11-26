@@ -9,7 +9,9 @@ import { Rolagem } from "@/components/Rolagem";
 import { VideoAoVer } from "@/components/VideoAoVer";
 import { VideoHero } from "@/components/VideoHero";
 import { metadados } from "@/lib/seo";
-import { CLIENTES, ESPECIALIDADES, GALERIA_HOME, SERVICOS_HOME, WHATSAPP_ORCAMENTO, whatsappUrl } from "@/lib/site";
+import { AvaliacoesGoogle, notaBR } from "@/components/AvaliacoesGoogle";
+import { buscarAvaliacoesGoogle } from "@/lib/google";
+import { CLIENTES, ESPECIALIDADES, GALERIA_HOME, GOOGLE_PERFIL, SERVICOS_HOME, WHATSAPP_ORCAMENTO, whatsappUrl } from "@/lib/site";
 import { v } from "@/lib/medidas";
 
 export const metadata = metadados({
@@ -20,9 +22,14 @@ export const metadata = metadados({
   caminho: "/",
 });
 
+// A home é refeita a cada 2 horas por causa das avaliações do Google (mesmo intervalo de
+// src/lib/google.ts, que precisa caber nas 1.000 consultas grátis do mês).
+export const revalidate = 7200;
+
 // Réplica da home do site Wix. Medidas desktop medidas em 1440px e convertidas em vw
 // (o Wix Studio escala o layout com a largura); medidas do celular medidas em 390px.
-export default function Home() {
+export default async function Home() {
+  const google = await buscarAvaliacoesGoogle();
   return (
     <>
       {/* 1. Abertura com vídeo. Medidas em .hero (globals.css). O Wix usava vídeo do banco do Wix,
@@ -36,13 +43,19 @@ export default function Home() {
         <div data-anima="fade-lento" data-anima-agora className="hero-caixa">
           {/* Selo sem as fotos de pessoas do Wix (eram do Unsplash; o cliente pediu para tirar em
               07/11/2026 e o usuário confirmou em 10/11). Por isso o layout é o .sem-fotos. */}
-          <div className="hero-selo sem-fotos">
-            <div className="hero-selo-linha">
+          {/* 25/11/2026 (cliente): nota e total reais do Google no lugar do "5.0 / 500+ Clientes" fixo.
+              Sem os dados (chave ausente ou erro na API), o selo leva ao perfil sem mostrar números. */}
+          <a
+            href={google ? "#avaliacoes" : GOOGLE_PERFIL}
+            {...(google ? {} : { target: "_blank", rel: "noopener" })}
+            className="hero-selo sem-fotos transition-colors hover:bg-white/15"
+          >
+            <span className="hero-selo-linha">
               <IconeEstrelas className="hero-estrelas text-menta" />
-              <p className="hero-nota">5.0 Nota</p>
-            </div>
-            <p className="hero-clientes">500+ Clientes</p>
-          </div>
+              <span className="hero-nota">{google ? `${notaBR(google.nota)} no Google` : "Avaliações no Google"}</span>
+            </span>
+            <span className="hero-clientes">{google ? `${google.total} avaliações` : "Veja o que dizem os clientes"}</span>
+          </a>
 
           <h1 className="hero-titulo">Soluções completas em engenharia e execução de obras.</h1>
           <p className="hero-lead">Planejamento, agilidade e compromisso para entregar obras com precisão e alto padrão.</p>
@@ -220,6 +233,9 @@ export default function Home() {
           ))}
         </ul>
       </section>
+
+      {/* 6b. Avaliações reais do Google (pedido do cliente em 25/11/2026; some se a API falhar). */}
+      {google && <AvaliacoesGoogle dados={google} />}
 
       {/* 7. Presença em todo o Brasil */}
       <section
